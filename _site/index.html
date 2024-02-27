@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html data-theme="mytheme" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./assets/global.css" rel="stylesheet">
+    <title>Eleventy Test</title>
+  </head>
+  <body>
+      <div class="drawer drawer-end">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
+    <div class="drawer-content flex flex-col">
+      <!-- Navbar -->
+      <div class="navbar bg-neutral shadow-xl">
+        <div class="w-10">
+            <img alt="Tailwind CSS Navbar component" src="/assets/nba-logo-transparent.png" />
+        </div>
+        <div class="flex-1 px-2 mx-2">
+          <a class="btn btn-ghost text-xl">NBStats</a>
+        </div>
+        <div class="flex-none hidden lg:block">
+          <ul class="menu menu-horizontal px-1">
+            <!-- Navbar menu content here -->
+            <label class="swap swap-rotate">
+  
+              <!-- this hidden checkbox controls the state -->
+              <input type="checkbox" class="theme-controller" value="darktheme" />
+              
+              <!-- sun icon -->
+              <svg class="swap-on fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+              
+              <!-- moon icon -->
+              <svg class="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+              
+            </label>
+            <!-- Navbar menu content here -->
+            <li><a>Home</a></li>
+            <li>
+              <a>Blog</a>
+            </li>
+            <li>
+              <details>
+                <summary>
+                  Team & Player Stats
+                </summary>
+                <ul class="p-2">
+                  <li><a>Teams</a></li>
+                  <li><a>Players</a></li>
+                </ul>
+              </details>
+            </li>
+            <li>
+              <a href="./live/index.html">Live Games</a>
+            </li>
+          </ul>
+        </div>
+        <div class="flex-none lg:hidden">
+            <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </label>
+          </div> 
+      </div>
+
+    <div class="hero min-h-fit shadow-xl" style="background-image: url(./assets/kobe-2001-1.webp);">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content">
+      <div class="max-w-md">
+        <h1 class="mb-5 text-5xl font-bold">Welcome To NBStats</h1>
+        <p class="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+        <button class="btn btn-primary">Read Blog</button>
+      </div>
+    </div>
+  </div>
+  <div class="card lg bg-neutral shadow-xl text-center">
+    <div class="card-body">
+        <h2 class="card-title">Upcoming Games</h2>
+        <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="flex w-full">
+                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
+                        <h2 class="card-title">Boston Celtics</h2>
+                        <div class="avatar">
+                            <div class="w-24 rounded-full">
+                              <img src="./assets/celtics.jpg" />
+                            </div>
+                        </div>
+                        <h2 class="card-title">44-12</h2>
+                    </div>
+                    <div class="divider divider-horizontal">VS</div>
+                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
+                        <h2 class="card-title">OKC Thunder</h2>
+                        <div class="avatar">
+                            <div class="w-24 rounded-full">
+                              <img src="./assets/OKC.png" />
+                            </div>
+                        </div>
+                        <h2 class="card-title">40-17</h2>
+                    </div>
+                  </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content"> 
+                <div class="playerStatsHidden">
+                    <p class="text-xs">REB</p>
+                    <p class="text-xs">AST</p>
+                    <p class="text-xs">FG%</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-2xl">8.8</p>
+                    <p class="text-2xl">9.5</p>
+                    <p class="text-2xl">49.2</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-xs">18th</p>
+                    <p class="text-xs">3rd</p>
+                    <p class="text-xs">54th</p>
+                </div>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="flex w-full">
+                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
+                        <h2 class="card-title">Boston Celtics</h2>
+                        <div class="avatar">
+                            <div class="w-24 rounded-full">
+                              <img src="./assets/celtics.jpg" />
+                            </div>
+                        </div>
+                        <h2 class="card-title">44-12</h2>
+                    </div>
+                    <div class="divider divider-horizontal">VS</div>
+                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
+                        <h2 class="card-title">Minnesota Timberwolves</h2>
+                        <div class="avatar">
+                            <div class="w-24 rounded-full">
+                              <img src="./assets/timb.png" />
+                            </div>
+                        </div>
+                        <h2 class="card-title">40-17</h2>
+                    </div>
+                  </div> 
+            </div>
+            <div class="collapse-content"> 
+                <div class="playerStatsHidden">
+                    <p class="text-xs">REB</p>
+                    <p class="text-xs">AST</p>
+                    <p class="text-xs">FG%</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-2xl">8.8</p>
+                    <p class="text-2xl">9.5</p>
+                    <p class="text-2xl">49.2</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-xs">18th</p>
+                    <p class="text-xs">3rd</p>
+                    <p class="text-xs">54th</p>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
+  <div class="flex flex-col w-full lg:flex-row shadow-xl">
+    <div class="grid flex-grow h-fit pt-3 pb-3 card bg-neutral rounded-box place-items-center">
+      <h2 class="card-title p-2">MVP Ladder</h2>
+      <ul class="timeline timeline-vertical">
+        <li>
+          <div class="timeline-start timeline-box">1st</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/luka.png" />
+              </div>
+          </div>
+          </div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/shai.png" />
+              </div>
+          </div>
+          </div>
+          <div class="timeline-end timeline-box">2nd</div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-start timeline-box">3rd</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/gian.png" />
+              </div>
+          </div>
+          </div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/luka.png" />
+              </div>
+          </div>
+          </div>
+          <div class="timeline-end timeline-box">4th</div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-start timeline-box">5th</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/shai.png" />
+              </div>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div> 
+    <div class="divider lg:divider-horizontal"></div> 
+    <div class="grid flex-grow h-fit pt-3 pb-3 card bg-neutral rounded-box place-items-center">
+      <h2 class="card-title p-2">Rookie Ladder</h2>
+      <ul class="timeline timeline-vertical">
+        <li>
+          <div class="timeline-start timeline-box">1st</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/luka.png" />
+              </div>
+          </div>
+          </div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/shai.png" />
+              </div>
+          </div>
+          </div>
+          <div class="timeline-end timeline-box">2nd</div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-start timeline-box">3rd</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/gian.png" />
+              </div>
+          </div>
+          </div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/luka.png" />
+              </div>
+          </div>
+          </div>
+          <div class="timeline-end timeline-box">4th</div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-start timeline-box">5th</div>
+          <div class="timeline-middle">
+            <div class="avatar">
+              <div class="w-14 rounded-full">
+                <img src="assets/shai.png" />
+              </div>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div> 
+  </div>
+  <div class="card lg bg-neutral shadow-xl">
+    <div class="card-body">
+        <div class="playerCardHeader">
+            <h2 class="card-title">Top Players</h2>
+            <p class="cardPts">Pts</p>
+        </div>
+        <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/luka.png" />
+                        </div>
+                    </div>
+                    <p>Luka Doncic (DAL)</p>
+                    <p class="cardPts">34.3</p>
+                </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content text-center"> 
+                <div class="stats shadow w-11/12">
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">REB</div>
+                    <div class="stat-value text-xl">8.8</div>
+                    <div class="stat-desc text-sm">18th</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">AST</div>
+                    <div class="stat-value text-xl">9.5</div>
+                    <div class="stat-desc text-sm">3rd</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">FG%</div>
+                    <div class="stat-value text-xl">49.2</div>
+                    <div class="stat-desc text-sm">54th</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/shai.png" />
+                        </div>
+                    </div>
+                    <p>Shai Gilgeous-Alexander (OKC)</p>
+                    <p class="cardPts">31.2</p>
+                </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content text-center"> 
+                <div class="stats shadow w-11/12">
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">REB</div>
+                    <div class="stat-value text-xl">8.8</div>
+                    <div class="stat-desc text-sm">18th</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">AST</div>
+                    <div class="stat-value text-xl">9.5</div>
+                    <div class="stat-desc text-sm">3rd</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">FG%</div>
+                    <div class="stat-value text-xl">49.2</div>
+                    <div class="stat-desc text-sm">54th</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/gian.png" />
+                        </div>
+                    </div>
+                    <p>Giannis Antetokounmpo (MIL)</p>
+                    <p class="cardPts">30.8</p>
+                </div>
+            </div>
+            <div class="collapse-content text-center"> 
+                <div class="stats shadow w-11/12">
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">REB</div>
+                    <div class="stat-value text-xl">8.8</div>
+                    <div class="stat-desc text-sm">18th</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">AST</div>
+                    <div class="stat-value text-xl">9.5</div>
+                    <div class="stat-desc text-sm">3rd</div>
+                    </div>
+                    <div class="stat place-items-center">
+                    <div class="stat-title text-base">FG%</div>
+                    <div class="stat-value text-xl">49.2</div>
+                    <div class="stat-desc text-sm">54th</div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="card lg bg-neutral shadow-xl">
+    <div class="card-body">
+        <div class="playerCardHeader">
+            <h2 class="card-title">Top Teams</h2>
+            <p class="cardPts">Record</p>
+        </div>
+        <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/celtics.jpg" />
+                        </div>
+                    </div>
+                    <p>Boston Celtics</p>
+                    <p class="cardPts">44-12</p>
+                </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content"> 
+                <div class="playerStatsHidden">
+                    <p class="text-xs">HOME</p>
+                    <p class="text-xs">AWAY</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-2xl">26-3</p>
+                    <p class="text-2xl">19-9</p>
+                </div>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/timb.png" />
+                        </div>
+                    </div>
+                    <p>Minnesota Timberwolves</p>
+                    <p class="cardPts">40-17</p>
+                </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content"> 
+                <div class="playerStatsHidden">
+                    <p class="text-xs">HOME</p>
+                    <p class="text-xs">AWAY</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-2xl">20-6</p>
+                    <p class="text-2xl">20-11</p>
+                </div>
+            </div>
+          </div>
+          <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="assets/OKC.png" />
+                        </div>
+                    </div>
+                    <p>Oklahoma City Thunger</p>
+                    <p class="cardPts">40-17</p>
+                </div>
+            </div>
+            <div class="collapse-content"> 
+                <div class="playerStatsHidden">
+                    <p class="text-xs">HOME</p>
+                    <p class="text-xs">AWAY</p>
+                </div>
+                <div class="playerStatsHidden">
+                    <p class="text-2xl">23-6</p>
+                    <p class="text-2xl">17-11</p>
+                </div>
+            </div>
+          </div>
+    </div>
+  </div>
+  <footer class="footer items-center p-4 bg-neutral text-neutral-content">
+    <aside class="items-center grid-flow-col">
+      <p>Copyright © 2024 - All right reserved</p>
+    </aside> 
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+      </a>
+      <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
+      <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
+    </nav>
+  </footer>
+    </div> 
+  <div class="drawer-side">
+    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <ul class="menu p-4 w-80 min-h-full bg-neutral">
+      <label class="swap swap-rotate">
+  
+        <!-- this hidden checkbox controls the state -->
+        <input type="checkbox" class="theme-controller" value="darktheme" />
+        
+        <!-- sun icon -->
+        <svg class="swap-on fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
+        
+        <!-- moon icon -->
+        <svg class="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
+        
+      </label>
+      <!-- Navbar menu content here -->
+      <li><a>Home</a></li>
+      <li>
+        <a>Blog</a>
+      </li>
+      <li>
+        <details>
+          <summary>
+            Team & Player Stats
+          </summary>
+          <ul class="p-2">
+            <li><a>Teams</a></li>
+            <li><a>Players</a></li>
+          </ul>
+        </details>
+      </li>
+      <li>
+        <a href="./live/index.html">Live Games</a>
+      </li>
+    </ul>
+  </div>
+</div>
+    <script src="./assets/script.js"></script>
+  </body>
+</html>

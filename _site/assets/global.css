@@ -1,0 +1,59 @@
+.drawer-content{
+    margin: 1.5vh;
+}
+.navbar{
+    border-radius: 2vh;
+}
+.hero{
+    margin-top: 1.5vh;
+    border-radius: 2vh;
+}
+.hero-overlay{
+    margin: 1.5vh;
+    border-radius: 2vh;
+}
+.card{
+    margin-top: 1.5vh;
+    border-radius: 2vh;
+}
+.playerList{
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+}
+.playerCardHeader{
+    display: flex;
+    flex-direction: row;
+    gap: 1vh;
+    align-items: center;
+    width: 100%;
+    
+}
+.cardPts{
+    text-align: end;
+}
+.collapse-title{
+    padding: 0;
+    width: 100%;
+}
+.playerStatsHidden{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+.divider{
+    margin-top: 0.25vh;
+    margin-bottom: 0.25vh;
+}
+.timeline-vertical > li > hr {
+    margin: 5px 0 5px 0;
+}
+.footer{
+    margin-top: 1.5vh;
+    border-radius: 2vh;
+}
