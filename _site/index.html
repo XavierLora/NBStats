@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./style.css" rel="stylesheet">
     <link href="./assets/global.css" rel="stylesheet">
+    <script type="module" src="./index.js"></script>
     <title>Eleventy Test</title>
   </head>
   <body>
@@ -76,61 +77,12 @@
   <div class="card lg bg-neutral shadow-xl">
     <div class="card-body place-items-center">
         <h2 class="card-title">Upcoming Games</h2>
-            <div class="collapse-title text-l font-medium text-center">
-                <div class="flex w-full">
-                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
-                        <h2 class="card-title">Boston Celtics</h2>
-                        <div class="avatar">
-                            <div class="w-24 rounded-full">
-                              <img src="./assets/celtics.jpg" />
-                            </div>
-                        </div>
-                        <h2 class="card-title">44-12</h2>
-                    </div>
-                    <div class="divider divider-horizontal">VS</div>
-                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
-                        <h2 class="card-title">OKC Thunder</h2>
-                        <div class="avatar">
-                            <div class="w-24 rounded-full">
-                              <img src="./assets/OKC.png" />
-                            </div>
-                        </div>
-                        <h2 class="card-title">40-17</h2>
-                    </div>
-                  </div>
-                  <div class="grid w-full place-items-center pt-2">
-                    <h2 class="card-title">Friday, February 22nd 2024</h2>
-                  </div> 
-            </div>
-            <div class="collapse-title text-l font-medium text-center">
-                <div class="flex w-full">
-                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
-                        <h2 class="card-title">Boston Celtics</h2>
-                        <div class="avatar">
-                            <div class="w-24 rounded-full">
-                              <img src="./assets/celtics.jpg" />
-                            </div>
-                        </div>
-                        <h2 class="card-title">44-12</h2>
-                    </div>
-                    <div class="divider divider-horizontal">VS</div>
-                    <div class="grid w-1/2 flex-grow card bg-base-100 p-2 rounded-box place-items-center">
-                        <h2 class="card-title">Minnesota Timberwolves</h2>
-                        <div class="avatar">
-                            <div class="w-24 rounded-full">
-                              <img src="./assets/timb.png" />
-                            </div>
-                        </div>
-                        <h2 class="card-title">40-17</h2>
-                    </div>
-                  </div>
-                  <div class="grid w-full place-items-center pt-2">
-                    <h2 class="card-title">Friday, February 22nd 2024</h2>
-                  </div> 
+          <div class="grid w-full auto-rows-max grid-cols-auto-fill-325" id="upcomingGamesCardContainer">
+            
             </div>
           </div>
         </div>
-  <div class="flex flex-col w-full lg:flex-row shadow-xl" id="mvpRookieContainer">
+  <div class="flex flex-col w-full lg:flex-row shadow-xl">
     <div class="grid flex-grow h-fit pt-3 pb-3 card bg-neutral rounded-box place-items-center">
       <h2 class="card-title p-2">MVP Ladder</h2>
       <ul class="timeline timeline-vertical">
@@ -139,7 +91,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/luka.png" />
+                <img src="assets/jokic.png" />
               </div>
           </div>
           </div>
@@ -174,7 +126,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/luka.png" />
+                <img src="assets/tatum.png" />
               </div>
           </div>
           </div>
@@ -187,7 +139,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/shai.png" />
+                <img src="assets/luka.png" />
               </div>
           </div>
           </div>
@@ -202,7 +154,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/luka.png" />
+                <img src="assets/wemby.png" />
               </div>
           </div>
           </div>
@@ -213,7 +165,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/shai.png" />
+                <img src="assets/chet.png" />
               </div>
           </div>
           </div>
@@ -226,7 +178,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/gian.png" />
+                <img src="assets/miller.png" />
               </div>
           </div>
           </div>
@@ -237,7 +189,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/luka.png" />
+                <img src="assets/gs.png" />
               </div>
           </div>
           </div>
@@ -250,7 +202,7 @@
           <div class="timeline-middle">
             <div class="avatar">
               <div class="w-14 rounded-full">
-                <img src="assets/shai.png" />
+                <img src="assets/jam.png" />
               </div>
           </div>
           </div>
@@ -460,6 +412,7 @@
       <a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-current"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg></a>
     </nav>
   </footer>
+
     </div> 
   <div class="drawer-side">
     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label> 
@@ -498,6 +451,5 @@
     </ul>
   </div>
 </div>
-    <script src="./assets/script.js"></script>
   </body>
 </html>
