@@ -2498,6 +2498,9 @@ html:has(.drawer-toggle:checked) {
 .hidden {
   display: none;
 }
+.h-48 {
+  height: 12rem;
+}
 .h-6 {
   height: 1.5rem;
 }
@@ -2557,6 +2560,12 @@ html:has(.drawer-toggle:checked) {
 .grid-flow-col {
   grid-auto-flow: column;
 }
+.auto-rows-max {
+  grid-auto-rows: max-content;
+}
+.grid-cols-auto-fill-325 {
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -2591,9 +2600,6 @@ html:has(.drawer-toggle:checked) {
 }
 .stroke-current {
   stroke: currentColor;
-}
-.p-0 {
-  padding: 0px;
 }
 .p-2 {
   padding: 0.5rem;
