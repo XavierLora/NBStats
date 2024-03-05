@@ -1,6 +1,6 @@
 ---
 layout: base.html
-title: Eleventy Test
+title: NBStats
 ---
 <div class="hero min-h-fit shadow-xl" style="background-image: url(./assets/kobe-2001-1.webp);">
     <div class="hero-overlay bg-opacity-60"></div>
@@ -14,115 +14,7 @@ title: Eleventy Test
   </div>
   {% include "./_includes/upcomingGames.html" %}
   {% include "./_includes/mvpRookie.html" %}
-  <div class="card lg bg-neutral shadow-xl">
-    <div class="card-body">
-        <div class="playerCardHeader">
-            <h2 class="card-title">Top Players</h2>
-            <p class="cardPts">Pts</p>
-        </div>
-        <div class="collapse">
-            <input type="radio" name="my-accordion-1"/> 
-            <div class="collapse-title text-l font-medium">
-                <div class="playerList">
-                    <div class="avatar">
-                        <div class="w-14 rounded-full">
-                          <img src="assets/luka.png" />
-                        </div>
-                    </div>
-                    <p>Luka Doncic (DAL)</p>
-                    <p class="cardPts">34.3</p>
-                </div>
-                <div class="divider"></div> 
-            </div>
-            <div class="collapse-content text-center"> 
-                <div class="stats shadow w-11/12">
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">REB</div>
-                    <div class="stat-value text-xl">8.8</div>
-                    <div class="stat-desc text-sm">18th</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">AST</div>
-                    <div class="stat-value text-xl">9.5</div>
-                    <div class="stat-desc text-sm">3rd</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">FG%</div>
-                    <div class="stat-value text-xl">49.2</div>
-                    <div class="stat-desc text-sm">54th</div>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="collapse">
-            <input type="radio" name="my-accordion-1"/> 
-            <div class="collapse-title text-l font-medium">
-                <div class="playerList">
-                    <div class="avatar">
-                        <div class="w-14 rounded-full">
-                          <img src="assets/shai.png" />
-                        </div>
-                    </div>
-                    <p>Shai Gilgeous-Alexander (OKC)</p>
-                    <p class="cardPts">31.2</p>
-                </div>
-                <div class="divider"></div> 
-            </div>
-            <div class="collapse-content text-center"> 
-                <div class="stats shadow w-11/12">
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">REB</div>
-                    <div class="stat-value text-xl">8.8</div>
-                    <div class="stat-desc text-sm">18th</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">AST</div>
-                    <div class="stat-value text-xl">9.5</div>
-                    <div class="stat-desc text-sm">3rd</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">FG%</div>
-                    <div class="stat-value text-xl">49.2</div>
-                    <div class="stat-desc text-sm">54th</div>
-                    </div>
-                </div>
-            </div>
-          </div>
-          <div class="collapse">
-            <input type="radio" name="my-accordion-1"/> 
-            <div class="collapse-title text-l font-medium">
-                <div class="playerList">
-                    <div class="avatar">
-                        <div class="w-14 rounded-full">
-                          <img src="assets/gian.png" />
-                        </div>
-                    </div>
-                    <p>Giannis Antetokounmpo (MIL)</p>
-                    <p class="cardPts">30.8</p>
-                </div>
-            </div>
-            <div class="collapse-content text-center"> 
-                <div class="stats shadow w-11/12">
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">REB</div>
-                    <div class="stat-value text-xl">8.8</div>
-                    <div class="stat-desc text-sm">18th</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">AST</div>
-                    <div class="stat-value text-xl">9.5</div>
-                    <div class="stat-desc text-sm">3rd</div>
-                    </div>
-                    <div class="stat place-items-center">
-                    <div class="stat-title text-base">FG%</div>
-                    <div class="stat-value text-xl">49.2</div>
-                    <div class="stat-desc text-sm">54th</div>
-                    </div>
-                </div>
-            </div>
-          </div>
-    </div>
-  </div>
+  {% include "./_includes/topPlayers.html" %}
   <div class="card lg bg-neutral shadow-xl">
     <div class="card-body">
         <div class="playerCardHeader">

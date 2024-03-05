@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/_includes/*.html", "./_site/*.html", "./_site/**/*.html"],
   theme: {
-    extend: {}
+    extend: {
+      gridTemplateColumns: {
+        'auto-fill-325': 'repeat(auto-fill, minmax(325px, 1fr));',
+      },
+    }
   },
   daisyui: {
     themes: [
