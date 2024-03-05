@@ -32,36 +32,25 @@ getNBAScoreboard().then(data => {
 const upcomingGamesMachine = (obj) => {
   var team1 = obj.competitions[0].competitors[0].team;
   var team2 = obj.competitions[0].competitors[1].team;
+  var gameTeams = obj.shortName;
   var record1 = obj.competitions[0].competitors[0].records[0].summary;
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.detail;
   const makeGame = 
-  `<div class="text-l font-medium text-center p-2">
-    <div class="flex w-full">
-      <div class="grid w-1/2 h-48 flex card bg-base-100 p-2 rounded-box place-items-center">
-          <h2 class="card-title text-base">${team1.displayName}</h2>
-          <div class="avatar">
-              <div class="w-24 rounded-xl">
-                <img src="${team1.logo}" />
-              </div>
-          </div>
-          <h2 class="card-title">${record1}</h2>
-      </div>
-      <div class="divider divider-horizontal">VS</div>
-      <div class="grid w-1/2 flex card bg-base-100 p-2 rounded-box place-items-center">
-          <h2 class="card-title text-base">${team2.displayName}</h2>
-          <div class="avatar">
-              <div class="w-24 rounded-xl">
-                <img src="${team2.logo}" />
-              </div>
-          </div>
-          <h2 class="card-title">${record2}</h2>
-      </div>
+  `<div class="flex gap-4">
+  <div class="avatar">
+    <div class="w-14 rounded-xl">
+      <img src="${team1.logo}" />
     </div>
-    <div class="grid w-full place-items-center pt-2">
-      <h2 class="card-title">${date}</h2>
-    </div> 
-</div>`;
+  </div>
+  <h2 class="card-title">${gameTeams}</h2>
+  <div class="avatar">
+    <div class="w-14 rounded-xl">
+      <img src="${team2.logo}" />
+    </div>
+  </div>
+</div>
+<p>${date}</p>`;
 
   return makeGame;
 }
