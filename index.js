@@ -1,6 +1,7 @@
 let upcomingGamesData;
 let topPlayersData;
 let topAthletesData = [];
+let topAthletesStats = [];
 
 
 async function getUpcomingGames() {
@@ -40,8 +41,17 @@ async function getTopPlayers(){
         const athleteData = await athleteResponse.json();
         topAthletesData.push(athleteData);
       }
+      for(let i = 0; i<topAthletesData.length; i++){
+        const athleteStatUrl = topAthletesData[0].statistics.$ref;
+        const athleteStatResponse = await fetch(athleteStatUrl);
+        if(!athleteStatResponse.ok){
+          throw new Error('Error fetching Athlete Data')
+        }
+        const athleteStatData = await athleteStatResponse.json();
+        topAthletesStats.push(athleteStatData);
+      }
       
-      resolve({ topPlayersData, topAthletesData});
+      resolve({ topPlayersData, topAthletesData, topAthletesStats});
     } catch (error) {
       reject(new Error('Error fetching top players data'));
     }
@@ -96,9 +106,31 @@ const topPlayersMachine = (obj) => {
   var name = obj.fullName;
   var img = obj.headshot.href;
   var pts;
+  var reb_name;
+  var reb_num;
+  var reb_rank;
+  var FG_name;
+  var FG_num;
+  var FG_rank;
+  var AST_name;
+  var AST_num;
+  var AST_rank;
   for(var i=0; i<topPlayersData.categories[0].leaders.length; i++){
     if(topPlayersData.categories[0].leaders[i].athlete.$ref == obj.$ref){
       var pts = topPlayersData.categories[0].leaders[i].displayValue;
+    }
+  }
+  for(var i=0; i<topAthletesStats.length; i++){
+    if(topAthletesStats[i].$red == obj.ref){
+      var reb_name = topAthletesStats[i].splits.categories[1].stats[15].abbreviation;
+      var reb_num = topAthletesStats[i].splits.categories[1].stats[15].displayValue;
+      var reb_rank = topAthletesStats[i].splits.categories[1].stats[15].rank + "th";
+      var FG_name = topAthletesStats[i].splits.categories[2].stats[5].abbreviation;
+      var FG_num = topAthletesStats[i].splits.categories[2].stats[5].displayValue;
+      var FG_rank = topAthletesStats[i].splits.categories[2].stats[5].rank + "th";
+      var AST_name = topAthletesStats[i].splits.categories[2].stats[0].abbreviation;
+      var AST_num = topAthletesStats[i].splits.categories[2].stats[0].displayValue;
+      var AST_rank = topAthletesStats[i].splits.categories[2].stats[0].rank + "th";
     }
   }
   const makePlayers = 
@@ -119,19 +151,19 @@ const topPlayersMachine = (obj) => {
     <div class="collapse-content text-center"> 
         <div class="stats shadow w-11/12">
             <div class="stat place-items-center">
-            <div class="stat-title text-base">REB</div>
-            <div class="stat-value text-xl">8.8</div>
-            <div class="stat-desc text-sm">18th</div>
+            <div class="stat-title text-base">${reb_name}</div>
+            <div class="stat-value text-xl">${reb_num}</div>
+            <div class="stat-desc text-sm">${reb_rank}</div>
             </div>
             <div class="stat place-items-center">
-            <div class="stat-title text-base">AST</div>
-            <div class="stat-value text-xl">9.5</div>
-            <div class="stat-desc text-sm">3rd</div>
+            <div class="stat-title text-base">${AST_name}</div>
+            <div class="stat-value text-xl">${AST_num}</div>
+            <div class="stat-desc text-sm">${AST_rank}</div>
             </div>
             <div class="stat place-items-center">
-            <div class="stat-title text-base">FG%</div>
-            <div class="stat-value text-xl">49.2</div>
-            <div class="stat-desc text-sm">54th</div>
+            <div class="stat-title text-base">${FG_name}</div>
+            <div class="stat-value text-xl">${FG_num}</div>
+            <div class="stat-desc text-sm">${FG_rank}</div>
             </div>
         </div>
     </div>
