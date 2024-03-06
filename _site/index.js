@@ -43,7 +43,7 @@ async function getTopPlayers(){
         topAthletesData.push(athleteData);
       }
       for(let i = 0; i<topAthletesData.length; i++){
-        const athleteStatUrl = topAthletesData[0].statistics.$ref;
+        const athleteStatUrl = topAthletesData[i].statistics.$ref;
         const secureAthleteStatUrl = athleteStatUrl.replace('http:', 'https:');
         const athleteStatResponse = await fetch(secureAthleteStatUrl);
         if(!athleteStatResponse.ok){
@@ -59,6 +59,7 @@ async function getTopPlayers(){
     }
   });
 }
+
 
 document.addEventListener('DOMContentLoaded', async function() {
   try {
@@ -86,25 +87,48 @@ const upcomingGamesMachine = (obj) => {
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
   const makeGame = 
-    `<div class="flex gap-4">
-    <div class="avatar">
-      <div class="w-14 rounded-xl">
-        <img src="${team1.logo}" />
+    `<div class="collapse">
+      <input type="radio" name="my-accordion-1"/>
+      <div class="collapse-title text-l font-medium">
+        <div class="flex gap-4 justify-center">
+        <div class="avatar">
+          <div class="w-14 rounded-xl">
+            <img src="${team1.logo}" />
+          </div>
+        </div>
+        <h2 class="card-title">${gameTeams}</h2>
+        <div class="avatar">
+          <div class="w-14 rounded-xl">
+            <img src="${team2.logo}" />
+          </div>
+        </div>
+    </div>
+    <p class="text-center">${date}</p>
+    <div class="divider"></div>
+    </div>
+    <div class="collapse-content text-center">
+      <div class="stats shadow w-11/12">
+          <div class="stat place-items-center">
+            <div class="stat-title text-base">Record</div>
+            <div class="stat-value text-xl">${record1}</div>
+          </div>
+          <div class="stat place-items-center">
+            <div class="stat-title text-base">Record</div>
+            <div class="stat-value text-xl">${record2}</div>
+          </div>
       </div>
     </div>
-    <h2 class="card-title">${gameTeams}</h2>
-    <div class="avatar">
-      <div class="w-14 rounded-xl">
-        <img src="${team2.logo}" />
-      </div>
-    </div>
-  </div>
-  <p>${date}</p>`;
+  </div>`;
 
   return makeGame;
 }
 
 const topPlayersMachine = (obj) => {
+  var objPlayerLink = obj.$ref;
+  var securePlayerLink = objPlayerLink.replace('http:', 'https:');
+  var objStatsLink = obj.statistics.$ref;
+  var temp = objStatsLink.replace('http:', 'https:');
+  var secureStatsLink = temp.replace('/statistics', '/statistics/0');
   var name = obj.fullName;
   var img = obj.headshot.href;
   var pts;
@@ -117,24 +141,26 @@ const topPlayersMachine = (obj) => {
   var AST_name;
   var AST_num;
   var AST_rank;
-  for(var i=0; i<topPlayersData.categories[0].leaders.length; i++){
-    if(topPlayersData.categories[0].leaders[i].athlete.$ref == obj.$ref){
-      var pts = topPlayersData.categories[0].leaders[i].displayValue;
+  var i = 0;
+while (typeof FG_name === 'undefined') {
+    if ((topPlayersData.categories[0].leaders[i].athlete.$ref).replace('http:', 'https:') === securePlayerLink) {
+        var pts = topPlayersData.categories[0].leaders[i].displayValue;
+        if ((topAthletesStats[i].$ref).replace('http:', 'https:') === secureStatsLink) {
+            console.log("Condition Met!");
+            var reb_name = topAthletesStats[i].splits.categories[1].stats[15].abbreviation;
+            var reb_num = topAthletesStats[i].splits.categories[1].stats[15].displayValue;
+            var reb_rank = topAthletesStats[i].splits.categories[1].stats[15].rank + "th";
+            var FG_name = topAthletesStats[i].splits.categories[2].stats[5].abbreviation;
+            var FG_num = topAthletesStats[i].splits.categories[2].stats[5].displayValue;
+            var FG_rank = topAthletesStats[i].splits.categories[2].stats[5].rank + "th";
+            var AST_name = topAthletesStats[i].splits.categories[2].stats[0].abbreviation;
+            var AST_num = topAthletesStats[i].splits.categories[2].stats[0].displayValue;
+            var AST_rank = topAthletesStats[i].splits.categories[2].stats[0].rank + "th";
+        }
     }
-  }
-  for(var i=0; i<topAthletesStats.length; i++){
-    if(topAthletesStats[i].$red == obj.ref){
-      var reb_name = topAthletesStats[i].splits.categories[1].stats[15].abbreviation;
-      var reb_num = topAthletesStats[i].splits.categories[1].stats[15].displayValue;
-      var reb_rank = topAthletesStats[i].splits.categories[1].stats[15].rank + "th";
-      var FG_name = topAthletesStats[i].splits.categories[2].stats[5].abbreviation;
-      var FG_num = topAthletesStats[i].splits.categories[2].stats[5].displayValue;
-      var FG_rank = topAthletesStats[i].splits.categories[2].stats[5].rank + "th";
-      var AST_name = topAthletesStats[i].splits.categories[2].stats[0].abbreviation;
-      var AST_num = topAthletesStats[i].splits.categories[2].stats[0].displayValue;
-      var AST_rank = topAthletesStats[i].splits.categories[2].stats[0].rank + "th";
-    }
-  }
+    i++;
+}
+
   const makePlayers = 
     `<div class="collapse">
     <input type="radio" name="my-accordion-1"/> 
@@ -151,7 +177,7 @@ const topPlayersMachine = (obj) => {
         <div class="divider"></div> 
     </div>
     <div class="collapse-content text-center"> 
-        <div class="stats shadow w-11/12">
+        <div class="stats shadow" id="playerStatWidth">
             <div class="stat place-items-center">
             <div class="stat-title text-base">${reb_name}</div>
             <div class="stat-value text-xl">${reb_num}</div>
