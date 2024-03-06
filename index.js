@@ -22,7 +22,7 @@ async function getUpcomingGames() {
   }
 
 async function getTopPlayers(){
-  const apiUrl = 'http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/types/2/leaders';
+  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/types/2/leaders';
 
   return new Promise(async (resolve, reject) => {
     try {
