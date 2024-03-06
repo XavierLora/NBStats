@@ -34,7 +34,8 @@ async function getTopPlayers(){
       // Assuming obj.categories[0].leaders[0].athlete.$ref is the URL of the athlete's data
       for(let i = 0; i<3; i++){
         const athleteUrl = topPlayersData.categories[0].leaders[i].athlete.$ref;
-        const athleteResponse = await fetch(athleteUrl);
+        const secureAthleteUrl = athleteUrl.replace('http:', 'https:');
+        const athleteResponse = await fetch(secureAthleteUrl);
         if (!athleteResponse.ok) {
           throw new Error('Error fetching athlete data');
         }
@@ -43,7 +44,8 @@ async function getTopPlayers(){
       }
       for(let i = 0; i<topAthletesData.length; i++){
         const athleteStatUrl = topAthletesData[0].statistics.$ref;
-        const athleteStatResponse = await fetch(athleteStatUrl);
+        const secureAthleteStatUrl = athleteStatUrl.replace('http:', 'https:');
+        const athleteStatResponse = await fetch(secureAthleteStatUrl);
         if(!athleteStatResponse.ok){
           throw new Error('Error fetching Athlete Data')
         }
