@@ -2499,6 +2499,9 @@ html:has(.drawer-toggle:checked) {
 .w-10 {
   width: 2.5rem;
 }
+.w-10\/12 {
+  width: 83.333333%;
+}
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -2532,6 +2535,12 @@ html:has(.drawer-toggle:checked) {
 .grid-flow-col {
   grid-auto-flow: column;
 }
+.auto-rows-max {
+  grid-auto-rows: max-content;
+}
+.grid-cols-auto-fill-325 {
+  grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -2540,6 +2549,9 @@ html:has(.drawer-toggle:checked) {
 }
 .items-center {
   align-items: center;
+}
+.justify-center {
+  justify-content: center;
 }
 .gap-4 {
   gap: 1rem;

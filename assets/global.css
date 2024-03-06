@@ -68,3 +68,9 @@
 #mvpRookieContainer{
     border-radius: 2vh;
 }
+#debug{
+    border: solid red 4px;
+}
+#playerStatWidth{
+    width: 85%;
+}
