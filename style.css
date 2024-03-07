@@ -2495,6 +2495,9 @@ html:has(.drawer-toggle:checked) {
 .w-10\/12 {
   width: 83.333333%;
 }
+.w-11\/12 {
+  width: 91.666667%;
+}
 .w-14 {
   width: 3.5rem;
 }
@@ -2543,6 +2546,9 @@ html:has(.drawer-toggle:checked) {
 .justify-center {
   justify-content: center;
 }
+.justify-items-center {
+  justify-items: center;
+}
 .gap-4 {
   gap: 1rem;
 }
@@ -2584,9 +2590,6 @@ html:has(.drawer-toggle:checked) {
 }
 .pb-3 {
   padding-bottom: 0.75rem;
-}
-.pr-6 {
-  padding-right: 1.5rem;
 }
 .pt-3 {
   padding-top: 0.75rem;
