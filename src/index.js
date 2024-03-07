@@ -128,18 +128,18 @@ const upcomingGamesMachine = (obj) => {
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
   const makeGame = `
-    <div class="collapse" id="debug">
+    <div class="collapse w-fit" id="debug">
       <input type="radio" name="my-accordion-1"/>
       <div class="collapse-title text-l font-medium flex flex-col justify-center">
         <div class="flex gap-4 justify-center text-center">
           <div class="avatar">
-            <div class="w-14 rounded-xl">
+            <div class="w-12 rounded-xl">
               <img src="${team1.logo}" />
             </div>
           </div>
           <h2 class="card-title">${gameTeams}</h2>
           <div class="avatar">
-            <div class="w-14 rounded-xl">
+            <div class="w-12 rounded-xl">
               <img src="${team2.logo}" />
             </div>
           </div>
