@@ -134,13 +134,13 @@ const upcomingGamesMachine = (obj) => {
         <div class="flex gap-4 justify-center text-center">
           <div class="avatar">
             <div class="w-14 rounded-xl">
-              <img src="${team1.logo}" />
+              <img src="${team2.logo}" />
             </div>
           </div>
           <h2 class="card-title text-base">${gameTeams}</h2>
           <div class="avatar">
             <div class="w-14 rounded-xl">
-              <img src="${team2.logo}" />
+              <img src="${team1.logo}" />
             </div>
           </div>
         </div>
@@ -152,19 +152,19 @@ const upcomingGamesMachine = (obj) => {
           ${isGameActive ? // Check if game is active
             `<div class="stat place-items-center">
               <div class="stat-title text-base">Score</div>
-              <div class="stat-value text-xl">${score1}</div>
+              <div class="stat-value text-xl">${score2}</div>
             </div>
             <div class="stat place-items-center">
               <div class="stat-title text-base">Score</div>
-              <div class="stat-value text-xl">${score2}</div>
+              <div class="stat-value text-xl">${score1}</div>
             </div>` :
             `<div class="stat place-items-center">
               <div class="stat-title text-base">Record</div>
-              <div class="stat-value text-xl">${record1}</div>
+              <div class="stat-value text-xl">${record2}</div>
             </div>
             <div class="stat place-items-center">
               <div class="stat-title text-base">Record</div>
-              <div class="stat-value text-xl">${record2}</div>
+              <div class="stat-value text-xl">${record1}</div>
             </div>`
           }
         </div>
