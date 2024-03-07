@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href=".././style.css" rel="stylesheet">
-    <link href=".././assets/global.css" rel="stylesheet">
-    <title>Eleventy Test</title>
+    <link href="../style.css" rel="stylesheet">
+    <link href="../assets/global.css" rel="stylesheet">
+    <script type="module" src="../index.js"></script>
+    <script type="module" src="./live.js"></script>
+    <title>Live Games</title>
   </head>
   <body>
+    <div class="drawer-content flex flex-col">
     <div class="card lg bg-neutral shadow-xl">
     <div class="card-body place-items-center">
         <h2 class="card-title">Live & Upcoming Games</h2>
-          <div class="grid w-full auto-rows-max grid-cols-auto-fill-325 justify-items-center" id="upcomingGamesCardContainer">
+          <div class="grid w-full auto-rows-max grid-cols-auto-fill-325 justify-items-center" id="liveGamesCardContainer">
             
             </div>
           </div>
         </div>
+</div>
+    
     <div class="btm-nav btm-nav-lg">
         <button onclick="location.href='../index.html'">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -28,6 +33,5 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
         </button>
       </div>
-    <script src="./assets/script.js"></script>
   </body>
 </html>

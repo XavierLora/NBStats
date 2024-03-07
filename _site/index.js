@@ -93,11 +93,12 @@ async function getTopTeams() {
 }
 
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function eventHandler() {
   try {
     const [upcomingGames, topPlayers, topTeams] = await Promise.all([getUpcomingGames(), getTopPlayers(), getTopTeams()]);
     console.log('Top Players Data:', topPlayers);
     console.log('Top Teams Data:', topTeams);
+    console.log('Upcoming Games Data:', upcomingGames);
       for (let i = 0; i < upcomingGamesData.events.length; i++) {
           const obj = upcomingGamesData.events[i];
           displayUpcomingGames(obj);
@@ -109,18 +110,21 @@ document.addEventListener('DOMContentLoaded', async function() {
     for (let i = 0; i < topTeamsData.length; i++) {
       const obj = topTeamData.items[i];
       displayTopTeams(obj);
-  }
+    }
+    
+    // Remove the event listener after execution
+    document.removeEventListener('DOMContentLoaded', eventHandler);
   } catch (error) {
       console.error('Error:', error);
   }
 });
-
 
 const upcomingGamesMachine = (obj) => {
   var team1 = obj.competitions[0].competitors[0].team;
   var team2 = obj.competitions[0].competitors[1].team;
   var gameTeams = obj.shortName;
   var isGameActive = obj.status.type.state == "in" || obj.status.type.state == "post";
+  var isGameOver = obj.status.type.state == "post";
   var score1 = obj.competitions[0].competitors[0].score;
   var score2 = obj.competitions[0].competitors[1].score;
   console.log(isGameActive);
@@ -323,6 +327,8 @@ function displayTopTeams(obj){
   let parentNode = document.getElementById('teamsContainer');
     parentNode.insertAdjacentHTML('beforeend', topTeamsMachine(obj));
 }
+
+
 
 //http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba
   
