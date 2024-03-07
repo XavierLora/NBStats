@@ -128,7 +128,7 @@ const upcomingGamesMachine = (obj) => {
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
   const makeGame = `
-    <div class="collapse w-full" id="debug">
+    <div class="collapse w-full">
       <input type="radio" name="my-accordion-1"/>
       <div class="collapse-title text-l font-medium flex flex-col justify-center">
         <div class="flex gap-4 justify-center text-center">
