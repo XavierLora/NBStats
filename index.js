@@ -145,17 +145,17 @@ const upcomingGamesMachine = (obj) => {
           </div>
         </div>
         <p class="text-center">${date}</p>
-        <div class="divider pr-4"></div>
+        <div class="divider pr-6"></div>
       </div>
       <div class="collapse-content text-center">
-        <div class="stats shadow" id="playerStatWidth">
+        <div class="stats shadow w-10/12">
           ${isGameActive ? // Check if game is active
             `<div class="stat place-items-center">
-              <div class="stat-title text-base">Score</div>
+              <div class="stat-title text-base">Live Score</div>
               <div class="stat-value text-xl">${score1}</div>
             </div>
             <div class="stat place-items-center">
-              <div class="stat-title text-base">Score</div>
+              <div class="stat-title text-base">Live Score</div>
               <div class="stat-value text-xl">${score2}</div>
             </div>` :
             `<div class="stat place-items-center">
