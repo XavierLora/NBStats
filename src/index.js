@@ -159,6 +159,17 @@ const upcomingGamesMachine = (obj) => {
               <div class="stat-value text-xl">${score2}</div>
             </div>
             <div class="stat place-items-center">
+              <div class="stat-title text-base">Highlights</div>
+              <div class="stat-value text-xl">
+              <a href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                </svg>
+              </a>
+            </div>
+            </div>
+            <div class="stat place-items-center">
               <div class="stat-title text-base">Score</div>
               <div class="stat-value text-xl">${score1}</div>
             </div>` :
