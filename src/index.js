@@ -2,6 +2,8 @@ let upcomingGamesData;
 let topPlayersData;
 let topAthletesData = [];
 let topAthletesStats = [];
+let topTeamData;
+let topTeamsData = [];
 
 
 async function getUpcomingGames() {
@@ -60,11 +62,42 @@ async function getTopPlayers(){
   });
 }
 
+async function getTopTeams() {
+  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/powerindex?lang=en&region=us';
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error('Error fetching top teams data');
+      }
+      topTeamData = await response.json();
+      // Assuming obj.categories[0].leaders[0].athlete.$ref is the URL of the athlete's data
+      for(let i = 0; i<3; i++){
+        const teameUrl = topTeamData.items[i].team.$ref;
+        const secureTeamUrl = teameUrl.replace('http:', 'https:');
+        const teamResponse = await fetch(secureTeamUrl);
+        if (!teamResponse.ok) {
+          throw new Error('Error fetching athlete data');
+        }
+        const teamData = await teamResponse.json();
+        topTeamsData.push(teamData);
+      }
+
+      
+      resolve({ topTeamData, topTeamsData});
+    } catch (error) {
+      reject(new Error('Error fetching top players data'));
+    }
+  });
+}
+
 
 document.addEventListener('DOMContentLoaded', async function() {
   try {
-    const [upcomingGames, topPlayers] = await Promise.all([getUpcomingGames(), getTopPlayers()]);
+    const [upcomingGames, topPlayers, topTeams] = await Promise.all([getUpcomingGames(), getTopPlayers(), getTopTeams()]);
     console.log('Top Players Data:', topPlayers);
+    console.log('Top Teams Data:', topTeams);
       for (let i = 0; i < upcomingGamesData.events.length; i++) {
           const obj = upcomingGamesData.events[i];
           displayUpcomingGames(obj);
@@ -73,6 +106,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         const obj = topAthletesData[i];
         displayTopPlayers(obj);
     }
+    for (let i = 0; i < topTeamsData.length; i++) {
+      const obj = topTeamData.items[i];
+      displayTopTeams(obj);
+  }
   } catch (error) {
       console.error('Error:', error);
   }
@@ -146,16 +183,12 @@ while (typeof FG_name === 'undefined') {
     if ((topPlayersData.categories[0].leaders[i].athlete.$ref).replace('http:', 'https:') === securePlayerLink) {
         var pts = topPlayersData.categories[0].leaders[i].displayValue;
         if ((topAthletesStats[i].$ref).replace('http:', 'https:') === secureStatsLink) {
-            console.log("Condition Met!");
             var reb_name = topAthletesStats[i].splits.categories[1].stats[15].abbreviation;
             var reb_num = topAthletesStats[i].splits.categories[1].stats[15].displayValue;
-            var reb_rank = topAthletesStats[i].splits.categories[1].stats[15].rank + "th";
             var FG_name = topAthletesStats[i].splits.categories[2].stats[5].abbreviation;
             var FG_num = topAthletesStats[i].splits.categories[2].stats[5].displayValue;
-            var FG_rank = topAthletesStats[i].splits.categories[2].stats[5].rank + "th";
             var AST_name = topAthletesStats[i].splits.categories[2].stats[0].abbreviation;
             var AST_num = topAthletesStats[i].splits.categories[2].stats[0].displayValue;
-            var AST_rank = topAthletesStats[i].splits.categories[2].stats[0].rank + "th";
         }
     }
     i++;
@@ -181,17 +214,14 @@ while (typeof FG_name === 'undefined') {
             <div class="stat place-items-center">
             <div class="stat-title text-base">${reb_name}</div>
             <div class="stat-value text-xl">${reb_num}</div>
-            <div class="stat-desc text-sm">${reb_rank}</div>
             </div>
             <div class="stat place-items-center">
             <div class="stat-title text-base">${AST_name}</div>
             <div class="stat-value text-xl">${AST_num}</div>
-            <div class="stat-desc text-sm">${AST_rank}</div>
             </div>
             <div class="stat place-items-center">
             <div class="stat-title text-base">${FG_name}</div>
             <div class="stat-value text-xl">${FG_num}</div>
-            <div class="stat-desc text-sm">${FG_rank}</div>
             </div>
         </div>
     </div>
@@ -200,14 +230,72 @@ while (typeof FG_name === 'undefined') {
   return makePlayers;
 }
 
+const topTeamsMachine = (obj) => {
+  var place = obj.stats[48].displayValue;
+  var wins = obj.stats[4].value;
+  var loses = obj.stats[5].value;
+  var sos = obj.stats[33].displayValue;
+  var objTeamLink = obj.team.$ref;
+  var secureTeamLink = objTeamLink.replace('http:', 'https:');
+  var teamName;
+  var teamImg;
+
+  var i = 0;
+  
+  while (typeof teamName === 'undefined') {
+    if ((topTeamsData[i].$ref).replace('http:', 'https:') === secureTeamLink) {
+            teamName = topTeamsData[i].displayName;
+            var temp = topTeamsData[i].logos[0].href;
+            var teamImg = temp.replace('http:', 'https:');
+        }
+    i++;
+  }
+  const makeTeams = 
+    `<div class="collapse">
+    <input type="radio" name="my-accordion-1"/> 
+    <div class="collapse-title text-l font-medium">
+        <div class="playerList">
+            <div class="avatar">
+                <div class="w-14 rounded-full">
+                  <img src="${teamImg}" />
+                </div>
+            </div>
+            <p class="teamName">${teamName}</p>
+            <p class="cardPts">${wins}-${loses}</p>
+        </div>
+        <div class="divider"></div> 
+    </div>
+    <div class="collapse-content text-center"> 
+    <div class="stats shadow w-11/12">
+    <div class="stat place-items-center">
+      <div class="stat-title text-base">RANK</div>
+      <div class="stat-value text-base">${place}</div>
+    </div>
+    <div class="stat place-items-center">
+      <div class="stat-title text-sm">Strength of Schedule</div>
+      <div class="stat-value text-xl">${sos}</div>
+    </div>
+</div>
+    </div>
+  </div>`
+
+  return makeTeams;
+}
+
+
+function displayUpcomingGames(obj){
+  let parentNode = document.getElementById('upcomingGamesCardContainer');
+    parentNode.insertAdjacentHTML('beforeend', upcomingGamesMachine(obj));
+}
+
 function displayTopPlayers(obj){
   let parentNode = document.getElementById('topPlayersContainer');
     parentNode.insertAdjacentHTML('beforeend', topPlayersMachine(obj));
 }
 
-function displayUpcomingGames(obj){
-  let parentNode = document.getElementById('upcomingGamesCardContainer');
-    parentNode.insertAdjacentHTML('beforeend', upcomingGamesMachine(obj));
+function displayTopTeams(obj){
+  let parentNode = document.getElementById('teamsContainer');
+    parentNode.insertAdjacentHTML('beforeend', topTeamsMachine(obj));
 }
 
 //http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba

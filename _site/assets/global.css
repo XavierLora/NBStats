@@ -19,10 +19,9 @@
 .playerList{
     display: flex;
     flex-direction: row;
-    gap: 1vh;
+    gap: 0.25vh;
     align-items: center;
-    width: 100%;
-    padding: 0;
+    width: 95%;
 }
 .gamesList{
     display: flex;
@@ -38,7 +37,10 @@
     gap: 1vh;
     align-items: center;
     width: 100%;
-    
+}
+.teamName{
+    padding: 0;
+    margin: 0;
 }
 .cardPts{
     text-align: end;
