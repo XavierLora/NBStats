@@ -75,8 +75,6 @@
 }
 #upcomingGamesCardContainer{
     border: solid red 4px;
-    padding-left: 0.25vh;
-    padding-right: 0.25vh;
     gap: 0.25vh;
 }
 #playerStatWidth{
