@@ -2495,9 +2495,6 @@ html:has(.drawer-toggle:checked) {
 .w-10\/12 {
   width: 83.333333%;
 }
-.w-12 {
-  width: 3rem;
-}
 .w-14 {
   width: 3.5rem;
 }
@@ -2608,6 +2605,10 @@ html:has(.drawer-toggle:checked) {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 .font-bold {
   font-weight: 700;
