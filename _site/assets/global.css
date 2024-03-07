@@ -36,7 +36,7 @@
     flex-direction: row;
     gap: 1vh;
     align-items: center;
-    width: 100%;
+    width: 95%;
 }
 .teamName{
     padding: 0;
