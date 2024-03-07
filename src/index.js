@@ -197,12 +197,15 @@ while (typeof FG_name === 'undefined') {
     if ((topPlayersData.categories[0].leaders[i].athlete.$ref).replace('http:', 'https:') === securePlayerLink) {
         var pts = topPlayersData.categories[0].leaders[i].displayValue;
         if ((topAthletesStats[i].$ref).replace('http:', 'https:') === secureStatsLink) {
-            var reb_name = topAthletesStats[i].splits.categories[1].stats[15].abbreviation;
+            var reb_name = topAthletesStats[i].splits.categories[1].stats[15].shortDisplayName;
             var reb_num = topAthletesStats[i].splits.categories[1].stats[15].displayValue;
+            var reb_rank = topAthletesStats[i].splits.categories[1].stats[15].rankDisplayValue;
             var FG_name = topAthletesStats[i].splits.categories[2].stats[5].abbreviation;
             var FG_num = topAthletesStats[i].splits.categories[2].stats[5].displayValue;
-            var AST_name = topAthletesStats[i].splits.categories[2].stats[0].abbreviation;
-            var AST_num = topAthletesStats[i].splits.categories[2].stats[0].displayValue;
+            var FG_rank = topAthletesStats[i].splits.categories[2].stats[5].rankDisplayValue;
+            var AST_name = topAthletesStats[i].splits.categories[2].stats[32].shortDisplayName;
+            var AST_num = topAthletesStats[i].splits.categories[2].stats[32].displayValue;
+            var AST_rank = topAthletesStats[i].splits.categories[2].stats[32].rankDisplayValue;
         }
     }
     i++;
@@ -228,14 +231,17 @@ while (typeof FG_name === 'undefined') {
             <div class="stat place-items-center">
             <div class="stat-title text-base">${reb_name}</div>
             <div class="stat-value text-xl">${reb_num}</div>
+            <div class="stat-value text-xs">${reb_rank}</div>
             </div>
             <div class="stat place-items-center">
             <div class="stat-title text-base">${AST_name}</div>
             <div class="stat-value text-xl">${AST_num}</div>
+            <div class="stat-value text-xs">${AST_rank}</div>
             </div>
             <div class="stat place-items-center">
             <div class="stat-title text-base">${FG_name}</div>
             <div class="stat-value text-xl">${FG_num}</div>
+            <div class="stat-value text-xs">${FG_rank}</div>
             </div>
         </div>
     </div>
