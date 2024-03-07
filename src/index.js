@@ -145,7 +145,7 @@ const upcomingGamesMachine = (obj) => {
           </div>
         </div>
         <p class="text-center">${date}</p>
-        <div class="divider"></div>
+        <div class="divider pr-4"></div>
       </div>
       <div class="collapse-content text-center">
         <div class="stats shadow" id="playerStatWidth">
@@ -249,6 +249,10 @@ const topTeamsMachine = (obj) => {
   var wins = obj.stats[4].value;
   var loses = obj.stats[5].value;
   var sos = obj.stats[33].displayValue;
+  if (place.indexOf("Tied-") !== -1) {
+    // If "Tied-" is found, remove it
+    place = place.replace("Tied-", "");
+}
   var objTeamLink = obj.team.$ref;
   var secureTeamLink = objTeamLink.replace('http:', 'https:');
   var teamName;
