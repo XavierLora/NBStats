@@ -73,6 +73,9 @@
 #debug{
     border: solid red 4px;
 }
+#upcomingGamesCardContainer{
+    border: solid red 4px;
+}
 #playerStatWidth{
     width: fit-content;
 }
