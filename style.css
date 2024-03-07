@@ -2453,6 +2453,9 @@ html:has(.drawer-toggle:checked) {
 .collapse {
   visibility: collapse;
 }
+.m-4 {
+  margin: 1rem;
+}
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -2495,9 +2498,6 @@ html:has(.drawer-toggle:checked) {
 .w-10\/12 {
   width: 83.333333%;
 }
-.w-11\/12 {
-  width: 91.666667%;
-}
 .w-14 {
   width: 3.5rem;
 }
@@ -2509,6 +2509,10 @@ html:has(.drawer-toggle:checked) {
 }
 .w-80 {
   width: 20rem;
+}
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .w-full {
   width: 100%;
