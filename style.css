@@ -1379,13 +1379,6 @@ html {
   line-height: 2.5rem;
   font-weight: 800;
 }
-.stat-desc {
-  grid-column-start: 1;
-  white-space: nowrap;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  color: var(--fallback-bc,oklch(var(--bc)/0.6));
-}
 .swap {
   position: relative;
   display: inline-grid;
@@ -2499,12 +2492,6 @@ html:has(.drawer-toggle:checked) {
 .w-10 {
   width: 2.5rem;
 }
-.w-10\/12 {
-  width: 83.333333%;
-}
-.w-11\/12 {
-  width: 91.666667%;
-}
 .w-14 {
   width: 3.5rem;
 }
@@ -2595,15 +2582,14 @@ html:has(.drawer-toggle:checked) {
 .pb-3 {
   padding-bottom: 0.75rem;
 }
+.pr-4 {
+  padding-right: 1rem;
+}
 .pt-3 {
   padding-top: 0.75rem;
 }
 .text-center {
   text-align: center;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 .text-5xl {
   font-size: 3rem;
@@ -2613,17 +2599,9 @@ html:has(.drawer-toggle:checked) {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
 }
 .font-bold {
   font-weight: 700;
