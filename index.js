@@ -130,10 +130,13 @@ const upcomingGamesMachine = (obj) => {
   var isGameOver = obj.status.type.state == "post";
   var score1 = obj.competitions[0].competitors[0].score;
   var score2 = obj.competitions[0].competitors[1].score;
-  var highlights = obj.links[2].href;
+  var highlights;
   var record1 = obj.competitions[0].competitors[0].records[0].summary;
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
+  if (isGameOver) {
+    highlights = obj.links[2].href;
+  }
   const makeGame = `
     <div class="collapse w-full">
       <input type="radio" name="my-accordion-1"/>
