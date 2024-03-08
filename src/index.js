@@ -123,12 +123,14 @@ const upcomingGamesMachine = (obj) => {
   var team1 = obj.competitions[0].competitors[0].team;
   var team2 = obj.competitions[0].competitors[1].team;
   var gameTeams = obj.shortName;
+  var winner1 = obj.competitions[0].competitors[0].winner;
+  var winner2 = obj.competitions[0].competitors[1].winner;
   var isGameActive = obj.status.type.state == "in"
   var isGamePre = obj.status.type.state == "pre";
   var isGameOver = obj.status.type.state == "post";
   var score1 = obj.competitions[0].competitors[0].score;
   var score2 = obj.competitions[0].competitors[1].score;
-  console.log(isGameActive);
+  var highlights = obj.links[2].href;
   var record1 = obj.competitions[0].competitors[0].records[0].summary;
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
@@ -136,7 +138,12 @@ const upcomingGamesMachine = (obj) => {
     <div class="collapse w-full">
       <input type="radio" name="my-accordion-1"/>
       <div class="collapse-title text-l font-medium flex flex-col justify-center">
-        <div class="flex gap-4 justify-center text-center">
+        <div class="flex gap-4 justify-center text-center place-items-center">
+        ${isGameOver ?
+          `${winner2 ? // Check if there is a winner
+          `<p class="text-center text-xl" id="win">W</p>` :
+          `<p class="text-center text-xl" id="lose">L</p>`
+          }
           <div class="avatar">
             <div class="w-14 rounded-xl">
               <img src="${team2.logo}" />
@@ -148,12 +155,29 @@ const upcomingGamesMachine = (obj) => {
               <img src="${team1.logo}" />
             </div>
           </div>
+          ${winner1 ? // Check if there is a winner
+            `<p class="text-center text-xl" id="win">W</p>` :
+            `<p class="text-center text-xl" id="lose">L</p>`
+            }`:
+        `<div class="avatar">
+          <div class="w-14 rounded-xl">
+            <img src="${team2.logo}" />
+          </div>
+        </div>
+        <h2 class="card-title text-base">${gameTeams}</h2>
+        <div class="avatar">
+          <div class="w-14 rounded-xl">
+            <img src="${team1.logo}" />
+          </div>
+        </div>
+        `
+        }
         </div>
         <p class="text-center">${date}</p>
         <div class="divider w-full"></div>
       </div>
       <div class="collapse-content text-center">
-        <div class="stats shadow w-10/12">
+        <div class="stats shadow w-11/12">
           ${isGamePre ? // Check if game is pre
             `<div class="stat place-items-center">
             <div class="stat-title text-base">Record</div>
@@ -175,12 +199,12 @@ const upcomingGamesMachine = (obj) => {
               (isGameOver ? // Check if game is over
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Final</div>
-                  <div class="stat-value text-xl">${record2}-${record1}</div>
+                  <div class="stat-value text-base">${score2}-${score1}</div>
                 </div>
                 <div class="stat place-items-center">
                 <div class="stat-title text-base">Highlights</div>
-                <div class="stat-value text-xl">
-                  <a href="#">
+                <div class="stat-value text-base">
+                  <a href="${highlights}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />

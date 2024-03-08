@@ -46,6 +46,7 @@ const liveGamesMachine = (obj) => {
     <div class="collapse w-full">
       <input type="radio" name="my-accordion-1"/>
       <div class="collapse-title text-l font-medium flex flex-col justify-center">
+        <p class="text-center">${date}</p>
         <div class="flex gap-4 justify-center text-center">
         ${isGamePre ? // Check if game is pre
             `<div class="avatar">
@@ -74,7 +75,19 @@ const liveGamesMachine = (obj) => {
             </div>
             <h2 class="card-title text-xl">${score1}</h2>` :
               (isGameOver ? // Check if game is over
-                `` :
+                `<h2 class="card-title text-xl">${score2}</h2>
+              <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team2.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-base">${gameTeams}</h2>
+            <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team1.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-xl">${score1}</h2>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
@@ -82,7 +95,6 @@ const liveGamesMachine = (obj) => {
             )
           }
         </div>
-        <p class="text-center">${date}</p>
         <div class="divider w-full"></div>
       </div>
       <div class="collapse-content text-center">
@@ -106,7 +118,14 @@ const liveGamesMachine = (obj) => {
                 <div class="stat-value text-xl">${score1}</div>
               </div>` :
               (isGameOver ? // Check if game is over
-                `` :
+                `<div class="stat place-items-center">
+                <div class="stat-title text-base">Score</div>
+                <div class="stat-value text-xl">${score2}</div>
+              </div>
+              <div class="stat place-items-center">
+                <div class="stat-title text-base">Score</div>
+                <div class="stat-value text-xl">${score1}</div>
+              </div>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
