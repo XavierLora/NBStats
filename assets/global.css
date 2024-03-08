@@ -85,11 +85,11 @@
     overflow: scroll;
     position: fixed;
     top: 10vh;
-    padding-top: 5vh;
+    padding-top: 7.5vh;
     width: 100%;
     z-index: -10;
     place-items: center;
-    padding-bottom: 20vh;
+    padding-bottom: 30vh;
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */  
@@ -123,4 +123,13 @@
   
   .on-scrollbar::-webkit-scrollbar-thumb {
     background-color: #acacac;
+}
+
+#win{
+    font-weight: 700;
+    color: #008348;
+}
+#lose{
+    font-weight: 700;
+    color: #cc1743;
 }
