@@ -120,6 +120,19 @@ document.addEventListener('DOMContentLoaded', async function eventHandler() {
 });
 
 const upcomingGamesMachine = (obj) => {
+  let allGamesOver = true;
+  for(let i = 0; i<obj.length; i++){
+    if(obj.status.type.state !== "post"){
+      allGamesOver = false;
+      break;
+    }
+  }
+  const gamesTitleElement = document.getElementById("gamesTitle");
+  if(allGamesOver){
+    gamesTitleElement.innerHTML="Last Night's Games";
+  }else{
+    gamesTitleElement.innerHTML="Live & Upcoming Games";
+  }
   var team1 = obj.competitions[0].competitors[0].team;
   var team2 = obj.competitions[0].competitors[1].team;
   var gameTeams = obj.shortName;
