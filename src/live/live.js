@@ -32,12 +32,36 @@ document.addEventListener('DOMContentLoaded', async function() {
 const liveGamesMachine = (obj) => {
     var team1 = obj.competitions[0].competitors[0].team;
     var team2 = obj.competitions[0].competitors[1].team;
+    var name1 = obj.competitions[0].competitors[0].team.abbreviation;
+    var name2 = obj.competitions[0].competitors[1].team.abbreviation;
     var gameTeams = obj.shortName;
     var isGameActive = obj.status.type.state == "in";
     var isGamePre = obj.status.type.state == "pre";
     var isGameOver = obj.status.type.state == "post";
     var score1 = obj.competitions[0].competitors[0].score;
     var score2 = obj.competitions[0].competitors[1].score;
+    var preRebStatName = obj.competitions[0].competitors[0].statistics[0].abbreviation;
+    var preRebStatTotal1 = obj.competitions[0].competitors[0].statistics[0].displayValue;
+    var preRebStatAvg1 = obj.competitions[0].competitors[0].statistics[1].displayValue;
+    var preRebStatRank1 = obj.competitions[0].competitors[0].statistics[0].rankDisplayValue;
+    var preRebStatTotal2 = obj.competitions[0].competitors[1].statistics[0].displayValue;
+    var preRebStatAvg2 = obj.competitions[0].competitors[1].statistics[1].displayValue;
+    var preRebStatRank2 = obj.competitions[0].competitors[1].statistics[0].rankDisplayValue;
+    var preAstStatName = obj.competitions[0].competitors[0].statistics[2].abbreviation;
+    var preAstStatTotal1 = obj.competitions[0].competitors[0].statistics[2].displayValue;
+    var preAstStatAvg1 = obj.competitions[0].competitors[0].statistics[14].displayValue;
+    var preAstStatRank1 = obj.competitions[0].competitors[0].statistics[2].rankDisplayValue;
+    var preAstStatTotal2 = obj.competitions[0].competitors[1].statistics[2].displayValue;
+    var preAstStatAvg2 = obj.competitions[0].competitors[1].statistics[14].displayValue;
+    var preAstStatRank2 = obj.competitions[0].competitors[1].statistics[2].rankDisplayValue;
+    var prePtsStatName = obj.competitions[0].competitors[0].statistics[5].abbreviation;
+    var prePtsStatTotal1 = obj.competitions[0].competitors[0].statistics[4].displayValue+"/"+obj.competitions[0].competitors[0].statistics[3].displayValue;
+    var prePtsStatAvg1 = obj.competitions[0].competitors[0].statistics[1].displayValue;
+    var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[5].rankDisplayValue;
+    var prePtsStatTotal2 = obj.competitions[0].competitors[1].statistics[4].displayValue+"/"+obj.competitions[0].competitors[1].statistics[3].displayValue;
+    var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[1].displayValue;
+    var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[5].rankDisplayValue;
+    
     console.log(isGameActive);
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
     var record2 = obj.competitions[0].competitors[1].records[0].summary;
@@ -49,7 +73,8 @@ const liveGamesMachine = (obj) => {
         <p class="text-center">${date}</p>
         <div class="flex gap-4 justify-center text-center">
         ${isGamePre ? // Check if game is pre
-            `<div class="avatar">
+            `<h2 class="card-title text-base">${record2}</h2>
+            <div class="avatar">
             <div class="w-14 rounded-xl">
               <img src="${team2.logo}" />
             </div>
@@ -59,7 +84,8 @@ const liveGamesMachine = (obj) => {
             <div class="w-14 rounded-xl">
               <img src="${team1.logo}" />
             </div>
-          </div>` :
+          </div>
+          <h2 class="card-title text-base">${record1}</h2>` :
             (isGameActive ? // Check if game is active
               `<h2 class="card-title text-xl">${score2}</h2>
               <div class="avatar">
@@ -98,15 +124,89 @@ const liveGamesMachine = (obj) => {
         <div class="divider w-full"></div>
       </div>
       <div class="collapse-content text-center">
-        <div class="stats shadow w-10/12">
+        <div class="collapse-title text-l font-medium flex flex-col justify-center">
+        <p class="text-center">Team Stats</p>
+        <div class="stats shadow w-full">
           ${isGamePre ? // Check if game is pre
-            `<div class="stat place-items-center">
-            <div class="stat-title text-base">Record</div>
-            <div class="stat-value text-xl">${record2}</div>
+            `<div role="tablist" class="tabs tabs-bordered justify-center">
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" />
+            <div role="tabpanel" class="tab-content">
+            <div class="overflow-x-auto w-full">
+            <table class="table-xs">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Total</th>
+                  <th>AVG</th>
+                  <th>Rank</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                  <th>${prePtsStatName}</th>
+                  <td>${prePtsStatTotal2}</td>
+                  <td>${prePtsStatAvg2}</td>
+                  <td>${prePtsStatRank2}</td>
+                </tr>
+                <!-- row 2 -->
+                <tr>
+                <th>${preAstStatName}</th>
+                <td>${preAstStatTotal2}</td>
+                <td>${preAstStatAvg2}</td>
+                <td>${preAstStatRank2}</td>
+                </tr>
+                <!-- row 3 -->
+                <tr>
+                <th>${preRebStatName}</th>
+                <td>${preRebStatTotal2}</td>
+                <td>${preRebStatAvg2}</td>
+                <td>${preRebStatRank2}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="stat place-items-center">
-            <div class="stat-title text-base">Record</div>
-            <div class="stat-value text-xl">${record1}</div>
+            </div>
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
+            <div role="tabpanel" class="tab-content">
+            <div class="overflow-x-auto">
+              <table class="table-xs">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Total</th>
+                    <th>AVG</th>
+                    <th>Rank</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  <tr>
+                  <th>${prePtsStatName}</th>
+                  <td>${prePtsStatTotal1}</td>
+                  <td>${prePtsStatAvg1}</td>
+                  <td>${prePtsStatRank1}</td>
+                </tr>
+                <!-- row 2 -->
+                <tr>
+                <th>${preAstStatName}</th>
+                <td>${preAstStatTotal1}</td>
+                <td>${preAstStatAvg1}</td>
+                <td>${preAstStatRank1}</td>
+                </tr>
+                <!-- row 3 -->
+                <tr>
+                <th>${preRebStatName}</th>
+                <td>${preRebStatTotal1}</td>
+                <td>${preRebStatAvg1}</td>
+                <td>${preRebStatRank1}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
           </div>` :
             (isGameActive ? // Check if game is active
               `<div class="stat place-items-center">
@@ -134,6 +234,7 @@ const liveGamesMachine = (obj) => {
           }
         </div>
       </div>
+    </div>
     </div>`;
   
     return makeGame;

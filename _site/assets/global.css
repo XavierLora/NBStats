@@ -16,6 +16,10 @@
     margin-top: 1.5vh;
     border-radius: 2vh;
 }
+.liveCard{
+    padding: 0;
+    border-radius: 2vh;
+}
 .playerList{
     display: flex;
     flex-direction: row;
@@ -132,4 +136,21 @@
 #lose{
     font-weight: 700;
     color: #cc1743;
+}
+.tabs-content{
+    grid-row-start: 1;
+}
+.tab:is(input[type="radio"]) {
+    width: 100%;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+  .tab:is(input[type="radio"]):after {
+    width: 100%;
+    --tw-content: attr(aria-label);
+    content: var(--tw-content);
+  }
+  input.tab:checked + .tab-content,
+.tab-active + .tab-content {
+  display: block;
 }
