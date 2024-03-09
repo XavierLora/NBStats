@@ -30,6 +30,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 const liveGamesMachine = (obj) => {
+  let allGamesOver = true;
+  for(let i = 0; i<obj.length; i++){
+    if(obj.status.type.state !== "post"){
+      allGamesOver = false;
+      break;
+    }
+  }
+  const gamesTitleElement = document.getElementById("gamesTitle");
+  if(allGamesOver){
+    gamesTitleElement.innerHTML="Last Night's Games";
+  }else{
+    gamesTitleElement.innerHTML="Live & Upcoming Games";
+  }
     var team1 = obj.competitions[0].competitors[0].team;
     var team2 = obj.competitions[0].competitors[1].team;
     var name1 = obj.competitions[0].competitors[0].team.abbreviation;
@@ -54,13 +67,13 @@ const liveGamesMachine = (obj) => {
     var preAstStatTotal2 = obj.competitions[0].competitors[1].statistics[2].displayValue;
     var preAstStatAvg2 = obj.competitions[0].competitors[1].statistics[14].displayValue;
     var preAstStatRank2 = obj.competitions[0].competitors[1].statistics[2].rankDisplayValue;
-    var prePtsStatName = obj.competitions[0].competitors[0].statistics[5].abbreviation;
-    var prePtsStatTotal1 = obj.competitions[0].competitors[0].statistics[4].displayValue+"/"+obj.competitions[0].competitors[0].statistics[3].displayValue;
-    var prePtsStatAvg1 = obj.competitions[0].competitors[0].statistics[1].displayValue;
-    var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[5].rankDisplayValue;
-    var prePtsStatTotal2 = obj.competitions[0].competitors[1].statistics[4].displayValue+"/"+obj.competitions[0].competitors[1].statistics[3].displayValue;
-    var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[1].displayValue;
-    var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[5].rankDisplayValue;
+    var prePtsStatName = obj.competitions[0].competitors[0].statistics[13].abbreviation;
+    var prePtsStatTotal1 = obj.competitions[0].competitors[0].statistics[9].displayValue;
+    var prePtsStatAvg1 = obj.competitions[0].competitors[0].statistics[13].displayValue;
+    var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[9].rankDisplayValue;
+    var prePtsStatTotal2 = obj.competitions[0].competitors[1].statistics[9].displayValue;
+    var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[13].displayValue;
+    var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[9].rankDisplayValue;
     
     console.log(isGameActive);
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
@@ -126,7 +139,7 @@ const liveGamesMachine = (obj) => {
       <div class="collapse-content text-center">
         <div class="collapse-title text-l font-medium flex flex-col justify-center">
         <p class="text-center">Team Stats</p>
-        <div class="stats shadow w-full">
+        <div class="stats shadow w-full bg-neutral">
           ${isGamePre ? // Check if game is pre
             `<div role="tablist" class="tabs tabs-bordered justify-center">
             <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" />
@@ -207,7 +220,8 @@ const liveGamesMachine = (obj) => {
               </table>
             </div>
             </div>
-          </div>` :
+          </div>
+          ` :
             (isGameActive ? // Check if game is active
               `<div class="stat place-items-center">
                 <div class="stat-title text-base">Score</div>
@@ -218,14 +232,87 @@ const liveGamesMachine = (obj) => {
                 <div class="stat-value text-xl">${score1}</div>
               </div>` :
               (isGameOver ? // Check if game is over
-                `<div class="stat place-items-center">
-                <div class="stat-title text-base">Score</div>
-                <div class="stat-value text-xl">${score2}</div>
+                `<div role="tablist" class="tabs tabs-bordered">
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" />
+                <div role="tabpanel" class="tab-content">
+                <div class="overflow-x-auto">
+                <table class="table-xs">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Total</th>
+                      <th>AVG</th>
+                      <th>Rank</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- row 1 -->
+                    <tr>
+                      <th>${prePtsStatName}</th>
+                      <td>${prePtsStatTotal2}</td>
+                      <td>${prePtsStatAvg2}</td>
+                      <td>${prePtsStatRank2}</td>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                    <th>${preAstStatName}</th>
+                    <td>${preAstStatTotal2}</td>
+                    <td>${preAstStatAvg2}</td>
+                    <td>${preAstStatRank2}</td>
+                    </tr>
+                    <!-- row 3 -->
+                    <tr>
+                    <th>${preRebStatName}</th>
+                    <td>${preRebStatTotal2}</td>
+                    <td>${preRebStatAvg2}</td>
+                    <td>${preRebStatRank2}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="stat place-items-center">
-                <div class="stat-title text-base">Score</div>
-                <div class="stat-value text-xl">${score1}</div>
-              </div>` :
+                </div>
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
+                <div role="tabpanel" class="tab-content">
+                <div class="overflow-x-auto">
+                  <table class="table-xs">
+                    <!-- head -->
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Total</th>
+                        <th>AVG</th>
+                        <th>Rank</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- row 1 -->
+                      <tr>
+                      <th>${prePtsStatName}</th>
+                      <td>${prePtsStatTotal1}</td>
+                      <td>${prePtsStatAvg1}</td>
+                      <td>${prePtsStatRank1}</td>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                    <th>${preAstStatName}</th>
+                    <td>${preAstStatTotal1}</td>
+                    <td>${preAstStatAvg1}</td>
+                    <td>${preAstStatRank1}</td>
+                    </tr>
+                    <!-- row 3 -->
+                    <tr>
+                    <th>${preRebStatName}</th>
+                    <td>${preRebStatTotal1}</td>
+                    <td>${preRebStatAvg1}</td>
+                    <td>${preRebStatRank1}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+              </div>
+              ` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
@@ -233,6 +320,7 @@ const liveGamesMachine = (obj) => {
             )
           }
         </div>
+        <div class="divider w-full"></div>
       </div>
     </div>
     </div>`;

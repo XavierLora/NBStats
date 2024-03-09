@@ -137,20 +137,20 @@
     font-weight: 700;
     color: #cc1743;
 }
-.tabs-content{
-    grid-row-start: 1;
+.tab-active{
+    border: solid 5px red;
 }
-.tab:is(input[type="radio"]) {
-    width: 100%;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-  }
-  .tab:is(input[type="radio"]):after {
-    width: 100%;
-    --tw-content: attr(aria-label);
-    content: var(--tw-content);
-  }
   input.tab:checked + .tab-content,
 .tab-active + .tab-content {
-  display: block;
+    display: block;
+    width: 100%;
+    border: solid 5 px red;
+}
+input.tab:checked{
+    width: 50vw;
+}
+.table-xs{
+    border: solid 5 px red;
+    width: 100%;
+    margin-bottom: 0.5vh;
 }
