@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 const liveGamesMachine = (obj) => {
   let allGamesOver = false;
-  for(let i = 0; i<obj.length; i++){
-    if(obj.status.type.state === "post"){
+  for(let i = 0; i<liveGamesData.events.length; i++){
+    if(liveGamesData.events[i].status.type.state === "post"){
       allGamesOver = true;
     }else{
       allGamesOver = false;
