@@ -120,11 +120,12 @@ document.addEventListener('DOMContentLoaded', async function eventHandler() {
 });
 
 const upcomingGamesMachine = (obj) => {
-  let allGamesOver = true;
+  let allGamesOver = false;
   for(let i = 0; i<obj.length; i++){
-    if(obj.status.type.state !== "post"){
+    if(obj.status.type.state === "post"){
+      allGamesOver = true;
+    }else{
       allGamesOver = false;
-      break;
     }
   }
   const gamesTitleElement = document.getElementById("gamesTitle");
