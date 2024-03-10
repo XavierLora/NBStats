@@ -272,120 +272,158 @@ const liveGamesMachine = (obj) => {
               <table class="table-xs">
                 <!-- head -->
                 <thead>
-                <tr>
-                <th></th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th>4</th>
-                <th>Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <!-- row 1 -->
                   <tr>
-                      <th>${name2}</th>
-                      <td>${gameQtr1Team2}</td>
-                      <td>${gameQtr2Team2}</td>
-                      <td>${gameQtr3Team2}</td>
-                      <td>${gameQtr4Team2}</td>
-                      <td>${score2}</td>
-                    </tr>
-                    <!-- row 2 -->
-                    <tr>
-                      <th>${name1}</th>
-                      <td>${gameQtr1Team1}</td>
-                      <td>${gameQtr2Team1}</td>
-                      <td>${gameQtr3Team1}</td>
-                      <td>${gameQtr4Team1}</td>
-                      <td>${score1}</td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-              </div>
-              <p class="text-center" id="liveStatsTitle">Team Stats</p>
-        <div class="stats shadow w-full bg-neutral">
-          <div role="tablist" class="tabs tabs-bordered justify-center">
-            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" />
-            <div role="tabpanel" class="tab-content">
-            <div class="overflow-x-auto w-full">
-            <table class="table-xs">
-              <!-- head -->
-              <thead>
-                <tr>
                   <th></th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
                   <th>Total</th>
-                  <th>AVG</th>
-                  <th>Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- row 1 -->
-                <tr>
-                  <th>${prePtsStatName}</th>
-                  <td>${prePtsStatTotal2}</td>
-                  <td>${prePtsStatAvg2}</td>
-                  <td>${prePtsStatRank2}</td>
-                </tr>
-                <!-- row 2 -->
-                <tr>
-                <th>${preAstStatName}</th>
-                <td>${preAstStatTotal2}</td>
-                <td>${preAstStatAvg2}</td>
-                <td>${preAstStatRank2}</td>
-                </tr>
-                <!-- row 3 -->
-                <tr>
-                <th>${preRebStatName}</th>
-                <td>${preRebStatTotal2}</td>
-                <td>${preRebStatAvg2}</td>
-                <td>${preRebStatRank2}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-            </div>
-            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
-            <div role="tabpanel" class="tab-content">
-            <div class="overflow-x-auto">
-              <table class="table-xs">
-                <!-- head -->
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Total</th>
-                    <th>AVG</th>
-                    <th>Rank</th>
                   </tr>
                 </thead>
                 <tbody>
                   <!-- row 1 -->
                   <tr>
-                  <th>${prePtsStatName}</th>
-                  <td>${prePtsStatTotal1}</td>
-                  <td>${prePtsStatAvg1}</td>
-                  <td>${prePtsStatRank1}</td>
-                </tr>
-                <!-- row 2 -->
-                <tr>
-                <th>${preAstStatName}</th>
-                <td>${preAstStatTotal1}</td>
-                <td>${preAstStatAvg1}</td>
-                <td>${preAstStatRank1}</td>
-                </tr>
-                <!-- row 3 -->
-                <tr>
-                <th>${preRebStatName}</th>
-                <td>${preRebStatTotal1}</td>
-                <td>${preRebStatAvg1}</td>
-                <td>${preRebStatRank1}</td>
-                </tr>
+                    <th>${name2}</th>
+                    <td>${gameQtr1Team2}</td>
+                    <td>${gameQtr2Team2}</td>
+                    <td>${gameQtr3Team2}</td>
+                    <td>${gameQtr4Team2}</td>
+                    <td>${score2}</td>
+                  </tr>
+                  <!-- row 2 -->
+                  <tr>
+                    <th>${name1}</th>
+                    <td>${gameQtr1Team1}</td>
+                    <td>${gameQtr2Team1}</td>
+                    <td>${gameQtr3Team1}</td>
+                    <td>${gameQtr4Team1}</td>
+                    <td>${score1}</td>
+                  </tr>
+                  <!-- row 3 -->
                 </tbody>
               </table>
+              </div>
             </div>
-            </div>
-          </div>` :
+            <p class="text-center" id="liveStatsTitle">Team Leaders</p>
+      <div class="stats shadow w-full bg-neutral">
+        <div role="tablist" class="tabs tabs-bordered justify-center">
+          <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" />
+          <div role="tabpanel" class="tab-content">
+          <div class="overflow-x-auto w-full">
+          <table class="table-xs">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th></th>
+                <th>Player</th>
+                <th>Total</th>
+                <th>POS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- row 1 -->
+              <!-- row 1 -->
+                <tr>
+                <th>${prePtsStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2PtsLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team2PtsLeader}</td>
+                <td>${team2PtsLeaderValue}</td>
+                <td>${team2PtsLeaderPos}</td>
+              </tr>
+              <!-- row 2 -->
+              <tr>
+                <th>${preAstStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2AstLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team2AstLeader}</td>
+                <td>${team2AstLeaderValue}</td>
+                <td>${team2AstLeaderPos}</td>
+              </tr>
+              <!-- row 3 -->
+              <tr>
+                <th>${preRebStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2RebLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team2RebLeader}</td>
+                <td>${team2RebLeaderValue}</td>
+                <td>${team2RebLeaderPos}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          </div>
+          <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
+          <div role="tabpanel" class="tab-content">
+          <div class="overflow-x-auto">
+            <table class="table-xs">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Total</th>
+                  <th>POS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr>
+                <th>${prePtsStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team1PtsLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team1PtsLeader}</td>
+                <td>${team1PtsLeaderValue}</td>
+                <td>${team1PtsLeaderPos}</td>
+              </tr>
+              <!-- row 2 -->
+              <tr>
+                <th>${preAstStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team1AstLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team1AstLeader}</td>
+                <td>${team1AstLeaderValue}</td>
+                <td>${team1AstLeaderPos}</td>
+              </tr>
+              <!-- row 3 -->
+              <tr>
+                <th>${preRebStatName}</th>
+                <td id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team1RebLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team1RebLeader}</td>
+                <td>${team1RebLeaderValue}</td>
+                <td>${team1RebLeaderPos}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>` :
               (isGameOver ? // Check if game is over
                 `<p class="text-center" id="liveStatsTitle">Game Stats</p>
                 <div class="stats shadow w-full bg-neutral">
