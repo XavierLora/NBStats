@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', async function eventHandler() {
 
 const upcomingGamesMachine = (obj) => {
   let allGamesOver = false;
-  for(let i = 0; i<obj.length; i++){
-    if(obj.status.type.state === "post"){
+  for(let i = 0; i<upcomingGamesData.events.length; i++){
+    if(upcomingGamesData.events[i].status.type.state === "post"){
       allGamesOver = true;
     }else{
       allGamesOver = false;
