@@ -2827,9 +2827,6 @@ html:has(.drawer-toggle:checked) {
 .justify-items-center {
   justify-items: center;
 }
-.justify-items-stretch {
-  justify-items: stretch;
-}
 .gap-4 {
   gap: 1rem;
 }
@@ -2888,6 +2885,10 @@ html:has(.drawer-toggle:checked) {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 .text-xl {
   font-size: 1.25rem;
