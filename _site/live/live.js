@@ -77,16 +77,17 @@ const liveGamesMachine = (obj) => {
     var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[9].rankDisplayValue;
 
     if(isGameActive || isGameOver){
-      var gameQtr1Team1 = obj.competitions[0].competitors[0].linescores[0].value;
-    var gameQtr2Team1 = obj.competitions[0].competitors[0].linescores[1].value;
-    var gameQtr3Team1 = obj.competitions[0].competitors[0].linescores[2].value;
-    var gameQtr4Team1 = obj.competitions[0].competitors[0].linescores[3].value;
-
-    var gameQtr1Team2 = obj.competitions[0].competitors[1].linescores[0].value;
-    var gameQtr2Team2 = obj.competitions[0].competitors[1].linescores[1].value;
-    var gameQtr3Team2 = obj.competitions[0].competitors[1].linescores[2].value;
-    var gameQtr4Team2 = obj.competitions[0].competitors[1].linescores[3].value;
+      var gameQtr1Team1 = obj.competitions[0].competitors[0].linescores[0]?.value || 0;
+      var gameQtr2Team1 = obj.competitions[0].competitors[0].linescores[1]?.value || 0;
+      var gameQtr3Team1 = obj.competitions[0].competitors[0].linescores[2]?.value || 0;
+      var gameQtr4Team1 = obj.competitions[0].competitors[0].linescores[3]?.value || 0;
+  
+      var gameQtr1Team2 = obj.competitions[0].competitors[1].linescores[0]?.value || 0;
+      var gameQtr2Team2 = obj.competitions[0].competitors[1].linescores[1]?.value || 0;
+      var gameQtr3Team2 = obj.competitions[0].competitors[1].linescores[2]?.value || 0;
+      var gameQtr4Team2 = obj.competitions[0].competitors[1].linescores[3]?.value || 0;
     }
+    
 
     var team1PtsLeaderImg = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.headshot;
     var team1PtsLeader = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.shortName;
