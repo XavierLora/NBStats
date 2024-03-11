@@ -159,5 +159,8 @@ input.tab:checked{
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    
+}
+#liveStatsTitle{
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
 }

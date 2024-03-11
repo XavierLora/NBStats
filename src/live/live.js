@@ -439,38 +439,38 @@ const liveGamesMachine = (obj) => {
               <!-- row 1 -->
                 <tr>
                 <th>${prePtsStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team2PtsLeaderImg}" />
                     </div>
                   </div>
                   ${team2PtsLeader}</td>
-                <td>${team2PtsLeaderValue}</td>
+                <td class="text-base">${team2PtsLeaderValue}</td>
               </tr>
               <!-- row 2 -->
               <tr>
                 <th>${preAstStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team2AstLeaderImg}" />
                     </div>
                   </div>
                   ${team2AstLeader}</td>
-                <td>${team2AstLeaderValue}</td>
+                <td class="text-base">${team2AstLeaderValue}</td>
               </tr>
               <!-- row 3 -->
               <tr>
                 <th>${preRebStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team2RebLeaderImg}" />
                     </div>
                   </div>
                   ${team2RebLeader}</td>
-                <td>${team2RebLeaderValue}</td>
+                <td class="text-base">${team2RebLeaderValue}</td>
               </tr>
             </tbody>
           </table>
@@ -484,7 +484,7 @@ const liveGamesMachine = (obj) => {
               <thead>
                 <tr>
                   <th></th>
-                  <th>Name</th>
+                  <th>Player</th>
                   <th>Total</th>
                 </tr>
               </thead>
@@ -492,38 +492,38 @@ const liveGamesMachine = (obj) => {
                 <!-- row 1 -->
                 <tr>
                 <th>${prePtsStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team1PtsLeaderImg}" />
                     </div>
                   </div>
                   ${team1PtsLeader}</td>
-                <td>${team1PtsLeaderValue}</td>
+                <td class="text-base">${team1PtsLeaderValue}</td>
               </tr>
               <!-- row 2 -->
               <tr>
                 <th>${preAstStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team1AstLeaderImg}" />
                     </div>
                   </div>
                   ${team1AstLeader}</td>
-                <td>${team1AstLeaderValue}</td>
+                <td class="text-base">${team1AstLeaderValue}</td>
               </tr>
               <!-- row 3 -->
               <tr>
                 <th>${preRebStatName}</th>
-                <td id="playerNameGamesContainer">
+                <td class="text-sm" id="playerNameGamesContainer">
                   <div class="avatar">
                     <div class="w-10 rounded-full">
                       <img src="${team1RebLeaderImg}" />
                     </div>
                   </div>
                   ${team1RebLeader}</td>
-                <td>${team1RebLeaderValue}</td>
+                <td class="text-base">${team1RebLeaderValue}</td>
               </tr>
               </tbody>
             </table>
@@ -590,38 +590,38 @@ const liveGamesMachine = (obj) => {
                 <!-- row 1 -->
                   <tr>
                   <th>${prePtsStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team2PtsLeaderImg}" />
                       </div>
                     </div>
                     ${team2PtsLeader}</td>
-                  <td>${team2PtsLeaderValue}</td>
+                  <td class="text-base">${team2PtsLeaderValue}</td>
                 </tr>
                 <!-- row 2 -->
                 <tr>
                   <th>${preAstStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team2AstLeaderImg}" />
                       </div>
                     </div>
                     ${team2AstLeader}</td>
-                  <td>${team2AstLeaderValue}</td>
+                  <td class="text-base">${team2AstLeaderValue}</td>
                 </tr>
                 <!-- row 3 -->
                 <tr>
                   <th>${preRebStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team2RebLeaderImg}" />
                       </div>
                     </div>
                     ${team2RebLeader}</td>
-                  <td>${team2RebLeaderValue}</td>
+                  <td class="text-base">${team2RebLeaderValue}</td>
                 </tr>
               </tbody>
             </table>
@@ -635,7 +635,7 @@ const liveGamesMachine = (obj) => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Name</th>
+                    <th>Player</th>
                     <th>Total</th>
                   </tr>
                 </thead>
@@ -643,38 +643,38 @@ const liveGamesMachine = (obj) => {
                   <!-- row 1 -->
                   <tr>
                   <th>${prePtsStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team1PtsLeaderImg}" />
                       </div>
                     </div>
                     ${team1PtsLeader}</td>
-                  <td>${team1PtsLeaderValue}</td>
+                  <td class="text-base">${team1PtsLeaderValue}</td>
                 </tr>
                 <!-- row 2 -->
                 <tr>
                   <th>${preAstStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team1AstLeaderImg}" />
                       </div>
                     </div>
                     ${team1AstLeader}</td>
-                  <td>${team1AstLeaderValue}</td>
+                  <td class="text-base">${team1AstLeaderValue}</td>
                 </tr>
                 <!-- row 3 -->
                 <tr>
                   <th>${preRebStatName}</th>
-                  <td id="playerNameGamesContainer">
+                  <td class="text-sm" id="playerNameGamesContainer">
                     <div class="avatar">
                       <div class="w-10 rounded-full">
                         <img src="${team1RebLeaderImg}" />
                       </div>
                     </div>
                     ${team1RebLeader}</td>
-                  <td>${team1RebLeaderValue}</td>
+                  <td class="text-base">${team1RebLeaderValue}</td>
                 </tr>
                 </tbody>
               </table>
