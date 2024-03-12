@@ -237,7 +237,7 @@ const upcomingGamesMachine = (obj) => {
               <p class="text-center p-2 text-base">Top Highlight</p>
               <div class="stats shadow w-full bg-neutral">
               <div class="overflow-x-auto w-full">
-              <video autoplay playsinline loop muted controls>
+              <video poster="${highlightThumbnail}" playsinline loop muted controls>
                 <source src="${highlightVid}" type="video/mp4">
               </video> 
               </div>
