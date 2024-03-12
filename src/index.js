@@ -157,7 +157,7 @@ const upcomingGamesMachine = (obj) => {
   }
   const makeGame = `
     <div class="collapse w-full">
-      <input type="radio" name="my-accordion-1"/>
+      <input type="checkbox" name="my-accordion-1"/>
       <div class="collapse-title text-l font-medium flex flex-col justify-center">
         <div class="flex gap-4 justify-center text-center place-items-center">
         ${isGameOver ?
