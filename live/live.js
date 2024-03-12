@@ -1,4 +1,5 @@
 let liveGamesData;
+let teamData;
 async function getLiveGames() {
   const apiUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
 
@@ -16,12 +17,32 @@ async function getLiveGames() {
   });
 }
 
+async function getTeamStats(gameID) {
+  const apiUrl = `https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/events/${gameID}`;
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+          throw new Error('Error fetching NBA scoreboard data');
+      }
+      teamData = await response.json();
+      resolve(teamData);
+  } catch (error) {
+      reject(new Error('Error fetching NBA scoreboard data'));
+  }
+  });
+}
+
+
 document.addEventListener('DOMContentLoaded', async function() {
   const liveData = await Promise.all([getLiveGames()]);
-  console.log(liveData)
+  console.log("Live Game Data: ", liveData);
   try {
       for (let i = 0; i < liveGamesData.events.length; i++) {
           const obj = liveGamesData.events[i];
+          const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
+          console.log(teamData);
           displayLiveGames(obj);
       }
   } catch (error) {
@@ -30,6 +51,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 const liveGamesMachine = (obj) => {
+  var gameID = obj.id;
+  console.log(gameID);
   let allGamesOver = false;
   for(let i = 0; i<liveGamesData.events.length; i++){
     if(liveGamesData.events[i].status.type.state === "post"){
@@ -55,24 +78,18 @@ const liveGamesMachine = (obj) => {
     var score1 = obj.competitions[0].competitors[0].score;
     var score2 = obj.competitions[0].competitors[1].score;
     var preRebStatName = obj.competitions[0].competitors[0].statistics[0].abbreviation;
-    var preRebStatTotal1 = obj.competitions[0].competitors[0].statistics[0].displayValue;
     var preRebStatAvg1 = obj.competitions[0].competitors[0].statistics[1].displayValue;
     var preRebStatRank1 = obj.competitions[0].competitors[0].statistics[0].rankDisplayValue;
-    var preRebStatTotal2 = obj.competitions[0].competitors[1].statistics[0].displayValue;
     var preRebStatAvg2 = obj.competitions[0].competitors[1].statistics[1].displayValue;
     var preRebStatRank2 = obj.competitions[0].competitors[1].statistics[0].rankDisplayValue;
     var preAstStatName = obj.competitions[0].competitors[0].statistics[2].abbreviation;
-    var preAstStatTotal1 = obj.competitions[0].competitors[0].statistics[2].displayValue;
     var preAstStatAvg1 = obj.competitions[0].competitors[0].statistics[14].displayValue;
     var preAstStatRank1 = obj.competitions[0].competitors[0].statistics[2].rankDisplayValue;
-    var preAstStatTotal2 = obj.competitions[0].competitors[1].statistics[2].displayValue;
     var preAstStatAvg2 = obj.competitions[0].competitors[1].statistics[14].displayValue;
     var preAstStatRank2 = obj.competitions[0].competitors[1].statistics[2].rankDisplayValue;
     var prePtsStatName = obj.competitions[0].competitors[0].statistics[13].abbreviation;
-    var prePtsStatTotal1 = obj.competitions[0].competitors[0].statistics[9].displayValue;
     var prePtsStatAvg1 = obj.competitions[0].competitors[0].statistics[13].displayValue;
     var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[9].rankDisplayValue;
-    var prePtsStatTotal2 = obj.competitions[0].competitors[1].statistics[9].displayValue;
     var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[13].displayValue;
     var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[9].rankDisplayValue;
 
@@ -92,34 +109,28 @@ const liveGamesMachine = (obj) => {
     var team1PtsLeaderImg = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.headshot;
     var team1PtsLeader = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.shortName;
     var team1PtsLeaderValue = obj.competitions[0].competitors[0].leaders[0].leaders[0].displayValue;
-    var team1PtsLeaderPos = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.position.abbreviation;
 
 
     var team1AstLeaderImg = obj.competitions[0].competitors[0].leaders[1].leaders[0].athlete.headshot;
     var team1AstLeader = obj.competitions[0].competitors[0].leaders[1].leaders[0].athlete.shortName;
     var team1AstLeaderValue = obj.competitions[0].competitors[0].leaders[1].leaders[0].displayValue;
-    var team1AstLeaderPos = obj.competitions[0].competitors[0].leaders[1].leaders[0].athlete.position.abbreviation;
 
     var team1RebLeaderImg = obj.competitions[0].competitors[0].leaders[2].leaders[0].athlete.headshot;
     var team1RebLeader = obj.competitions[0].competitors[0].leaders[2].leaders[0].athlete.shortName;
     var team1RebLeaderValue = obj.competitions[0].competitors[0].leaders[2].leaders[0].displayValue;
-    var team1RebLeaderPos = obj.competitions[0].competitors[0].leaders[2].leaders[0].athlete.position.abbreviation;
 
     var team2PtsLeaderImg = obj.competitions[0].competitors[1].leaders[0].leaders[0].athlete.headshot;
     var team2PtsLeader = obj.competitions[0].competitors[1].leaders[0].leaders[0].athlete.shortName;
     var team2PtsLeaderValue = obj.competitions[0].competitors[1].leaders[0].leaders[0].displayValue;
-    var team2PtsLeaderPos = obj.competitions[0].competitors[1].leaders[0].leaders[0].athlete.position.abbreviation;
 
 
     var team2AstLeaderImg = obj.competitions[0].competitors[1].leaders[1].leaders[0].athlete.headshot;
     var team2AstLeader = obj.competitions[0].competitors[1].leaders[1].leaders[0].athlete.shortName;
     var team2AstLeaderValue = obj.competitions[0].competitors[1].leaders[1].leaders[0].displayValue;
-    var team2AstLeaderPos = obj.competitions[0].competitors[1].leaders[1].leaders[0].athlete.position.abbreviation;
 
     var team2RebLeaderImg = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.headshot;
     var team2RebLeader = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.shortName;
     var team2RebLeaderValue = obj.competitions[0].competitors[1].leaders[2].leaders[0].displayValue;
-    var team2RebLeaderPos = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.position.abbreviation;
     
     console.log(isGameActive);
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
@@ -196,7 +207,6 @@ const liveGamesMachine = (obj) => {
               <thead>
                 <tr>
                   <th></th>
-                  <th>Total</th>
                   <th>AVG</th>
                   <th>Rank</th>
                 </tr>
@@ -205,21 +215,18 @@ const liveGamesMachine = (obj) => {
                 <!-- row 1 -->
                 <tr>
                   <th>${prePtsStatName}</th>
-                  <td>${prePtsStatTotal2}</td>
                   <td>${prePtsStatAvg2}</td>
                   <td>${prePtsStatRank2}</td>
                 </tr>
                 <!-- row 2 -->
                 <tr>
                 <th>${preAstStatName}</th>
-                <td>${preAstStatTotal2}</td>
                 <td>${preAstStatAvg2}</td>
                 <td>${preAstStatRank2}</td>
                 </tr>
                 <!-- row 3 -->
                 <tr>
                 <th>${preRebStatName}</th>
-                <td>${preRebStatTotal2}</td>
                 <td>${preRebStatAvg2}</td>
                 <td>${preRebStatRank2}</td>
                 </tr>
@@ -235,7 +242,6 @@ const liveGamesMachine = (obj) => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Total</th>
                     <th>AVG</th>
                     <th>Rank</th>
                   </tr>
@@ -244,21 +250,18 @@ const liveGamesMachine = (obj) => {
                   <!-- row 1 -->
                   <tr>
                   <th>${prePtsStatName}</th>
-                  <td>${prePtsStatTotal1}</td>
                   <td>${prePtsStatAvg1}</td>
                   <td>${prePtsStatRank1}</td>
                 </tr>
                 <!-- row 2 -->
                 <tr>
                 <th>${preAstStatName}</th>
-                <td>${preAstStatTotal1}</td>
                 <td>${preAstStatAvg1}</td>
                 <td>${preAstStatRank1}</td>
                 </tr>
                 <!-- row 3 -->
                 <tr>
                 <th>${preRebStatName}</th>
-                <td>${preRebStatTotal1}</td>
                 <td>${preRebStatAvg1}</td>
                 <td>${preRebStatRank1}</td>
                 </tr>
