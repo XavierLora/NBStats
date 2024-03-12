@@ -148,8 +148,12 @@ const upcomingGamesMachine = (obj) => {
   var record1 = obj.competitions[0].competitors[0].records[0].summary;
   var record2 = obj.competitions[0].competitors[1].records[0].summary;
   var date = obj.competitions[0].status.type.shortDetail;
+  var highlightVid;
+  var highlightThumbnail;
   if (isGameOver) {
+    highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD.href;
     highlights = obj.links[2].href;
+    highlightThumbnail = obj.competitions[0].headlines[0].video[0].thumbnail;
   }
   const makeGame = `
     <div class="collapse w-full">
@@ -228,6 +232,15 @@ const upcomingGamesMachine = (obj) => {
                     </svg>
                   </a>
                 </div>
+              </div>
+              </div>
+              <p class="text-center p-2 text-base">Top Highlight</p>
+              <div class="stats shadow w-11/12 bg-neutral">
+              <div class="overflow-x-auto w-full">
+              <video controls>
+                <source src="${highlightVid}" type="video/mp4">
+              </video> 
+              </div>
               </div>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
