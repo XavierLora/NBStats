@@ -150,7 +150,14 @@ const upcomingGamesMachine = (obj) => {
   var date = obj.competitions[0].status.type.shortDetail;
   var highlightVid;
   var highlightThumbnail;
-  if (isGameOver) {
+  const objDate = new Date(obj.date);
+
+  // Calculate the date 8 hours ahead of obj.date
+  const eightHoursLaterDate = new Date(objDate);
+  eightHoursLaterDate.setHours(objDate.getHours() + 8);
+
+// Compare if the current date is 8 hours ahead of obj.date
+  if (new Date() >= eightHoursLaterDate) {
     highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD.href;
     highlights = obj.links[2].href;
     highlightThumbnail = obj.competitions[0].headlines[0].video[0].thumbnail;
