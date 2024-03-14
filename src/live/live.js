@@ -589,12 +589,13 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
           </div>
         </div>
         </div>
-        <button class="btn m-4 btn-neutral" onclick="my_modal_5.showModal()">Full Game Stats</button>
-        <dialog id="my_modal_5" class="modal">
+        <label for="my_modal_6" class="btn m-4">Full Game Stats</label>
+        <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+        <div class="modal" role="dialog">
           <div class="modal-box">
-          <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-          </form>
+          <div class="modal-action">
+            <label for="my_modal_6" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+          </div>
           <div class="flex gap-4 justify-center text-center">
               <h2 class="card-title text-xl">${score2}</h2>
               <div class="avatar">
@@ -650,7 +651,7 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
               </div>
             </div>
           </div>
-        </dialog>` :
+        </div>` :
               (isGameOver ? // Check if game is over
                 `<p class="text-center" id="liveStatsTitle">Game Stats</p>
                 <div class="stats shadow w-full bg-neutral">
