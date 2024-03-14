@@ -164,3 +164,6 @@ input.tab:checked{
     padding-top: 0.5vh;
     padding-bottom: 0.5vh;
 }
+.btn{
+    border-radius: 1.5vh;
+}
