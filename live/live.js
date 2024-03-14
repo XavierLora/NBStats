@@ -589,12 +589,12 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
           </div>
         </div>
         </div>
-        <label for="my_modal_6" class="btn m-4">Full Game Stats</label>
-        <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+        <label for="my_modal_${gameID}" class="btn m-4">Full Game Stats</label>
+        <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
         <div class="modal" role="dialog">
           <div class="modal-box">
           <div class="modal-action">
-            <label for="my_modal_6" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+            <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
           </div>
           <div class="flex gap-4 justify-center text-center">
               <h2 class="card-title text-xl">${score2}</h2>
@@ -804,19 +804,69 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
             </div>
           </div>
           </div>
-          <button class="btn btn-neutral" onclick="my_modal_5.showModal()">open modal</button>
-        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <label for="my_modal_${gameID}" class="btn m-4">Full Game Stats</label>
+        <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
+        <div class="modal" role="dialog">
           <div class="modal-box">
-            <h3 class="font-bold text-lg">Hello!</h3>
-            <p class="py-4">Press ESC key or click the button below to close</p>
-            <div class="modal-action">
-              <form method="dialog">
-                <!-- if there is a button in form, it will close the modal -->
-                <button class="btn">Close</button>
-              </form>
+          <div class="modal-action">
+            <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+          </div>
+          <div class="flex gap-4 justify-center text-center">
+              <h2 class="card-title text-xl">${score2}</h2>
+              <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team2.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-base">${gameTeams}</h2>
+            <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team1.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-xl">${score1}</h2>
+          </div>
+            <p class="text-center" id="liveStatsTitle">Game Stats</p>
+              <div class="stats shadow w-full bg-neutral">
+              <div class="overflow-x-auto w-full">
+              <table class="table-xs">
+                <!-- head -->
+                <thead>
+                  <tr>
+                  <th></th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  <tr>
+                    <th>${name2}</th>
+                    <td>${gameQtr1Team2}</td>
+                    <td>${gameQtr2Team2}</td>
+                    <td>${gameQtr3Team2}</td>
+                    <td>${gameQtr4Team2}</td>
+                    <td>${score2}</td>
+                  </tr>
+                  <!-- row 2 -->
+                  <tr>
+                    <th>${name1}</th>
+                    <td>${gameQtr1Team1}</td>
+                    <td>${gameQtr2Team1}</td>
+                    <td>${gameQtr3Team1}</td>
+                    <td>${gameQtr4Team1}</td>
+                    <td>${score1}</td>
+                  </tr>
+                  <!-- row 3 -->
+                </tbody>
+              </table>
+              </div>
             </div>
           </div>
-        </dialog>` :
+        </div>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
