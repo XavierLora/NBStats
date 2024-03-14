@@ -1,5 +1,7 @@
 let liveGamesData;
 let teamData;
+let playerStats;
+
 async function getLiveGames() {
   const apiUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
 
@@ -34,6 +36,44 @@ async function getTeamStats(gameID) {
   });
 }
 
+async function getPlayerStats(gameStats) {
+  const apiUrl = `${gameStats}`;
+
+  return new Promise(async (resolve, reject) => {
+      try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+              throw new Error('Error fetching game stats');
+          }
+          const gameData = await response.json();
+
+          const categories = gameData.splits.categories[0];
+          const playerStats = [];
+
+          
+              categories.athletes.forEach(async athlete => {
+                  const athleteResponse = await fetch(athlete.athlete.$ref);
+                  const athleteStatResponse = await fetch(athlete.statistics.$ref);
+                  if (!athleteResponse.ok || !athleteStatResponse.ok) {
+                      throw new Error('Error fetching player stats');
+                  }
+                  const athleteData = await athleteResponse.json();
+                  const athleteStatData = await athleteStatResponse.json();
+                  playerStats.push({
+                      athlete: athleteData,
+                      stats: athleteStatData
+                  });
+
+              });
+
+          resolve(playerStats);
+      } catch (error) {
+          reject(new Error('Error fetching player stats'));
+      }
+  });
+}
+
+
 
 document.addEventListener('DOMContentLoaded', async function() {
   const liveData = await Promise.all([getLiveGames()]);
@@ -42,17 +82,24 @@ document.addEventListener('DOMContentLoaded', async function() {
       for (let i = 0; i < liveGamesData.events.length; i++) {
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
-          console.log(teamData);
-          displayLiveGames(obj);
+          let playerDataTeam1;
+          let playerDataTeam2;
+          if(liveGamesData.events[i].status.type.state === "post" || liveGamesData.events[i].status.type.state === "in"){
+            playerDataTeam1 = await Promise.all([getPlayerStats(teamData[0].competitions[0].competitors[0].statistics.$ref)]);
+            playerDataTeam2 = await Promise.all([getPlayerStats(teamData[0].competitions[0].competitors[1].statistics.$ref)]);
+            console.log(playerDataTeam1);
+            console.log(playerDataTeam2);
+          }
+
+          displayLiveGames(obj, playerDataTeam1, playerDataTeam2);
       }
   } catch (error) {
       console.error('Error:', error);
   }
 });
 
-const liveGamesMachine = (obj) => {
+const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
   var gameID = obj.id;
-  console.log(gameID);
   let allGamesOver = false;
   for(let i = 0; i<liveGamesData.events.length; i++){
     if(liveGamesData.events[i].status.type.state === "post"){
@@ -131,8 +178,7 @@ const liveGamesMachine = (obj) => {
     var team2RebLeaderImg = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.headshot;
     var team2RebLeader = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.shortName;
     var team2RebLeaderValue = obj.competitions[0].competitors[1].leaders[2].leaders[0].displayValue;
-    
-    console.log(isGameActive);
+
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
     var record2 = obj.competitions[0].competitors[1].records[0].summary;
     var date = obj.competitions[0].status.type.shortDetail;
@@ -532,7 +578,70 @@ const liveGamesMachine = (obj) => {
             </table>
           </div>
           </div>
-        </div>` :
+        </div>
+        </div>
+        <button class="btn m-4 btn-neutral" onclick="my_modal_5.showModal()">Full Game Stats</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+          <div class="flex gap-4 justify-center text-center">
+              <h2 class="card-title text-xl">${score2}</h2>
+              <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team2.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-base">${gameTeams}</h2>
+            <div class="avatar">
+              <div class="w-14 rounded-xl">
+                <img src="${team1.logo}" />
+              </div>
+            </div>
+            <h2 class="card-title text-xl">${score1}</h2>
+          </div>
+            <p class="text-center" id="liveStatsTitle">Game Stats</p>
+              <div class="stats shadow w-full bg-neutral">
+              <div class="overflow-x-auto w-full">
+              <table class="table-xs">
+                <!-- head -->
+                <thead>
+                  <tr>
+                  <th></th>
+                  <th>1</th>
+                  <th>2</th>
+                  <th>3</th>
+                  <th>4</th>
+                  <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  <tr>
+                    <th>${name2}</th>
+                    <td>${gameQtr1Team2}</td>
+                    <td>${gameQtr2Team2}</td>
+                    <td>${gameQtr3Team2}</td>
+                    <td>${gameQtr4Team2}</td>
+                    <td>${score2}</td>
+                  </tr>
+                  <!-- row 2 -->
+                  <tr>
+                    <th>${name1}</th>
+                    <td>${gameQtr1Team1}</td>
+                    <td>${gameQtr2Team1}</td>
+                    <td>${gameQtr3Team1}</td>
+                    <td>${gameQtr4Team1}</td>
+                    <td>${score1}</td>
+                  </tr>
+                  <!-- row 3 -->
+                </tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+        </dialog>` :
               (isGameOver ? // Check if game is over
                 `<p class="text-center" id="liveStatsTitle">Game Stats</p>
                 <div class="stats shadow w-full bg-neutral">
@@ -683,14 +792,27 @@ const liveGamesMachine = (obj) => {
               </table>
             </div>
             </div>
-          </div>` :
+          </div>
+          </div>
+          <button class="btn btn-neutral" onclick="my_modal_5.showModal()">open modal</button>
+        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Hello!</h3>
+            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div class="modal-action">
+              <form method="dialog">
+                <!-- if there is a button in form, it will close the modal -->
+                <button class="btn">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
               )
             )
           }
-        </div>
         <div class="divider w-full"></div>
       </div>
     </div>
@@ -699,7 +821,7 @@ const liveGamesMachine = (obj) => {
     return makeGame;
   }
 
-function displayLiveGames(obj){
+function displayLiveGames(obj, playerDataTeam1, playerDataTeam2){
     let parentNode = document.getElementById('liveGamesCardContainer');
-    parentNode.insertAdjacentHTML('beforeend', liveGamesMachine(obj));
+    parentNode.insertAdjacentHTML('beforeend', liveGamesMachine(obj, playerDataTeam1, playerDataTeam2));
 }
