@@ -435,6 +435,7 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
               </table>
             </div>
             </div>
+          </div>
           </div>` :
             (isGameActive ? // Check if game is active
               `<p class="text-center" id="liveStatsTitle">Game Stats</p>
@@ -589,7 +590,7 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
         </div>
         </div>
         <button class="btn m-4 btn-neutral" onclick="my_modal_5.showModal()">Full Game Stats</button>
-        <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <dialog id="my_modal_5" class="modal">
           <div class="modal-box">
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
