@@ -52,8 +52,12 @@ async function getPlayerStats(gameStats) {
 
           
               categories.athletes.forEach(async athlete => {
-                  const athleteResponse = await fetch(athlete.athlete.$ref);
-                  const athleteStatResponse = await fetch(athlete.statistics.$ref);
+                  var AthleteUrl = athlete.athlete.$ref;
+                  var secureAthleteUrl = AthleteUrl.replace('http:', 'https:');
+                  var AthleteStatUrl = athlete.statistics.$ref;
+                  var secureAthleteStatUrl = AthleteStatUrl.replace('http:', 'https:');
+                  const athleteResponse = await fetch(secureAthleteUrl);
+                  const athleteStatResponse = await fetch(secureAthleteStatUrl);
                   if (!athleteResponse.ok || !athleteStatResponse.ok) {
                       throw new Error('Error fetching player stats');
                   }
@@ -82,11 +86,15 @@ document.addEventListener('DOMContentLoaded', async function() {
       for (let i = 0; i < liveGamesData.events.length; i++) {
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
-          let playerDataTeam1;
-          let playerDataTeam2;
+          var playerDataTeam1;
+          var playerDataTeam2;
           if(liveGamesData.events[i].status.type.state === "post" || liveGamesData.events[i].status.type.state === "in"){
-            playerDataTeam1 = await Promise.all([getPlayerStats(teamData[0].competitions[0].competitors[0].statistics.$ref)]);
-            playerDataTeam2 = await Promise.all([getPlayerStats(teamData[0].competitions[0].competitors[1].statistics.$ref)]);
+            var playerDataTeam1Url = teamData[0].competitions[0].competitors[0].statistics.$ref;
+            var playerDataTeam2Url = teamData[0].competitions[0].competitors[1].statistics.$ref;
+            var securePlayerDataTeam1Url = playerDataTeam1Url.replace('http:', 'https:');
+            var securePlayerDataTeam2Url = playerDataTeam2Url.replace('http:', 'https:');
+            playerDataTeam1 = await Promise.all([getPlayerStats(securePlayerDataTeam1Url)]);
+            playerDataTeam2 = await Promise.all([getPlayerStats(securePlayerDataTeam2Url)]);
             console.log(playerDataTeam1);
             console.log(playerDataTeam2);
           }
