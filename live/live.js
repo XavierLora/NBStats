@@ -1,6 +1,6 @@
 let liveGamesData;
 let teamData;
-let playerStats;
+let playerStats = [];
 
 async function getLiveGames() {
   const apiUrl = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard';
@@ -38,6 +38,7 @@ async function getTeamStats(gameID) {
 
 async function getPlayerStats(gameStats) {
   const apiUrl = `${gameStats}`;
+  playerStats = []; 
 
   return new Promise(async (resolve, reject) => {
       try {
@@ -48,33 +49,32 @@ async function getPlayerStats(gameStats) {
           const gameData = await response.json();
 
           const categories = gameData.splits.categories[0];
-          const playerStats = [];
 
           
-              categories.athletes.forEach(async athlete => {
-                  var AthleteUrl = athlete.athlete.$ref;
-                  var secureAthleteUrl = AthleteUrl.replace('http:', 'https:');
-                  var AthleteStatUrl = athlete.statistics.$ref;
-                  var secureAthleteStatUrl = AthleteStatUrl.replace('http:', 'https:');
-                  const athleteResponse = await fetch(secureAthleteUrl);
-                  const athleteStatResponse = await fetch(secureAthleteStatUrl);
-                  if (!athleteResponse.ok || !athleteStatResponse.ok) {
-                      throw new Error('Error fetching player stats');
-                  }
-                  const athleteData = await athleteResponse.json();
-                  const athleteStatData = await athleteStatResponse.json();
-                  playerStats.push({
-                      athlete: athleteData,
-                      stats: athleteStatData
-                  });
+          const playerPromises = categories.athletes.map(async athlete => {
+            var AthleteUrl = athlete.athlete.$ref;
+            var secureAthleteUrl = AthleteUrl.replace('http:', 'https:');
+            var AthleteStatUrl = athlete.statistics.$ref;
+            var secureAthleteStatUrl = AthleteStatUrl.replace('http:', 'https:');
+            const athleteResponse = await fetch(secureAthleteUrl);
+            const athleteStatResponse = await fetch(secureAthleteStatUrl);
+            if (!athleteResponse.ok || !athleteStatResponse.ok) {
+                throw new Error('Error fetching player stats');
+            }
+            const athleteData = await athleteResponse.json();
+            const athleteStatData = await athleteStatResponse.json();
+            return {
+                athlete: athleteData,
+                stats: athleteStatData
+            };
+        });
 
-              });
-
-          resolve(playerStats);
-      } catch (error) {
-          reject(new Error('Error fetching player stats'));
-      }
-  });
+        const playerStats = await Promise.all(playerPromises);
+        resolve(playerStats);
+    } catch (error) {
+        reject(new Error('Error fetching player stats'));
+    }
+});
 }
 
 
@@ -86,8 +86,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       for (let i = 0; i < liveGamesData.events.length; i++) {
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
-          var playerDataTeam1;
-          var playerDataTeam2;
+          let playerDataTeam1;
+          let playerDataTeam2;
           if(liveGamesData.events[i].status.type.state === "post" || liveGamesData.events[i].status.type.state === "in"){
             var playerDataTeam1Url = teamData[0].competitions[0].competitors[0].statistics.$ref;
             var playerDataTeam2Url = teamData[0].competitions[0].competitors[1].statistics.$ref;
@@ -95,10 +95,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             var securePlayerDataTeam2Url = playerDataTeam2Url.replace('http:', 'https:');
             playerDataTeam1 = await Promise.all([getPlayerStats(securePlayerDataTeam1Url)]);
             playerDataTeam2 = await Promise.all([getPlayerStats(securePlayerDataTeam2Url)]);
-            console.log(playerDataTeam1);
-            console.log(playerDataTeam2);
-          }
 
+          }
           displayLiveGames(obj, playerDataTeam1, playerDataTeam2);
       }
   } catch (error) {
@@ -106,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
-const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
+const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   var gameID = obj.id;
   let allGamesOver = false;
   for(let i = 0; i<liveGamesData.events.length; i++){
@@ -190,6 +188,7 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
     var record2 = obj.competitions[0].competitors[1].records[0].summary;
     var date = obj.competitions[0].status.type.shortDetail;
+
     const makeGame = `
     <div class="collapse w-full">
       <input type="checkbox" name="my-accordion-1"/>
@@ -596,20 +595,20 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
           <div class="modal-action">
             <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
           </div>
-          <div class="flex gap-4 justify-center text-center">
-              <h2 class="card-title text-xl">${score2}</h2>
+          <div class="flex gap-4 justify-around text-center">
+              <h2 class="card-title text-2xl">${score2}</h2>
               <div class="avatar">
-              <div class="w-14 rounded-xl">
+              <div class="w-16 rounded-xl">
                 <img src="${team2.logo}" />
               </div>
             </div>
-            <h2 class="card-title text-base">${gameTeams}</h2>
+            <h2 class="card-title text-base"></h2>
             <div class="avatar">
-              <div class="w-14 rounded-xl">
+              <div class="w-16 rounded-xl">
                 <img src="${team1.logo}" />
               </div>
             </div>
-            <h2 class="card-title text-xl">${score1}</h2>
+            <h2 class="card-title text-2xl">${score1}</h2>
           </div>
             <p class="text-center" id="liveStatsTitle">Game Stats</p>
               <div class="stats shadow w-full bg-neutral">
@@ -650,8 +649,56 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
               </table>
               </div>
             </div>
+          <p class="text-center" id="liveStatsTitle">Team Players</p>
+          <div class="stats shadow w-full bg-neutral">
+            <div role="tablist" class="tabs tabs-bordered justify-center">
+              <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" checked="checked" />
+              <div role="tabpanel" class="tab-content">
+              <div class="overflow-x-auto w-full">
+              <table class="table-xs">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Player</th>
+                    <th>Pts</th>
+                    <th>Ast</th>
+                    <th>Reb</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- row 1 -->
+                  ${generateTeamPlayerRows(DataTeam2)}
+                </tbody>
+              </table>
+            </div>
+              </div>
+              <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
+              <div role="tabpanel" class="tab-content">
+              <div class="overflow-x-auto">
+                <table class="table-xs">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Player</th>
+                      <th>Pts</th>
+                      <th>Ast</th>
+                      <th>Reb</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- row 1 -->
+                    ${generateTeamPlayerRows(DataTeam1)}
+                    
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+            </div>
           </div>
-        </div>` :
+        </div>`:
               (isGameOver ? // Check if game is over
                 `<p class="text-center" id="liveStatsTitle">Game Stats</p>
                 <div class="stats shadow w-full bg-neutral">
@@ -710,41 +757,41 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
               <tbody>
                 <!-- row 1 -->
                 <!-- row 1 -->
-                  <tr>
-                  <th>${prePtsStatName}</th>
-                  <td class="text-sm" id="playerNameGamesContainer">
-                    <div class="avatar">
-                      <div class="w-10 rounded-full">
-                        <img src="${team2PtsLeaderImg}" />
-                      </div>
-                    </div>
-                    ${team2PtsLeader}</td>
-                  <td class="text-base">${team2PtsLeaderValue}</td>
-                </tr>
-                <!-- row 2 -->
                 <tr>
-                  <th>${preAstStatName}</th>
-                  <td class="text-sm" id="playerNameGamesContainer">
-                    <div class="avatar">
-                      <div class="w-10 rounded-full">
-                        <img src="${team2AstLeaderImg}" />
-                      </div>
+                <th>${prePtsStatName}</th>
+                <td class="text-sm" id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2PtsLeaderImg}" />
                     </div>
-                    ${team2AstLeader}</td>
-                  <td class="text-base">${team2AstLeaderValue}</td>
-                </tr>
-                <!-- row 3 -->
-                <tr>
-                  <th>${preRebStatName}</th>
-                  <td class="text-sm" id="playerNameGamesContainer">
-                    <div class="avatar">
-                      <div class="w-10 rounded-full">
-                        <img src="${team2RebLeaderImg}" />
-                      </div>
+                  </div>
+                  ${team2PtsLeader}</td>
+                <td class="text-base">${team2PtsLeaderValue}</td>
+              </tr>
+              <!-- row 2 -->
+              <tr>
+                <th>${preAstStatName}</th>
+                <td class="text-sm" id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2AstLeaderImg}" />
                     </div>
-                    ${team2RebLeader}</td>
-                  <td class="text-base">${team2RebLeaderValue}</td>
-                </tr>
+                  </div>
+                  ${team2AstLeader}</td>
+                <td class="text-base">${team2AstLeaderValue}</td>
+              </tr>
+              <!-- row 3 -->
+              <tr>
+                <th>${preRebStatName}</th>
+                <td class="text-sm" id="playerNameGamesContainer">
+                  <div class="avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="${team2RebLeaderImg}" />
+                    </div>
+                  </div>
+                  ${team2RebLeader}</td>
+                <td class="text-base">${team2RebLeaderValue}</td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -805,68 +852,117 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
           </div>
           </div>
           <label for="my_modal_${gameID}" class="btn m-4">Full Game Stats</label>
-        <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
-        <div class="modal" role="dialog">
-          <div class="modal-box">
-          <div class="modal-action">
-            <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
-          </div>
-          <div class="flex gap-4 justify-center text-center">
-              <h2 class="card-title text-xl">${score2}</h2>
+          <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
+          <div class="modal" role="dialog">
+            <div class="modal-box">
+            <div class="modal-action">
+              <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+            </div>
+            <div class="flex gap-4 justify-around text-center">
+                <h2 class="card-title text-2xl">${score2}</h2>
+                <div class="avatar">
+                <div class="w-16 rounded-xl">
+                  <img src="${team2.logo}" />
+                </div>
+              </div>
+              <h2 class="card-title text-base"></h2>
               <div class="avatar">
-              <div class="w-14 rounded-xl">
-                <img src="${team2.logo}" />
+                <div class="w-16 rounded-xl">
+                  <img src="${team1.logo}" />
+                </div>
+              </div>
+              <h2 class="card-title text-2xl">${score1}</h2>
+            </div>
+              <p class="text-center" id="liveStatsTitle">Game Stats</p>
+                <div class="stats shadow w-full bg-neutral">
+                <div class="overflow-x-auto w-full">
+                <table class="table-xs">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                    <th></th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- row 1 -->
+                    <tr>
+                      <th>${name2}</th>
+                      <td>${gameQtr1Team2}</td>
+                      <td>${gameQtr2Team2}</td>
+                      <td>${gameQtr3Team2}</td>
+                      <td>${gameQtr4Team2}</td>
+                      <td>${score2}</td>
+                    </tr>
+                    <!-- row 2 -->
+                    <tr>
+                      <th>${name1}</th>
+                      <td>${gameQtr1Team1}</td>
+                      <td>${gameQtr2Team1}</td>
+                      <td>${gameQtr3Team1}</td>
+                      <td>${gameQtr4Team1}</td>
+                      <td>${score1}</td>
+                    </tr>
+                    <!-- row 3 -->
+                  </tbody>
+                </table>
+                </div>
+              </div>
+            <p class="text-center" id="liveStatsTitle">Team Players</p>
+            <div class="stats shadow w-full bg-neutral">
+              <div role="tablist" class="tabs tabs-bordered justify-center">
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" checked="checked" />
+                <div role="tabpanel" class="tab-content">
+                <div class="overflow-x-auto" id="playerStatsContainer">
+                <table class="table-xs">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                    <th></th>
+                    <th>Player</th>
+                    <th>Pts</th>
+                    <th>Ast</th>
+                    <th>Reb</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- row 1 -->
+                    ${generateTeamPlayerRows(DataTeam2)}
+                      
+                  </tbody>
+                </table>
+              </div>
+                </div>
+                <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
+                <div role="tabpanel" class="tab-content">
+                <div class="overflow-x-auto" id="playerStatsContainer">
+                  <table class="table-xs">
+                    <!-- head -->
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>Player</th>
+                        <th>Pts</th>
+                        <th>Ast</th>
+                        <th>Reb</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- row 1 -->
+                      ${generateTeamPlayerRows(DataTeam1)}
+                      
+                    </tbody>
+                  </table>
+                </div>
+                </div>
+              </div>
               </div>
             </div>
-            <h2 class="card-title text-base">${gameTeams}</h2>
-            <div class="avatar">
-              <div class="w-14 rounded-xl">
-                <img src="${team1.logo}" />
-              </div>
-            </div>
-            <h2 class="card-title text-xl">${score1}</h2>
-          </div>
-            <p class="text-center" id="liveStatsTitle">Game Stats</p>
-              <div class="stats shadow w-full bg-neutral">
-              <div class="overflow-x-auto w-full">
-              <table class="table-xs">
-                <!-- head -->
-                <thead>
-                  <tr>
-                  <th></th>
-                  <th>1</th>
-                  <th>2</th>
-                  <th>3</th>
-                  <th>4</th>
-                  <th>Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- row 1 -->
-                  <tr>
-                    <th>${name2}</th>
-                    <td>${gameQtr1Team2}</td>
-                    <td>${gameQtr2Team2}</td>
-                    <td>${gameQtr3Team2}</td>
-                    <td>${gameQtr4Team2}</td>
-                    <td>${score2}</td>
-                  </tr>
-                  <!-- row 2 -->
-                  <tr>
-                    <th>${name1}</th>
-                    <td>${gameQtr1Team1}</td>
-                    <td>${gameQtr2Team1}</td>
-                    <td>${gameQtr3Team1}</td>
-                    <td>${gameQtr4Team1}</td>
-                    <td>${score1}</td>
-                  </tr>
-                  <!-- row 3 -->
-                </tbody>
-              </table>
-              </div>
-            </div>
-          </div>
-        </div>` :
+          </div>` :
                 `<div class="stat place-items-center">
                   <div class="stat-title text-base">Game Status Unknown</div>
                 </div>`
@@ -877,8 +973,44 @@ const liveGamesMachine = (obj, playerDataTeam1, playerDataTeam2) => {
       </div>
     </div>
     </div>`;
-  
     return makeGame;
+  }
+
+  const generateTeamPlayerRows = (playerData) => {
+    // Get the first array from playerData to iterate over
+    var playerStatIndex = playerData[0];
+    
+
+    var playerRows = '';
+    
+
+    for (let i = 0; i < playerStatIndex.length; i++) {
+        const obj = playerStatIndex[i];
+          if (typeof obj.athlete.headshot === 'undefined') {
+            continue; // Skip this iteration and move to the next one
+        }
+        const makePlayer = `
+        <tr>
+        <th class="text-sm">${obj.athlete.jersey}</th>
+        <td class="text-sm" id="playerNameGamesContainer">
+          <div class="avatar">
+            <div class="w-7 rounded-full">
+              <img src="${obj.athlete.headshot.href}" />
+            </div>
+          </div>
+          ${obj.athlete.displayName} 
+        </td>
+        <td class="text-sm">${obj.stats.splits.categories[2].stats[10].displayValue}</td>
+        <td class="text-sm">${obj.stats.splits.categories[2].stats[0].displayValue}</td>
+        <td class="text-sm">${obj.stats.splits.categories[1].stats[6].displayValue}</td>
+      </tr>
+        `;
+
+      
+        playerRows += makePlayer;
+    }
+   
+    return playerRows;
   }
 
 function displayLiveGames(obj, playerDataTeam1, playerDataTeam2){
