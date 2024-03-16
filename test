@@ -1,40 +1,28 @@
-async function getPlayerStats(gameStats) {
-  const apiUrl = `${gameStats}`;
+const generateTeamPlayerRows = (playerData) => {
+    // Map over each sub-array of athlete data in playerData and generate the HTML block for each athlete within each sub-array
+    const playerRows = playerData.map(players => {
+      return players.map(player => {
+        console.log(player); // Log the values of each player object
+        return `
+          <tr>
+            <th>${player.athlete.jersey}</th>
+            <td class="text-sm" id="playerNameGamesContainer">
+              <div class="avatar">
+                <div class="w-10 rounded-full">
+                  <img src="${player.athlete.headshot}" />
+                </div>
+              </div>
+              ${player.athlete.displayName} <!-- Not sure where team2PtsLeader comes from -->
+            </td>
+            <td class="text-base">${player.stats.splits.catagories[2].stats[10].displayValue}</td>
+          </tr>
+        `;
+      }).join(''); // Join all generated HTML blocks for each athlete within the sub-array
+    });
+    console.log(playerRows);
+    // Join all generated HTML blocks for each sub-array into a single string
+    const allPlayerRows = playerRows.join('');
 
-  return new Promise(async (resolve, reject) => {
-      try {
-          const response = await fetch(apiUrl);
-          if (!response.ok) {
-              throw new Error('Error fetching game stats');
-          }
-          const gameData = await response.json();
-
-          const categories = gameData[0].splits.categories;
-          const playerStats = [];
-
-          categories.forEach(category => {
-              category.athletes.forEach(async athlete => {
-                console.log(athlete.$ref);
-                console.log(statistics.$ref);
-                  const athleteApiUrl = `${athlete.$ref}`;
-                  const athleteStatApiUrl = `${statistics.$ref}`
-                  const athleteResponse = await fetch(athleteApiUrl);
-                  const athleteStatResponse = await fetch(athleteStatApiUrl);
-                  if (!athleteResponse.ok || !athleteStatResponse.ok) {
-                      throw new Error('Error fetching player stats');
-                  }
-                  const athleteData = await athleteResponse.json();
-                  const athleteStatData = await athleteStatResponse.json();
-                  playerStats.push({
-                      athlete: athleteData,
-                      stats: athleteStatData
-                  });
-              });
-          });
-
-          resolve(playerStats);
-      } catch (error) {
-          reject(new Error('Error fetching player stats'));
-      }
-  });
-}
+  
+    return allPlayerRows;
+  }
