@@ -111,17 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if the clicked element is the checkbox
     if (target.matches('.modal-toggle')) {
-      const container = document.getElementById("liveGamesCardContainer");
-      container.style.zIndex = target.checked ? "999" : "-10";
+      const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
+      const gamesTitleContainer = document.getElementById("titleHeader");
+      console.log(gamesTitleContainer);
+      gamesTitleContainer.style.zIndex = "-10"; 
+      modal.style.zIndex = "999"; // Adjust the z-index as needed
+      console.log("modal open");
     }
 
     // Check if the clicked element is the close button
     if (target.matches('.modal-action label[for^="my_modal_"]')) {
-      const container = document.getElementById("liveGamesCardContainer");
-      container.style.zIndex = "-10";
+      const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
+      const gamesTitleContainer = document.getElementById("titleHeader");
+      gamesTitleContainer.style.zIndex = "99"; 
+      modal.style.zIndex = "-10";
     }
   });
 });
+
 
 const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   var gameID = obj.id;
