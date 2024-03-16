@@ -979,6 +979,7 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   const generateTeamPlayerRows = (playerData) => {
     // Get the first array from playerData to iterate over
     var playerStatIndex = playerData[0];
+    console.log(playerData);
     
 
     var playerRows = '';
@@ -998,7 +999,7 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
               <img src="${obj.athlete.headshot.href}" />
             </div>
           </div>
-          ${obj.athlete.displayName} 
+          ${obj.athlete.shortName} 
         </td>
         <td class="text-sm">${obj.stats.splits.categories[2].stats[10].displayValue}</td>
         <td class="text-sm">${obj.stats.splits.categories[2].stats[0].displayValue}</td>
