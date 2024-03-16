@@ -104,6 +104,25 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Attach event listener to the document body
+  document.body.addEventListener('click', function(event) {
+    const target = event.target;
+
+    // Check if the clicked element is the checkbox
+    if (target.matches('.modal-toggle')) {
+      const container = document.getElementById("liveGamesCardContainer");
+      container.style.zIndex = target.checked ? "999" : "-10";
+    }
+
+    // Check if the clicked element is the close button
+    if (target.matches('.modal-action label[for^="my_modal_"]')) {
+      const container = document.getElementById("liveGamesCardContainer");
+      container.style.zIndex = "-10";
+    }
+  });
+});
+
 const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   var gameID = obj.id;
   let allGamesOver = false;
@@ -979,7 +998,6 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   const generateTeamPlayerRows = (playerData) => {
     // Get the first array from playerData to iterate over
     var playerStatIndex = playerData[0];
-    console.log(playerData);
     
 
     var playerRows = '';
