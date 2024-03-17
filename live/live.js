@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
       const gamesTitleContainer = document.getElementById("titleHeader");
       gamesTitleContainer.style.zIndex = "999"; 
-      modal.style.zIndex = "-10";
+      modal.style.zIndex = "-999";
     }
   });
 });
