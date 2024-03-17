@@ -618,12 +618,16 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
           </div>
         </div>
         </div>
-        <label for="my_modal_${gameID}" class="btn m-4">Full Game Stats</label>
+        <label for="my_modal_${gameID}" class="btn m-4 btn-outline">Full Game Stats</label>
         <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
         <div class="modal" role="dialog">
           <div class="modal-box">
           <div class="modal-action">
-            <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+            <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </label>
           </div>
           <div class="flex gap-4 justify-around text-center">
               <h2 class="card-title text-2xl">${score2}</h2>
@@ -882,12 +886,16 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
             </div>
           </div>
           </div>
-          <label for="my_modal_${gameID}" class="btn m-4">Full Game Stats</label>
+          <label for="my_modal_${gameID}" class="btn m-4 btn-outline">Full Game Stats</label>
           <input type="checkbox" id="my_modal_${gameID}" class="modal-toggle" />
           <div class="modal" role="dialog">
             <div class="modal-box">
             <div class="modal-action">
-              <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+              <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </label>
             </div>
             <div class="flex gap-4 justify-around text-center">
                 <h2 class="card-title text-2xl">${score2}</h2>
