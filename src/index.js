@@ -158,9 +158,9 @@ const upcomingGamesMachine = (obj) => {
 
 // Compare if the current date is 8 hours ahead of obj.date
   if (new Date() >= eightHoursLaterDate) {
-    highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD.href;
+    highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD?.href || 0;
     highlights = obj.links[2].href;
-    highlightThumbnail = obj.competitions[0].headlines[0].video[0].thumbnail;
+    highlightThumbnail = obj.competitions[0].headlines[0].video[0]?.thumbnail || 0;
   }
   const makeGame = `
     <div class="collapse w-full">
