@@ -172,7 +172,7 @@ input.tab:checked{
 }
 #playerStatsContainer{
     width: 100%;
-    height: 22.5vh;
+    height: 30vh;
     place-items: center;
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
