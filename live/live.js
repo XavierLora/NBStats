@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
       const gamesTitleContainer = document.getElementById("titleHeader");
       console.log(gamesTitleContainer);
-      gamesTitleContainer.style.zIndex = "-10"; 
+      gamesTitleContainer.style.zIndex = "-999"; 
       modal.style.zIndex = "999"; // Adjust the z-index as needed
       console.log("modal open");
     }
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (target.matches('.modal-action label[for^="my_modal_"]')) {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
       const gamesTitleContainer = document.getElementById("titleHeader");
-      gamesTitleContainer.style.zIndex = "99"; 
+      gamesTitleContainer.style.zIndex = "999"; 
       modal.style.zIndex = "-10";
     }
   });
