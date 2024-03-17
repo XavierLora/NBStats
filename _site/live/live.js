@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (modal.style.zIndex === "999") {
         gamesTitleContainer.style.opacity = "1"; 
         gamesContainer.style.top = "10vh"; 
-        gamesTitleContainer.style.height = "10vh";
+        gamesTitleContainer.style.height = "fit-content";
         modal.style.zIndex = "-999";
         console.log("closed");
       } else {
