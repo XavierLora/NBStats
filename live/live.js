@@ -524,41 +524,41 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
             <tbody>
               <!-- row 1 -->
               <!-- row 1 -->
-                <tr>
-                <th>${prePtsStatName}</th>
-                <td class="text-sm" id="playerNameGamesContainer">
-                  <div class="avatar">
-                    <div class="w-10 rounded-full">
-                      <img src="${team2PtsLeaderImg}" />
-                    </div>
-                  </div>
-                  ${team2PtsLeader}</td>
-                <td class="text-base">${team2PtsLeaderValue}</td>
-              </tr>
-              <!-- row 2 -->
               <tr>
-                <th>${preAstStatName}</th>
-                <td class="text-sm" id="playerNameGamesContainer">
-                  <div class="avatar">
-                    <div class="w-10 rounded-full">
-                      <img src="${team2AstLeaderImg}" />
-                    </div>
+              <th>${prePtsStatName}</th>
+              <td class="text-sm" id="playerNameGamesContainer">
+                <div class="avatar">
+                  <div class="w-10 rounded-full">
+                    <img src="${team2PtsLeaderImg}" />
                   </div>
-                  ${team2AstLeader}</td>
-                <td class="text-base">${team2AstLeaderValue}</td>
-              </tr>
-              <!-- row 3 -->
-              <tr>
-                <th>${preRebStatName}</th>
-                <td class="text-sm" id="playerNameGamesContainer">
-                  <div class="avatar">
-                    <div class="w-10 rounded-full">
-                      <img src="${team2RebLeaderImg}" />
-                    </div>
+                </div>
+                ${team2PtsLeader}</td>
+              <td class="text-base">${team2PtsLeaderValue}</td>
+            </tr>
+            <!-- row 2 -->
+            <tr>
+              <th>${preAstStatName}</th>
+              <td class="text-sm" id="playerNameGamesContainer">
+                <div class="avatar">
+                  <div class="w-10 rounded-full">
+                    <img src="${team2AstLeaderImg}" />
                   </div>
-                  ${team2RebLeader}</td>
-                <td class="text-base">${team2RebLeaderValue}</td>
-              </tr>
+                </div>
+                ${team2AstLeader}</td>
+              <td class="text-base">${team2AstLeaderValue}</td>
+            </tr>
+            <!-- row 3 -->
+            <tr>
+              <th>${preRebStatName}</th>
+              <td class="text-sm" id="playerNameGamesContainer">
+                <div class="avatar">
+                  <div class="w-10 rounded-full">
+                    <img src="${team2RebLeaderImg}" />
+                  </div>
+                </div>
+                ${team2RebLeader}</td>
+              <td class="text-base">${team2RebLeaderValue}</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -684,28 +684,29 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
             <div role="tablist" class="tabs tabs-bordered justify-center">
               <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name2}" checked="checked" />
               <div role="tabpanel" class="tab-content">
-              <div class="overflow-x-auto w-full">
+              <div class="overflow-x-auto" id="playerStatsContainer">
               <table class="table-xs">
                 <!-- head -->
                 <thead>
                   <tr>
-                    <th></th>
-                    <th>Player</th>
-                    <th>Pts</th>
-                    <th>Ast</th>
-                    <th>Reb</th>
+                  <th></th>
+                  <th>Player</th>
+                  <th>Pts</th>
+                  <th>Ast</th>
+                  <th>Reb</th>
                   </tr>
                 </thead>
                 <tbody>
                   <!-- row 1 -->
                   ${generateTeamPlayerRows(DataTeam2)}
+                    
                 </tbody>
               </table>
             </div>
               </div>
               <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="${name1}" />
               <div role="tabpanel" class="tab-content">
-              <div class="overflow-x-auto">
+              <div class="overflow-x-auto" id="playerStatsContainer">
                 <table class="table-xs">
                   <!-- head -->
                   <thead>
