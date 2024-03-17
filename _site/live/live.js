@@ -109,22 +109,24 @@ document.addEventListener('DOMContentLoaded', function() {
   document.body.addEventListener('click', function(event) {
     const target = event.target;
 
-    // Check if the clicked element is the checkbox
+    // Check if the clicked element is the modal toggle or the close button
     if (target.matches('.modal-toggle')) {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
+      const gamesContainer = document.getElementById("liveGamesCardContainer");
       const gamesTitleContainer = document.getElementById("titleHeader");
-      console.log(gamesTitleContainer);
-      gamesTitleContainer.style.zIndex = "-999"; 
-      modal.style.zIndex = "999"; // Adjust the z-index as needed
-      console.log("modal open");
-    }
-
-    // Check if the clicked element is the close button
-    if (target.matches('.modal-action label[for^="my_modal_"]')) {
-      const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
-      const gamesTitleContainer = document.getElementById("titleHeader");
-      gamesTitleContainer.style.zIndex = "999"; 
-      modal.style.zIndex = "-999";
+      
+      // Toggle modal open/close
+      if (modal.style.zIndex === "999") {
+        gamesTitleContainer.style.opacity = "1"; 
+        gamesContainer.style.top = "10vh"; 
+        modal.style.zIndex = "-999";
+        console.log("closed");
+      } else {
+        gamesContainer.style.top = "0"; 
+        gamesTitleContainer.style.opacity = "0"; 
+        modal.style.zIndex = "999"; // Adjust the z-index as needed
+        console.log("modal open");
+      }
     }
   });
 });
