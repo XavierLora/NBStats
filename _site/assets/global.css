@@ -93,7 +93,7 @@
     width: 100%;
     z-index: -10;
     place-items: center;
-    padding-bottom: 30vh;
+    padding-bottom: 20vh;
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */  
