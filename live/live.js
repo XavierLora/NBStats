@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', async function() {
   }
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
   // Attach event listener to the document body
   document.body.addEventListener('click', function(event) {
@@ -124,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const gamesTitleContainer = document.getElementById("titleHeader");
       
       // Toggle modal open/close
-      if (target.matches('#modal-toggle')) {
+      if (modal.style.zIndex === "999") {
         gamesTitleContainer.style.opacity = "1"; 
         gamesContainer.style.top = "10vh"; 
         gamesTitleContainer.style.height = "fit-content";
@@ -140,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
 
 
 const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
