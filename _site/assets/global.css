@@ -97,8 +97,7 @@
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */  
-    -webkit-animation: fadein 2s linear forwards;
-    animation: fadein 2s linear forwards;
+    opacity: 0;
 
     ::-webkit-scrollbar-track {
         -webkit-box-shadow: none !important;
@@ -149,7 +148,7 @@
     border: solid 5 px red;
 }
 input.tab:checked{
-    width: 62.5vw;
+    width: 65vw;
 }
 .table-xs{
     border: solid 5 px red;
@@ -193,18 +192,26 @@ input.tab:checked{
     }
 }
 
+#logoContainer{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    text-align: center
+}
+
+#liveGamesCardContainer.fadein{
+    animation: fadein 2s linear forwards;
+    -webkit-animation: fadein 2s linear forwards;
+}
+
 @-webkit-keyframes fadein {
     0% { opacity: 0;}
-    25% { opacity: 0;}
-    50% { opacity: 0;}
-    75% { opacity: 0.5;}
     100% { opacity: 1;}
 }
   
 @keyframes fadein {
     0% { opacity: 0;}
-    25% { opacity: 0;}
-    50% { opacity: 0;}
-    75% { opacity: 0.5;}
     100% { opacity: 1;}
 }
