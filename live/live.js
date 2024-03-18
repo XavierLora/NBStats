@@ -83,11 +83,12 @@ document.addEventListener('DOMContentLoaded', async function() {
   const liveData = await Promise.all([getLiveGames()]);
   console.log("Live Game Data: ", liveData);
   try {
-    const gamesTitleElement = document.getElementById("gamesTitle");
+    const loadElement = document.getElementById("logoContainer");
+    const gamesElement = document.getElementById("liveGamesCardContainer");
     var step = (100/liveGamesData.events.length);
       for (let i = 0; i < liveGamesData.events.length; i++) {
         
-        gamesTitleElement.innerHTML=`<div class="radial-progress" style="--value:${i*step}; --size:12rem; --thickness: 5px;" role="progressbar">${Math.floor((i*step))+'%'}</div>`;
+          loadElement.innerHTML=`<div class="radial-progress" style="--value:${i*step}; --size:12rem; --thickness: 5px;" role="progressbar">${Math.floor((i*step))+'%'}</div>`;
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
           let playerDataTeam1;
@@ -99,11 +100,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             var securePlayerDataTeam2Url = playerDataTeam2Url.replace('http:', 'https:');
             playerDataTeam1 = await Promise.all([getPlayerStats(securePlayerDataTeam1Url)]);
             playerDataTeam2 = await Promise.all([getPlayerStats(securePlayerDataTeam2Url)]);
-
           }
           displayLiveGames(obj, playerDataTeam1, playerDataTeam2);
       }
-      
+      loadElement.innerHTML=``;
+      loadElement.style.opacity="0";
+      loadElement.style.zIndex="-999";
+      fadeMain();
   } catch (error) {
       console.error('Error:', error);
   }
@@ -629,9 +632,9 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
           <div class="modal-box">
           <div class="modal-action">
             <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+            <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
+          </svg>          
             </label>
           </div>
           <div class="flex gap-4 justify-around text-center">
@@ -897,9 +900,9 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
             <div class="modal-box">
             <div class="modal-action">
               <label for="my_modal_${gameID}" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-7 h-7">
+              <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
+            </svg>            
               </label>
             </div>
             <div class="flex gap-4 justify-around text-center">
@@ -1023,13 +1026,18 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
   const generateTeamPlayerRows = (playerData) => {
     // Get the first array from playerData to iterate over
     var playerStatIndex = playerData[0];
+    const playerArray = Object.values(playerStatIndex);
+
     
+    playerArray.sort((a,b) => b.stats.splits.categories[2].stats[10].value - a.stats.splits.categories[2].stats[10].value);
+
+    console.log(playerArray);
 
     var playerRows = '';
     
 
-    for (let i = 0; i < playerStatIndex.length; i++) {
-        const obj = playerStatIndex[i];
+    for (let i = 0; i < playerArray.length; i++) {
+        const obj = playerArray[i];
           if (typeof obj.athlete.headshot === 'undefined') {
             continue; // Skip this iteration and move to the next one
         }
@@ -1060,4 +1068,9 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
 function displayLiveGames(obj, playerDataTeam1, playerDataTeam2){
     let parentNode = document.getElementById('liveGamesCardContainer');
     parentNode.insertAdjacentHTML('beforeend', liveGamesMachine(obj, playerDataTeam1, playerDataTeam2));
+}
+
+function fadeMain(){
+  const mainElement = document.getElementById("liveGamesCardContainer");
+  mainElement.classList.add("fadein");
 }
