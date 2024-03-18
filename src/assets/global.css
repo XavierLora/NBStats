@@ -148,7 +148,7 @@
     border: solid 5 px red;
 }
 input.tab:checked{
-    width: 65vw;
+    width: 63.5vw;
 }
 .table-xs{
     border: solid 5 px red;
@@ -173,7 +173,7 @@ input.tab:checked{
 }
 #playerStatsContainer{
     width: 100%;
-    height: 25vh;
+    height: 30vh;
     place-items: center;
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
