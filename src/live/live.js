@@ -83,7 +83,11 @@ document.addEventListener('DOMContentLoaded', async function() {
   const liveData = await Promise.all([getLiveGames()]);
   console.log("Live Game Data: ", liveData);
   try {
+    const gamesTitleElement = document.getElementById("gamesTitle");
+    var step = (100/liveGamesData.events.length);
       for (let i = 0; i < liveGamesData.events.length; i++) {
+        
+        gamesTitleElement.innerHTML=`<div class="radial-progress" style="--value:${i*step}; --size:12rem; --thickness: 5px;" role="progressbar">${Math.floor((i*step))+'%'}</div>`;
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
           let playerDataTeam1;
@@ -99,6 +103,7 @@ document.addEventListener('DOMContentLoaded', async function() {
           }
           displayLiveGames(obj, playerDataTeam1, playerDataTeam2);
       }
+      
   } catch (error) {
       console.error('Error:', error);
   }
