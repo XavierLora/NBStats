@@ -7,6 +7,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/_includes/");
     eleventyConfig.addPassthroughCopy("src/index.js");
     eleventyConfig.addPassthroughCopy("src/live/live.js");
+    eleventyConfig.addPassthroughCopy("src/stats/stats.js");
     return{
         dir: {
             input: 'src',

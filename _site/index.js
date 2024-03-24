@@ -96,9 +96,6 @@ async function getTopTeams() {
 document.addEventListener('DOMContentLoaded', async function eventHandler() {
   try {
     const [upcomingGames, topPlayers, topTeams] = await Promise.all([getUpcomingGames(), getTopPlayers(), getTopTeams()]);
-    console.log('Top Players Data:', topPlayers);
-    console.log('Top Teams Data:', topTeams);
-    console.log('Upcoming Games Data:', upcomingGames);
       for (let i = 0; i < upcomingGamesData.events.length; i++) {
           const obj = upcomingGamesData.events[i];
           displayUpcomingGames(obj);
@@ -411,7 +408,6 @@ function displayTopTeams(obj){
   let parentNode = document.getElementById('teamsContainer');
     parentNode.insertAdjacentHTML('beforeend', topTeamsMachine(obj));
 }
-
 
 
 //http://sports.core.api.espn.com/v2/sports/basketball/leagues/nba

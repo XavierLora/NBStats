@@ -114,11 +114,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Attach event listener to the document body
   document.body.addEventListener('click', function(event) {
     const target = event.target;
 
-    // Check if the clicked element is the modal toggle or the close button
     if (target.matches('.modal-toggle')) {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
       const gamesContainer = document.getElementById("liveGamesCardContainer");
@@ -130,13 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
         gamesContainer.style.top = "10vh"; 
         gamesTitleContainer.style.height = "fit-content";
         modal.style.zIndex = "-999";
-        console.log("closed");
       } else {
         gamesContainer.style.top = "0"; 
         gamesTitleContainer.style.opacity = "0";
         gamesTitleContainer.style.height = "0";
         modal.style.zIndex = "999"; // Adjust the z-index as needed
-        console.log("modal open");
       }
     }
   });
