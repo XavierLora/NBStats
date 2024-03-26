@@ -1,6 +1,0 @@
-const gamesTitleElement = document.getElementById("gamesTitle");
-  if(allGamesOver){
-    gamesTitleElement.innerHTML="Last Night's Games";
-  }else{
-    gamesTitleElement.innerHTML="Live & Upcoming Games";
-  }
