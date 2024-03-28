@@ -23,7 +23,7 @@ async function getTeamStats(){
                 var teamStatsUrl = teamData.statistics.$ref;
                 var teamRecordUrl = teamData.record.$ref;
                 var secureTeamStatsUrl = teamStatsUrl.replace('http:','https:');
-                var secureTeamRecordUrl = teamRecordUrl.replace('https:','https:');
+                var secureTeamRecordUrl = teamRecordUrl.replace('http:','https:');
                 const teamStatsResponse = await fetch(secureTeamStatsUrl);
                 const teamRecordResponse = await fetch(secureTeamRecordUrl);
                 if(!teamStatsResponse.ok || !teamRecordResponse.ok){
