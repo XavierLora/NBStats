@@ -149,7 +149,7 @@ const generateTeamPlayers = (players) => {
     }
     const makePlayer = `
     <div class="avatar">
-    <div class="w-10">
+    <div class="w-12">
       <img src="${obj.players.headshot.href}" />
     </div>
   </div>
