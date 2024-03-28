@@ -1816,6 +1816,10 @@ input.tab:checked + .tab-content,
   align-self: flex-start;
   justify-self: center;
 }
+.avatar-group {
+  display: flex;
+  overflow: hidden;
+}
 .avatar-group :where(.avatar) {
   overflow: hidden;
   border-radius: 9999px;
@@ -3234,21 +3238,15 @@ html:has(.drawer-toggle:checked) {
 .collapse {
   visibility: collapse;
 }
-.absolute {
-  position: absolute;
-}
-.right-2 {
-  right: 0.5rem;
-}
-.top-2 {
-  top: 0.5rem;
-}
 .m-4 {
   margin: 1rem;
 }
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 .mb-5 {
   margin-bottom: 1.25rem;
@@ -3291,6 +3289,9 @@ html:has(.drawer-toggle:checked) {
 .w-11\/12 {
   width: 91.666667%;
 }
+.w-12 {
+  width: 3rem;
+}
 .w-14 {
   width: 3.5rem;
 }
@@ -3305,6 +3306,10 @@ html:has(.drawer-toggle:checked) {
 }
 .w-80 {
   width: 20rem;
+}
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .w-full {
   width: 100%;
@@ -3330,6 +3335,9 @@ html:has(.drawer-toggle:checked) {
 .grid-cols-auto-fill-325 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));;
 }
+.flex-row {
+  flex-direction: row;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -3338,6 +3346,9 @@ html:has(.drawer-toggle:checked) {
 }
 .items-center {
   align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -3351,8 +3362,16 @@ html:has(.drawer-toggle:checked) {
 .gap-4 {
   gap: 1rem;
 }
+.-space-x-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(-1.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(-1.25rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .overflow-x-auto {
   overflow-x: auto;
+}
+.rounded {
+  border-radius: 0.25rem;
 }
 .rounded-box {
   border-radius: var(--rounded-box, 1rem);
@@ -3389,6 +3408,10 @@ html:has(.drawer-toggle:checked) {
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .pb-3 {
   padding-bottom: 0.75rem;
@@ -3436,6 +3459,10 @@ html:has(.drawer-toggle:checked) {
   --tw-text-opacity: 1;
   color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
 }
+.text-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
 .shadow {
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
@@ -3469,4 +3496,7 @@ html:has(.drawer-toggle:checked) {
   .lg\:flex-row {
     flex-direction: row;
   }
+}
+.rtl\:space-x-reverse:where([dir="rtl"], [dir="rtl"] *) > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
 }
