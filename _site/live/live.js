@@ -84,10 +84,8 @@ document.addEventListener('DOMContentLoaded', async function() {
   console.log("Live Game Data: ", liveData);
   try {
     const loadElement = document.getElementById("logoContainer");
-    const gamesElement = document.getElementById("liveGamesCardContainer");
     var step = (100/liveGamesData.events.length);
       for (let i = 0; i < liveGamesData.events.length; i++) {
-        
           loadElement.innerHTML=`<div class="radial-progress" style="--value:${i*step}; --size:12rem; --thickness: 5px;" role="progressbar">${Math.floor((i*step))+'%'}</div>`;
           const obj = liveGamesData.events[i];
           const teamData = await Promise.all([getTeamStats(liveGamesData.events[i].id)]);
@@ -168,7 +166,8 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
     var isGameOver = obj.status.type.state == "post";
     var score1 = obj.competitions[0].competitors[0].score;
     var score2 = obj.competitions[0].competitors[1].score;
-    var preRebStatName = obj.competitions[0].competitors[0].statistics[0].abbreviation;
+    if (isGamePre){
+      var preRebStatName = obj.competitions[0].competitors[0].statistics[0].abbreviation;
     var preRebStatAvg1 = obj.competitions[0].competitors[0].statistics[1].displayValue;
     var preRebStatRank1 = obj.competitions[0].competitors[0].statistics[0].rankDisplayValue;
     var preRebStatAvg2 = obj.competitions[0].competitors[1].statistics[1].displayValue;
@@ -183,6 +182,8 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
     var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[9].rankDisplayValue;
     var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[13].displayValue;
     var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[9].rankDisplayValue;
+    }
+    
 
     if(isGameActive || isGameOver){
       var gameQtr1Team1 = obj.competitions[0].competitors[0].linescores[0]?.value || 0;
