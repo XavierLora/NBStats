@@ -3251,6 +3251,9 @@ html:has(.drawer-toggle:checked) {
 .mb-5 {
   margin-bottom: 1.25rem;
 }
+.ml-auto {
+  margin-left: auto;
+}
 .inline-block {
   display: inline-block;
 }
@@ -3289,9 +3292,6 @@ html:has(.drawer-toggle:checked) {
 .w-11\/12 {
   width: 91.666667%;
 }
-.w-12 {
-  width: 3rem;
-}
 .w-14 {
   width: 3.5rem;
 }
@@ -3306,10 +3306,6 @@ html:has(.drawer-toggle:checked) {
 }
 .w-80 {
   width: 20rem;
-}
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
 }
 .w-full {
   width: 100%;
@@ -3335,9 +3331,6 @@ html:has(.drawer-toggle:checked) {
 .grid-cols-auto-fill-325 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));;
 }
-.flex-row {
-  flex-direction: row;
-}
 .flex-col {
   flex-direction: column;
 }
@@ -3346,9 +3339,6 @@ html:has(.drawer-toggle:checked) {
 }
 .items-center {
   align-items: center;
-}
-.justify-end {
-  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -3409,12 +3399,14 @@ html:has(.drawer-toggle:checked) {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
 .pb-3 {
   padding-bottom: 0.75rem;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pr-4 {
+  padding-right: 1rem;
 }
 .pt-3 {
   padding-top: 0.75rem;
