@@ -109,33 +109,55 @@ document.addEventListener('DOMContentLoaded', async function(){
 const teamsMachine = (obj) => {
     var teamCity = obj.teams.abbreviation;
     var teamName = obj.teams.name;
+    var id = obj.teams.abbreviation;
     var teamImg = obj.teams.logos[0].href;
     var record = obj.record.items[0].displayValue;
     var rank = obj.record.items[0].stats[10].value;
     const makeTeam = `
-    <div class="collapse w-full">
-    <input type="checkbox" name="my-accordion-1"/>
-      <div class="collapse-title text-l font-medium flex flex-col justify-center">
-          <div class="flex p-2 place-items-center align-center w-full">
-              <div class="avatar pl-2">
-                  <div class="w-14 rounded">
-                  <img src="${teamImg}" />
-                  </div>
+    <label for="my_modal_${id}" >
+      <div class="w-full">
+        <div class="text-l font-medium flex flex-col justify-center">
+            <div class="flex p-2 place-items-center align-center w-full">
+                <div class="avatar pl-2">
+                    <div class="w-14 rounded">
+                    <img src="${teamImg}" />
+                    </div>
+                </div>
+              <div class="flex flex-col px-2 text-left">
+                <p class="text-primary text-sm">${teamCity} ${teamName}</p>
+                  <p class="text-sm">Rank: #${rank}</p>
+                  <p class="text-primary text-sm">${record}</p>
               </div>
-            <div class="flex flex-col px-2 text-left">
-              <p class="text-primary text-sm">${teamCity} ${teamName}</p>
-                <p class="text-sm">Rank: #${rank}</p>
-                <p class="text-primary text-sm">${record}</p>
+                <div class="pr-4 avatar-group -space-x-5 rtl:space-x-reverse ml-auto">
+                  ${generateTeamPlayers(obj.athletes)}
+                </div>
             </div>
-              <div class="pr-4 avatar-group -space-x-5 rtl:space-x-reverse ml-auto">
-                ${generateTeamPlayers(obj.athletes)}
+            <div class="divider"></div> 
+        </div>
+        </div>
+      </label>
+        <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
+        <div class="modal" role="dialog">
+          <div class="modal-box">
+          <div class="flex p-2 place-items-center align-center w-full">
+                <div class="avatar pl-2">
+                    <div class="w-14 rounded">
+                    <img src="${teamImg}" />
+                    </div>
+                </div>
+                <p class="text-primary text">${teamCity} ${teamName}</p>
+                <p class="text">#${rank}</p>
+                <p class="text-primary text">${record}</p>
               </div>
+            <div class="modal-action">
+              <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+              </label>
+            </div>
           </div>
-          <div class="divider"></div> 
-      </div>
-      <div class="collapse-content text-center"> 
-      </div>
-  </div>`;
+        </div>`;
 
     return makeTeam;
 }
