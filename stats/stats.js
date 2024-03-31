@@ -150,7 +150,7 @@ const teamsMachine = (obj) => {
                         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                           <div class="modal-box min-h-fit">
-                            <div class="flex gap-4 justify-center">
+                            <div class="flex flex-col gap-4 place-items-center">
                               <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
                                 <div class="hero-overlay bg-opacity-60"></div>
                                     <div class="hero-content text-neutral-content">
@@ -161,6 +161,22 @@ const teamsMachine = (obj) => {
                                       </div>
                                     </div>
                                   </div>
+                                  <div class="stats bg-neutral shadow w-11/12 p-0">
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">OVR</div>
+                                    <div class="stat-value text-xl">${record}</div>
+                                  </div>
+                                  
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">HOME</div>
+                                    <div class="stat-value text-xl">${homeRecord}</div>
+                                  </div>
+                                  
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">AWAY</div>
+                                    <div class="stat-value text-xl">${awayRecord}</div>
+                                  </div>
+                                </div>
                             </div>
                             <div class="modal-action">
                               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
