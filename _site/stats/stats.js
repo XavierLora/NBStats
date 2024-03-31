@@ -149,7 +149,7 @@ const teamsMachine = (obj) => {
                       </label>
                         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
                         <div class="modal" role="dialog">
-                          <div class="modal-box">
+                          <div class="modal-box min-h-fit">
                             <div class="flex gap-4 justify-center">
                               <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
                                 <div class="hero-overlay bg-opacity-60"></div>
