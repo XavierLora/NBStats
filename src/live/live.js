@@ -182,22 +182,6 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
     var prePtsStatRank1 = obj.competitions[0].competitors[0].statistics[9].rankDisplayValue;
     var prePtsStatAvg2 = obj.competitions[0].competitors[1].statistics[13].displayValue;
     var prePtsStatRank2 = obj.competitions[0].competitors[1].statistics[9].rankDisplayValue;
-    }
-    
-
-    if(isGameActive || isGameOver){
-      var gameQtr1Team1 = obj.competitions[0].competitors[0].linescores[0]?.value || 0;
-      var gameQtr2Team1 = obj.competitions[0].competitors[0].linescores[1]?.value || 0;
-      var gameQtr3Team1 = obj.competitions[0].competitors[0].linescores[2]?.value || 0;
-      var gameQtr4Team1 = obj.competitions[0].competitors[0].linescores[3]?.value || 0;
-  
-      var gameQtr1Team2 = obj.competitions[0].competitors[1].linescores[0]?.value || 0;
-      var gameQtr2Team2 = obj.competitions[0].competitors[1].linescores[1]?.value || 0;
-      var gameQtr3Team2 = obj.competitions[0].competitors[1].linescores[2]?.value || 0;
-      var gameQtr4Team2 = obj.competitions[0].competitors[1].linescores[3]?.value || 0;
-    }
-    
-
     var team1PtsLeaderImg = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.headshot;
     var team1PtsLeader = obj.competitions[0].competitors[0].leaders[0].leaders[0].athlete.shortName;
     var team1PtsLeaderValue = obj.competitions[0].competitors[0].leaders[0].leaders[0].displayValue;
@@ -223,6 +207,21 @@ const liveGamesMachine = (obj, DataTeam1, DataTeam2) => {
     var team2RebLeaderImg = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.headshot;
     var team2RebLeader = obj.competitions[0].competitors[1].leaders[2].leaders[0].athlete.shortName;
     var team2RebLeaderValue = obj.competitions[0].competitors[1].leaders[2].leaders[0].displayValue;
+    }
+    
+
+    if(isGameActive || isGameOver){
+      var gameQtr1Team1 = obj.competitions[0].competitors[0].linescores[0]?.value || 0;
+      var gameQtr2Team1 = obj.competitions[0].competitors[0].linescores[1]?.value || 0;
+      var gameQtr3Team1 = obj.competitions[0].competitors[0].linescores[2]?.value || 0;
+      var gameQtr4Team1 = obj.competitions[0].competitors[0].linescores[3]?.value || 0;
+  
+      var gameQtr1Team2 = obj.competitions[0].competitors[1].linescores[0]?.value || 0;
+      var gameQtr2Team2 = obj.competitions[0].competitors[1].linescores[1]?.value || 0;
+      var gameQtr3Team2 = obj.competitions[0].competitors[1].linescores[2]?.value || 0;
+      var gameQtr4Team2 = obj.competitions[0].competitors[1].linescores[3]?.value || 0;
+    }
+  
 
     var record1 = obj.competitions[0].competitors[0].records[0].summary;
     var record2 = obj.competitions[0].competitors[1].records[0].summary;
