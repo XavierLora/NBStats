@@ -150,11 +150,11 @@ const teamsMachine = (obj) => {
                         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                           <div class="modal-box">
-                            <div class="flex flex-col gap-4 place-items-center">
+                            <div class="flex gap-4 justify-center">
                               <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
                                 <div class="hero-overlay bg-opacity-60"></div>
-                                  <div class="hero-content text-neutral-content">
-                                    <div class="avatar p-1">
+                                    <div class="hero-content text-neutral-content">
+                                      <div class="avatar p-1">
                                         <div class="w-16 rounded">
                                           <img src="${teamImg}" />
                                         </div>
