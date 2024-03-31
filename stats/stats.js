@@ -140,7 +140,12 @@ const teamsMachine = (obj) => {
     var record = obj.record.items[0].displayValue;
     var homeRecord = obj.record.items[1].displayValue;
     var awayRecord = obj.record.items[2].displayValue;
-    var rank = obj.record.items[0].stats[10].value;
+    var rank;
+    for(let i=8; i<=12;i++){
+        if(obj.record.items[0].stats[i].name === "playoffSeed"){
+          rank = obj.record.items[0].stats[i].value
+        }
+    }
     const makeTeam = `
     <label for="my_modal_${id}" >
                     <div class="card lg bg-neutral shadow-xl">
@@ -220,7 +225,7 @@ const teamsMachine = (obj) => {
                                         </thead>
                                         <tbody>
                                           <!-- row 1 -->
-                                          
+                                          ${generateTeamPlayerRows(obj.athletes)}
                                             
                                         </tbody>
                                       </table>
