@@ -166,7 +166,6 @@ const teamsMachine = (obj) => {
                                       </div>
                                     </div>
                                   </div>
-                            
                             </div>
                             <div class="modal-action">
                               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">

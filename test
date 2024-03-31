@@ -44,43 +44,6 @@
                                       </div>
                                     </div>
                                   </div>
-                            <div class="stats bg-neutral shadow w-11/12 p-0">
-                                  <div class="stat place-items-center">
-                                    <div class="stat-title text-base">OVR</div>
-                                    <div class="stat-value text-xl">${record}</div>
-                                  </div>
-                                  
-                                  <div class="stat place-items-center">
-                                    <div class="stat-title text-base">HOME</div>
-                                    <div class="stat-value text-xl">${homeRecord}</div>
-                                  </div>
-                                  
-                                  <div class="stat place-items-center">
-                                    <div class="stat-title text-base">AWAY</div>
-                                    <div class="stat-value text-xl">${awayRecord}</div>
-                                  </div>
-                                </div>
-                                <div class="stats shadow w-full bg-neutral w-11/12">
-                                    <div class="overflow-x-auto" id="playerStatsContainer">
-                                      <table class="table-xs">
-                                      <!-- head -->
-                                        <thead>
-                                          <tr>
-                                          <th></th>
-                                          <th>Player</th>
-                                          <th>Pts</th>
-                                          <th>Ast</th>
-                                          <th>Reb</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <!-- row 1 -->
-                                          ${generateTeamPlayerRows(obj.athletes)}
-                                            
-                                        </tbody>
-                                      </table>
-                                     </div>
-                                  </div>
                             </div>
                             <div class="modal-action">
                               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
