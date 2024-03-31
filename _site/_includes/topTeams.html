@@ -4,6 +4,32 @@
             <h2 class="card-title">Top Teams</h2>
             <p class="cardPts">Record</p>
         </div>
-          
+        <div class="collapse">
+            <input type="radio" name="my-accordion-1"/> 
+            <div class="collapse-title text-l font-medium">
+                <div class="playerList">
+                    <div class="avatar">
+                        <div class="w-14 rounded-full">
+                          <img src="${teamImg}" />
+                        </div>
+                    </div>
+                    <p class="teamName">${teamCity} ${teamName}</p>
+                    <p class="cardPts">${wins}-${loses}</p>
+                </div>
+                <div class="divider"></div> 
+            </div>
+            <div class="collapse-content text-center"> 
+            <div class="stats shadow" id="playerStatWidth">
+            <div class="stat place-items-center">
+              <div class="stat-title text-base">RANK</div>
+              <div class="stat-value text-xl">${place}</div>
+            </div>
+            <div class="stat place-items-center">
+              <div class="stat-title text-base">Strength of Sch.</div>
+              <div class="stat-value text-xl">${sos}</div>
+            </div>
+        </div>
+            </div>
+          </div>
     </div>
   </div>
