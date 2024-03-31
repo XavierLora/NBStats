@@ -3248,9 +3248,6 @@ html:has(.drawer-toggle:checked) {
 .mb-5 {
   margin-bottom: 1.25rem;
 }
-.ml-auto {
-  margin-left: auto;
-}
 .inline-block {
   display: inline-block;
 }
@@ -3372,6 +3369,10 @@ html:has(.drawer-toggle:checked) {
 .rounded-xl {
   border-radius: 0.75rem;
 }
+.border-\[\#212124\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(33 33 36 / var(--tw-border-opacity));
+}
 .bg-neutral {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-n,oklch(var(--n)/var(--tw-bg-opacity)));
@@ -3387,6 +3388,9 @@ html:has(.drawer-toggle:checked) {
 }
 .p-0 {
   padding: 0px;
+}
+.p-1 {
+  padding: 0.25rem;
 }
 .p-2 {
   padding: 0.5rem;
@@ -3408,9 +3412,6 @@ html:has(.drawer-toggle:checked) {
 .pl-2 {
   padding-left: 0.5rem;
 }
-.pr-4 {
-  padding-right: 1rem;
-}
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -3431,6 +3432,10 @@ html:has(.drawer-toggle:checked) {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 .text-sm {
   font-size: 0.875rem;
@@ -3467,15 +3472,6 @@ html:has(.drawer-toggle:checked) {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.ring {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-.ring-\[\#212124\] {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(33 33 36 / var(--tw-ring-opacity));
 }
 @media (min-width: 768px) {
 
