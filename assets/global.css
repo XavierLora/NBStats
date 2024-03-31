@@ -90,7 +90,7 @@
     position: fixed;
     top: 10vh;
     padding-top: 7.5vh;
-    padding-bottom: 17.5vh;
+    padding-bottom: 22.5vh;
     width: 100%;
     z-index: -10;
     place-items: center;
@@ -212,6 +212,9 @@ input.tab:checked{
 }
 .modal-box {
     padding: 0.75rem;
+}
+#teamCards{
+    padding:0;
 }
 
 @-webkit-keyframes fadein {
