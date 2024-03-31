@@ -150,45 +150,7 @@ const teamsMachine = (obj) => {
         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
         <div class="modal" role="dialog">
           <div class="modal-box">
-            <div class="flex flex-col gap-4 place-items-center">
-              <div class="stats bg-neutral shadow w-11/12 p-0">
-                <div class="stat place-items-center">
-                  <div class="stat-title text-base">OVR</div>
-                  <div class="stat-value text-xl">${record}</div>
-                </div>
-                
-                <div class="stat place-items-center">
-                  <div class="stat-title text-base">HOME</div>
-                  <div class="stat-value text-xl">${homeRecord}</div>
-                </div>
-                
-                <div class="stat place-items-center">
-                  <div class="stat-title text-base">AWAY</div>
-                  <div class="stat-value text-xl">${awayRecord}</div>
-                </div>
-              </div>
-              <div class="stats shadow w-full bg-neutral w-11/12">
-                <div class="overflow-x-auto" id="playerStatsContainer">
-                  <table class="table-xs">
-                  <!-- head -->
-                    <thead>
-                      <tr>
-                      <th></th>
-                      <th>Player</th>
-                      <th>Pts</th>
-                      <th>Ast</th>
-                      <th>Reb</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- row 1 -->
-                      
-                        
-                    </tbody>
-                  </table>
-                 </div>
-              </div>
-            </div>
+            
             <div class="modal-action">
               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
