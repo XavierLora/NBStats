@@ -204,29 +204,7 @@ const teamsMachine = (obj) => {
                                     </div>
                                   </div>
                                 </div>
-                                <div class="flex justify-center p-1">
-                                  <div class="stats shadow bg-neutral w-11/12">
-                                      <div class="overflow-x-auto" id="playerStatsContainer">
-                                        <table class="table-xs">
-                                        <!-- head -->
-                                          <thead>
-                                            <tr>
-                                            <th></th>
-                                            <th>Player</th>
-                                            <th>Pts</th>
-                                            <th>Ast</th>
-                                            <th>Reb</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            <!-- row 1 -->
-                                            ${generateTeamPlayerRows(obj.athletes)}
-                                              
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                    </div>
-                                </div>
+              
                             <div class="modal-action">
                               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
