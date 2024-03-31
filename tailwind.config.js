@@ -3,6 +3,9 @@ module.exports = {
   content: ["./src/_includes/*.html", "./_site/*.html", "./_site/**/*.html"],
   theme: {
     extend: {
+      colors: {
+        'backgroundColor': "#212124",
+      },
       gridTemplateColumns: {
         'auto-fill-325': 'repeat(auto-fill, minmax(300px, 1fr));',
       },

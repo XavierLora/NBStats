@@ -107,14 +107,20 @@ document.addEventListener('DOMContentLoaded', async function(){
 });
 
 const teamsMachine = (obj) => {
-    var teamCity = obj.teams.abbreviation;
-    var teamName = obj.teams.name;
+    var teamName = obj.teams.displayName;
     var id = obj.teams.abbreviation;
     var teamImg = obj.teams.logos[0].href;
     var record = obj.record.items[0].displayValue;
-    var rank = obj.record.items[0].stats[10].value;
+    var rank;
+    for(let i=8; i<=12;i++){
+      if(obj.record.items[0].stats[i].name === "playoffSeed"){
+        rank = obj.record.items[0].stats[i].value;
+      }
+    }
     const makeTeam = `
     <label for="my_modal_${id}" >
+    <div class="card lg bg-neutral shadow-xl">
+    <div class="card-body p-0">
       <div class="w-full">
         <div class="text-l font-medium flex flex-col justify-center">
             <div class="flex p-2 place-items-center align-center w-full">
@@ -123,18 +129,21 @@ const teamsMachine = (obj) => {
                     <img src="${teamImg}" />
                     </div>
                 </div>
-              <div class="flex flex-col px-2 text-left">
-                <p class="text-primary text-sm">${teamCity} ${teamName}</p>
-                  <p class="text-sm">Rank: #${rank}</p>
-                  <p class="text-primary text-sm">${record}</p>
+                <div class="flex flex-col px-2 text-center">
+                  <p class="text-primary text-lg">#${rank}</p>
+                  <p class="text-sm">${record}</p>
               </div>
-                <div class="pr-4 avatar-group -space-x-5 rtl:space-x-reverse ml-auto">
+              <div class="flex flex-col px-2 text-center">
+                <p class="text-primary text-md p-1">${teamName}</p>
+                  <div class="avatar-group -space-x-5 rtl:space-x-reverse">
                   ${generateTeamPlayers(obj.athletes)}
-                </div>
+                  </div>
+              </div>
             </div>
-            <div class="divider"></div> 
+          </div>
         </div>
-        </div>
+      </div>
+      </div>
       </label>
         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
         <div class="modal" role="dialog">
@@ -145,7 +154,7 @@ const teamsMachine = (obj) => {
                     <img src="${teamImg}" />
                     </div>
                 </div>
-                <p class="text-primary text">${teamCity} ${teamName}</p>
+                <p class="text-primary text">${teamName}</p>
                 <p class="text">#${rank}</p>
                 <p class="text-primary text">${record}</p>
               </div>
@@ -170,7 +179,7 @@ const generateTeamPlayers = (players) => {
       continue; // Skip this iteration and move to the next one
     }
     const makePlayer = `
-    <div class="avatar">
+    <div class="avatar border-[#212124]">
     <div class="w-12">
       <img src="${obj.players.headshot.href}" />
     </div>
