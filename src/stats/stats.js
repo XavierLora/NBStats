@@ -121,78 +121,77 @@ const teamsMachine = (obj) => {
     }
     const makeTeam = `
     <label for="my_modal_${id}" >
-    <div class="card lg bg-neutral shadow-xl">
-    <div class="card-body p-0">
-      <div class="w-full">
-        <div class="text-l font-medium flex flex-col justify-center">
-            <div class="flex p-2 place-items-center align-center w-full">
-                <div class="avatar pl-2">
-                    <div class="w-14 rounded">
-                    <img src="${teamImg}" />
-                    </div>
-                </div>
-                <div class="flex flex-col px-2 text-center">
-                  <p class="text-primary text-lg">#${rank}</p>
-                  <p class="text-sm">${record}</p>
-              </div>
-              <div class="flex flex-col px-2 text-center">
-                <p class="text-primary text-md p-1">${teamName}</p>
-                  <div class="avatar-group -space-x-5 rtl:space-x-reverse">
-                  ${generateTeamPlayers(obj.athletes)}
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-      </label>
-        <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
-        <div class="modal" role="dialog">
-          <div class="modal-box">
-            <div class="flex flex-col gap-4 place-items-center">
-              <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
-                <div class="hero-overlay bg-opacity-60"></div>
-                  <div class="hero-content text-neutral-content">
-                      <div class="flex p-2 gap-4 place-items-center justify-center w-full text-center">
-                        <div class="avatar p-1">
-                          <div class="w-16 rounded">
-                            <img src="${teamImg}" />
+                    <div class="card lg bg-neutral shadow-xl">
+                    <div class="card-body p-0">
+                      <div class="w-full">
+                        <div class="text-l font-medium flex flex-col justify-center">
+                            <div class="flex p-2 place-items-center align-center w-full">
+                                <div class="avatar pl-2">
+                                    <div class="w-14 rounded">
+                                    <img src="${teamImg}" />
+                                    </div>
+                                </div>
+                                <div class="flex flex-col px-2 text-center">
+                                  <p class="text-primary text-lg">#${rank}</p>
+                                  <p class="text-sm">${record}</p>
+                              </div>
+                              <div class="flex flex-col px-2 text-center">
+                                <p class="text-primary text-md p-1">${teamName}</p>
+                                  <div class="avatar-group -space-x-5 rtl:space-x-reverse">
+                                  ${generateTeamPlayers(obj.athletes)}
+                                  </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div class="w-fit">
-                          <p class="text-primary text-xl">${teamName}</p>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="stats bg-neutral shadow w-11/12 p-0">
-                  <div class="stat place-items-center">
-                    <div class="stat-title text-base">OVR</div>
-                    <div class="stat-value text-xl">${record}</div>
-                  </div>
-                  
-                  <div class="stat place-items-center">
-                    <div class="stat-title text-base">HOME</div>
-                    <div class="stat-value text-xl">${homeRecord}</div>
-                  </div>
-                  
-                  <div class="stat place-items-center">
-                    <div class="stat-title text-base">AWAY</div>
-                    <div class="stat-value text-xl">${awayRecord}</div>
-                  </div>
-                </div>
-                
-            </div>
-            <div class="modal-action">
-              <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-              </label>
-            </div>
-          </div>
-        </div>`;
+                      </div>
+                      </label>
+                        <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
+                        <div class="modal" role="dialog">
+                          <div class="modal-box">
+                            <div class="flex flex-col gap-4 place-items-center">
+                              <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
+                                <div class="hero-overlay bg-opacity-60"></div>
+                                  <div class="hero-content text-neutral-content">
+                                      <div class="flex p-2 gap-4 place-items-center justify-center w-full text-center">
+                                        <div class="avatar p-1">
+                                          <div class="w-16 rounded">
+                                            <img src="${teamImg}" />
+                                          </div>
+                                        </div>
+                                        <div class="w-fit">
+                                          <p class="text-primary text-xl">${teamName}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            <div class="stats bg-neutral shadow w-11/12 p-0">
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">OVR</div>
+                                    <div class="stat-value text-xl">${record}</div>
+                                  </div>
+                                  
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">HOME</div>
+                                    <div class="stat-value text-xl">${homeRecord}</div>
+                                  </div>
+                                  
+                                  <div class="stat place-items-center">
+                                    <div class="stat-title text-base">AWAY</div>
+                                    <div class="stat-value text-xl">${awayRecord}</div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="modal-action">
+                              <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                                </svg>
+                              </label>
+                            </div>
+                          </div>
+                        </div>`;
 
     return makeTeam;
 }
