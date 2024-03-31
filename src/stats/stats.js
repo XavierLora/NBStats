@@ -106,6 +106,33 @@ document.addEventListener('DOMContentLoaded', async function(){
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('click', function(event) {
+    const target = event.target;
+
+    if (target.matches('.modal-toggle')) {
+      const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
+      const gamesContainer = document.getElementById("liveGamesCardContainer");
+      const gamesTitleContainer = document.getElementById("titleHeader");
+      
+      // Toggle modal open/close
+      if (modal.style.zIndex === "999") {
+        gamesTitleContainer.style.opacity = "1"; 
+        gamesContainer.style.top = "10vh"; 
+        gamesTitleContainer.style.height = "fit-content";
+        modal.style.zIndex = "-999";
+        console.log("close");
+      } else {
+        gamesContainer.style.top = "0"; 
+        gamesTitleContainer.style.opacity = "0";
+        gamesTitleContainer.style.height = "0";
+        modal.style.zIndex = "999"; // Adjust the z-index as needed
+        console.log("open");
+      }
+    }
+  });
+});
+
 const teamsMachine = (obj) => {
     var teamName = obj.teams.displayName;
     var id = obj.teams.abbreviation;
@@ -145,8 +172,8 @@ const teamsMachine = (obj) => {
                         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                           <div class="modal-box min-h-fit">
-                            <div class="flex flex-col w-full justify-center p-2">
-                              <div class="flex justify-center">
+                            <div class="flex flex-col w-full justify-center">
+                              <div class="flex justify-center p-1">
                                 <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
                                   <div class="hero-overlay bg-opacity-60"></div>
                                       <div class="hero-content text-neutral-content">
@@ -159,8 +186,8 @@ const teamsMachine = (obj) => {
                                     </div>
                                 </div>
                                 </div>
-                                <div class="flex justify-center">
-                                  <div class="stats bg-neutral shadow w-11/12 p-0">
+                                <div class="flex justify-center p-1">
+                                  <div class="stats bg-neutral shadow w-11/12">
                                     <div class="stat place-items-center">
                                       <div class="stat-title text-base">OVR</div>
                                       <div class="stat-value text-xl">${record}</div>
@@ -176,6 +203,29 @@ const teamsMachine = (obj) => {
                                       <div class="stat-value text-xl">${awayRecord}</div>
                                     </div>
                                   </div>
+                                </div>
+                                <div class="flex justify-center p-1">
+                                  <div class="stats shadow bg-neutral w-11/12">
+                                      <div class="overflow-x-auto" id="playerStatsContainer">
+                                        <table class="table-xs">
+                                        <!-- head -->
+                                          <thead>
+                                            <tr>
+                                            <th></th>
+                                            <th>Player</th>
+                                            <th>Pts</th>
+                                            <th>Ast</th>
+                                            <th>Reb</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            <!-- row 1 -->
+                                            ${generateTeamPlayerRows(obj.athletes)}
+                                              
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                    </div>
                                 </div>
                             <div class="modal-action">
                               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
