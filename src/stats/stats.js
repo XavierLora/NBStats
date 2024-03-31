@@ -250,8 +250,9 @@ const generateTeamPlayerRows = (playerList) => {
   // Get the first array from playerData to iterate over
   var playerRows = '';
   
+  const maxPlayersToShow = Math.min(playerList.length, 10);
 
-  for (let i = 0; i < playerList.length; i++) {
+  for (let i = 0; i < maxPlayersToShow; i++) {
       const obj = playerList[i];
         if (!obj || typeof obj.players === 'undefined' || typeof obj.players.headshot === 'undefined') {
           continue; // Skip this iteration and move to the next one
