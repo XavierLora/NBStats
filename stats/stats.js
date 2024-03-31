@@ -151,21 +151,6 @@ const teamsMachine = (obj) => {
         <div class="modal" role="dialog">
           <div class="modal-box">
             <div class="flex flex-col gap-4 place-items-center">
-            <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
-              <div class="hero-overlay bg-opacity-60"></div>
-                <div class="hero-content text-neutral-content">
-                <div class="flex p-2 gap-4 place-items-center justify-center w-full text-center">
-                <div class="avatar p-1">
-                    <div class="w-16 rounded">
-                    <img src="${teamImg}" />
-                    </div>
-                </div>
-                <div class="w-fit">
-                  <p class="text-primary text-xl">${teamName}</p>
-                </div>
-              </div>
-              </div>
-              </div>
               <div class="stats bg-neutral shadow w-11/12 p-0">
                 <div class="stat place-items-center">
                   <div class="stat-title text-base">OVR</div>
