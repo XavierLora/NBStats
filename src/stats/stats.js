@@ -166,7 +166,23 @@ const teamsMachine = (obj) => {
                       </div>
                     </div>
                   </div>
-              
+                  <div class="stats bg-neutral shadow w-11/12 p-0">
+                  <div class="stat place-items-center">
+                    <div class="stat-title text-base">OVR</div>
+                    <div class="stat-value text-xl">${record}</div>
+                  </div>
+                  
+                  <div class="stat place-items-center">
+                    <div class="stat-title text-base">HOME</div>
+                    <div class="stat-value text-xl">${homeRecord}</div>
+                  </div>
+                  
+                  <div class="stat place-items-center">
+                    <div class="stat-title text-base">AWAY</div>
+                    <div class="stat-value text-xl">${awayRecord}</div>
+                  </div>
+                </div>
+                
             </div>
             <div class="modal-action">
               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
