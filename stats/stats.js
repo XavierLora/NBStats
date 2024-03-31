@@ -220,7 +220,7 @@ const teamsMachine = (obj) => {
                                         </thead>
                                         <tbody>
                                           <!-- row 1 -->
-                                          ${generateTeamPlayerRows(obj.athletes)}
+                                          
                                             
                                         </tbody>
                                       </table>
