@@ -3304,6 +3304,10 @@ html:has(.drawer-toggle:checked) {
 .w-80 {
   width: 20rem;
 }
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .w-full {
   width: 100%;
 }

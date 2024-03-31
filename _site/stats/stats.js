@@ -111,6 +111,8 @@ const teamsMachine = (obj) => {
     var id = obj.teams.abbreviation;
     var teamImg = obj.teams.logos[0].href;
     var record = obj.record.items[0].displayValue;
+    var homeRecord = obj.record.items[1].displayValue;
+    var awayRecord = obj.record.items[2].displayValue;
     var rank;
     for(let i=8; i<=12;i++){
       if(obj.record.items[0].stats[i].name === "playoffSeed"){
@@ -148,16 +150,60 @@ const teamsMachine = (obj) => {
         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
         <div class="modal" role="dialog">
           <div class="modal-box">
-          <div class="flex p-2 place-items-center align-center w-full">
-                <div class="avatar pl-2">
-                    <div class="w-14 rounded">
+            <div class="flex flex-col gap-4 place-items-center">
+            <div class="hero min-h-fit w-11/12 shadow-xl" style="background-image: url(${obj.teams.venue.images[0].href});">
+              <div class="hero-overlay bg-opacity-60"></div>
+                <div class="hero-content text-neutral-content">
+                <div class="flex p-2 gap-4 place-items-center justify-center w-full text-center">
+                <div class="avatar p-1">
+                    <div class="w-16 rounded">
                     <img src="${teamImg}" />
                     </div>
                 </div>
-                <p class="text-primary text">${teamName}</p>
-                <p class="text">#${rank}</p>
-                <p class="text-primary text">${record}</p>
+                <div class="w-fit">
+                  <p class="text-primary text-xl">${teamName}</p>
+                </div>
               </div>
+              </div>
+              </div>
+              <div class="stats bg-neutral shadow w-11/12 p-0">
+                <div class="stat place-items-center">
+                  <div class="stat-title text-base">OVR</div>
+                  <div class="stat-value text-xl">${record}</div>
+                </div>
+                
+                <div class="stat place-items-center">
+                  <div class="stat-title text-base">HOME</div>
+                  <div class="stat-value text-xl">${homeRecord}</div>
+                </div>
+                
+                <div class="stat place-items-center">
+                  <div class="stat-title text-base">AWAY</div>
+                  <div class="stat-value text-xl">${awayRecord}</div>
+                </div>
+              </div>
+              <div class="stats shadow w-full bg-neutral w-11/12">
+                <div class="overflow-x-auto" id="playerStatsContainer">
+                  <table class="table-xs">
+                  <!-- head -->
+                    <thead>
+                      <tr>
+                      <th></th>
+                      <th>Player</th>
+                      <th>Pts</th>
+                      <th>Ast</th>
+                      <th>Reb</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- row 1 -->
+                      ${generateTeamPlayerRows(obj.athletes)}
+                        
+                    </tbody>
+                  </table>
+                 </div>
+              </div>
+            </div>
             <div class="modal-action">
               <label for="my_modal_${id}" class="btn btn-sm btn-circle btn-ghost">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -169,6 +215,40 @@ const teamsMachine = (obj) => {
         </div>`;
 
     return makeTeam;
+}
+
+const generateTeamPlayerRows = (playerList) => {
+  // Get the first array from playerData to iterate over
+  var playerRows = '';
+  
+
+  for (let i = 0; i < playerList.length; i++) {
+      const obj = playerList[i];
+        if (!obj || typeof obj.players === 'undefined' || typeof obj.players.headshot === 'undefined') {
+          continue; // Skip this iteration and move to the next one
+      }
+      const makePlayer = `
+      <tr>
+      <th class="text-sm">${obj.players.jersey}</th>
+      <td class="text-sm" id="playerNameGamesContainer">
+        <div class="avatar">
+          <div class="w-7 rounded-full">
+            <img src="${obj.players.headshot.href}" />
+          </div>
+        </div>
+        ${obj.players.shortName} 
+      </td>
+      <td class="text-sm">${obj.stats.splits.categories[2].stats[30].displayValue}</td>
+      <td class="text-sm">${obj.stats.splits.categories[2].stats[32].displayValue}</td>
+      <td class="text-sm">${obj.stats.splits.categories[1].stats[15].displayValue}</td>
+    </tr>
+      `;
+
+    
+      playerRows += makePlayer;
+  }
+ 
+  return playerRows;
 }
 
 const generateTeamPlayers = (players) => {
