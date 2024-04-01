@@ -1,95 +1,93 @@
 let teamData;
 let teamStatData;
 
-async function getTeamStats(){
-    const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/teams?limit=30';
+async function getTeamStats() {
+  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/teams?limit=30';
 
-    return new Promise(async (resolve, reject) => {
-        try{
-            const response = await fetch(apiUrl);
-            if(!response.ok){
-                throw new Error('Error fetching NBA Teams');
-            }
-            const data = await response.json();
-            
-            const teamPromises = data.items.map(async teams => {
-                const teamUrl = teams.$ref;
-                const safeTeamUrl = teamUrl.replace('http:', 'https:');
-                const teamResponse = await fetch(safeTeamUrl);
-                if(!teamResponse.ok){
-                    throw new Error('Error fetching team data');
-                }
-                const teamData = await teamResponse.json();
-                const teamStatsUrl = teamData.statistics.$ref;
-                const teamRecordUrl = teamData.record.$ref;
-                const teamPlayersUrl = teamData.athletes.$ref;
-                const secureTeamStatsUrl = teamStatsUrl.replace('http:','https:');
-                const secureTeamRecordUrl = teamRecordUrl.replace('http:','https:');
-                const securePlayersUrl = teamPlayersUrl.replace('http:','https:');
-                const teamStatsResponse = await fetch(secureTeamStatsUrl);
-                if(!teamStatsResponse.ok){
-                  throw new Error('Error fetching team Stats');
-                }
-                const teamStats = await teamStatsResponse.json();
-                const teamRecordResponse = await fetch(secureTeamRecordUrl);
-                if(!teamRecordResponse.ok){
-                  throw new Error('Error fetching team Record');
-                }
-                const teamRecord = await teamRecordResponse.json();
-                const teamPlayersResponse = await fetch(securePlayersUrl);
-                if(!teamPlayersResponse.ok){
-                    throw new Error('Error fetching team players');
-                }
-                const teamPlayers = await teamPlayersResponse.json();
-                
-                const playerPromises = teamPlayers.items.map(async athlete => {
-                  const athleteUrl = athlete.$ref;
-                  const secureAthleteUrl = athleteUrl.replace('http:', 'https:');
-                  const athleteResponse = await fetch(secureAthleteUrl);
-                  if(!athleteResponse.ok){
-                    throw new Error('Error fetching player data');
-                  }
-                  const athleteData = await athleteResponse.json();
-                  if(!athleteData.statistics){
-                    return null;
-                  }
-                  const athleteStatsUrl = athleteData.statistics.$ref || "";
-                  const secureAthleteStatsUrl = athleteStatsUrl.replace('http:', 'https:');
-                  const athleteStatResponse = await fetch(secureAthleteStatsUrl);
-                  if(!athleteStatResponse.ok){
-                    throw new Error('Error fetching player stats data');
-                  }
-                  const athleteStatData = await athleteStatResponse.json();
-                  
-                  return{
-                    players: athleteData,
-                    stats: athleteStatData
-                  }
-                });
+  try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+          throw new Error('Error fetching NBA Teams');
+      }
+      const data = await response.json();
 
-                const player = await Promise.all(playerPromises);
-                const playerArray = Object.values(player);
-                const filteredPlayerArray = playerArray.filter(obj => obj && obj.players && obj.players.headshot);
-                filteredPlayerArray.sort((a, b) => {
-                  const statA = a?.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
-                  const statB = b?.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
-                  return statB - statA;
-              });
-                
-                return{
-                    teams: teamData,
-                    stats: teamStats,
-                    record: teamRecord,
-                    athletes: filteredPlayerArray
-                };
-            });
-            const teamStats = await Promise.all(teamPromises);
-            resolve(teamStats);
-        }catch(error){
-            reject(new Error('Promise Error NBA Teams'));
-            console.error(error);
-        }
-    });
+      const teamPromises = data.items.map(async teams => {
+          const teamUrl = teams.$ref;
+          const safeTeamUrl = teamUrl.replace('http:', 'https:');
+          const teamResponse = await fetch(safeTeamUrl);
+          if (!teamResponse.ok) {
+              throw new Error('Error fetching team data');
+          }
+          const teamData = await teamResponse.json();
+
+          const teamStatsUrl = teamData.statistics.$ref.replace('http:', 'https:');
+          const teamRecordUrl = teamData.record.$ref.replace('http:', 'https:');
+          const teamPlayersUrl = teamData.athletes.$ref.replace('http:', 'https:');
+
+          const [teamStatsResponse, teamRecordResponse, teamPlayersResponse] = await Promise.all([
+              fetch(teamStatsUrl),
+              fetch(teamRecordUrl),
+              fetch(teamPlayersUrl)
+          ]);
+
+          if (!teamStatsResponse.ok || !teamRecordResponse.ok || !teamPlayersResponse.ok) {
+              throw new Error('Error fetching team data');
+          }
+
+          const [teamStats, teamRecord, teamPlayers] = await Promise.all([
+              teamStatsResponse.json(),
+              teamRecordResponse.json(),
+              teamPlayersResponse.json()
+          ]);
+
+          const playerPromises = teamPlayers.items.map(async athlete => {
+              const athleteUrl = athlete.$ref;
+              const secureAthleteUrl = athleteUrl.replace('http:', 'https:');
+              const athleteResponse = await fetch(secureAthleteUrl);
+              if (!athleteResponse.ok) {
+                  throw new Error('Error fetching player data');
+              }
+              const athleteData = await athleteResponse.json();
+              if (!athleteData.statistics) {
+                  return null;
+              }
+              const athleteStatUrl = athleteData.statistics.$ref;
+              const secureAthleteStatUrl = athleteStatUrl.replace('http:', 'https:');
+              const athleteStatResponse = await fetch(secureAthleteStatUrl);
+              if (!athleteStatResponse.ok) {
+                  throw new Error('Error fetching player stats data');
+              }
+              const athleteStatData = await athleteStatResponse.json();
+
+              return {
+                  players: athleteData,
+                  stats: athleteStatData
+              };
+          });
+
+          const players = await Promise.all(playerPromises);
+          const filteredPlayers = players.filter(player => player && player.players && player.players.headshot);
+
+          filteredPlayers.sort((a, b) => {
+              const statA = a.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
+              const statB = b.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
+              return statB - statA;
+          });
+
+          return {
+              teams: teamData,
+              stats: teamStats,
+              record: teamRecord,
+              athletes: filteredPlayers
+          };
+      });
+
+      const teamStats = await Promise.all(teamPromises);
+      return teamStats;
+  } catch (error) {
+      console.error(error);
+      throw new Error('Error fetching NBA Teams');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async function(){
