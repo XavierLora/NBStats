@@ -7,7 +7,8 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/_includes/");
     eleventyConfig.addPassthroughCopy("src/index.js");
     eleventyConfig.addPassthroughCopy("src/live/live.js");
-    eleventyConfig.addPassthroughCopy("src/stats/stats.js");
+    eleventyConfig.addPassthroughCopy("src/stats/statsEast.js");
+    eleventyConfig.addPassthroughCopy("src/stats/statsWest.js");
     eleventyConfig.addPassthroughCopy("src/blog/posts/");
 
     eleventyConfig.addCollection('posts', function(collectionApi){
