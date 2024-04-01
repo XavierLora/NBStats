@@ -248,7 +248,7 @@ const teamsMachine = (obj) => {
                               </div>
                             </div>
                           </div>
-                        </div>`;
+                        `;
 
     return makeTeam;
 }
