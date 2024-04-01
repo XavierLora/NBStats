@@ -27,13 +27,19 @@ async function getTeamStats(){
                 const secureTeamRecordUrl = teamRecordUrl.replace('http:','https:');
                 const securePlayersUrl = teamPlayersUrl.replace('http:','https:');
                 const teamStatsResponse = await fetch(secureTeamStatsUrl);
+                if(!teamStatsResponse.ok){
+                  throw new Error('Error fetching team Stats');
+                }
+                const teamStats = await teamStatsResponse.json();
                 const teamRecordResponse = await fetch(secureTeamRecordUrl);
-                const teamPlayersResponse = await fetch(securePlayersUrl);
-                if(!teamStatsResponse.ok || !teamRecordResponse.ok || !teamPlayersResponse.ok){
-                    throw new Error('Error fetching team data');
+                if(!teamRecordResponse.ok){
+                  throw new Error('Error fetching team Record');
                 }
                 const teamRecord = await teamRecordResponse.json();
-                const teamStats = await teamStatsResponse.json();
+                const teamPlayersResponse = await fetch(securePlayersUrl);
+                if(!teamPlayersResponse.ok){
+                    throw new Error('Error fetching team players');
+                }
                 const teamPlayers = await teamPlayersResponse.json();
                 
                 const playerPromises = teamPlayers.items.map(async athlete => {
