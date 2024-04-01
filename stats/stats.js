@@ -251,7 +251,7 @@ const generateTeamPlayerRows = (playerList) => {
   var playerRows = '';
   
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 15; i++) {
       const obj = playerList[i];
         if (!obj || typeof obj.players === 'undefined' || typeof obj.players.headshot === 'undefined') {
           continue; // Skip this iteration and move to the next one
