@@ -89,6 +89,32 @@ async function getTeamStats() {
       throw new Error('Error fetching NBA Teams');
   }
 }
+function handleScroll(event) {
+  const playerListContainer = event.target.matches('.player-list-container');
+
+  if (playerListContainer) {
+    // Calculate visible range of players based on scroll position
+    const scrollTop = playerListContainer.scrollTop;
+    const visibleHeight = playerListContainer.clientHeight;
+    const visibleStart = Math.floor(scrollTop / playerRowHeight);
+    console.log(playerRowHeight);
+    const visibleEnd = Math.min(
+      Math.ceil((scrollTop + visibleHeight) / playerRowHeight),
+      players.length
+    );
+
+    // Render only the visible players
+    let playerRows = '';
+    for (let i = visibleStart; i < visibleEnd; i++) {
+      let obj = players[i];
+      playerRows += generatePlayerRow(obj);
+    }
+    playerListContainer.innerHTML = playerRows;
+  }
+}
+
+// Attach scroll event listener to a parent element using event delegation
+document.addEventListener('scroll', handleScroll);
 
 document.addEventListener('DOMContentLoaded', async function(){
     const teams = await Promise.all([getTeamStats()]);
@@ -229,7 +255,7 @@ const teamsMachine = (obj) => {
                                           <th>Reb</th>
                                           </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="player-list-container">
                                           <!-- row 1 -->
                                           ${generateTeamPlayerRows(obj.athletes)}
                                             
@@ -253,15 +279,17 @@ const teamsMachine = (obj) => {
 }
 
 
-
 const generateTeamPlayerRows = (playerList) => {
-  // Get the first array from playerData to iterate over
   let playerRows = '';
-  
-
   for (let i = 0; i < playerList.length; i++) {
-      let obj = playerList[i];
-      playerRows += `
+    let obj = playerList[i];
+    playerRows += generatePlayerRow(obj);
+  }
+  return playerRows;
+}
+
+const generatePlayerRow = (obj) => {
+  return `
       <tr>
       <th class="text-sm">${obj.players.jersey}</th>
       <td class="text-sm" id="playerNameGamesContainer">
@@ -276,11 +304,8 @@ const generateTeamPlayerRows = (playerList) => {
       <td class="text-sm">${obj.stats.splits.categories[2].stats[32].displayValue}</td>
       <td class="text-sm">${obj.stats.splits.categories[1].stats[15].displayValue}</td>
     </tr>
-      `;
-  }
- 
-  return playerRows;
-}
+  `;
+};
 
 const generateTeamPlayers = (players) => {
   let playerHtml = '';
