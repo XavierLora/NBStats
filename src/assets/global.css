@@ -215,6 +215,10 @@ input.tab:checked{
 #teamCards{
     padding:0;
 }
+#teamBackArrow{
+    position: absolute;
+    left: 5vh;
+}
 
 @-webkit-keyframes fadein {
     0% { opacity: 0;}
