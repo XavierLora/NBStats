@@ -13,19 +13,19 @@ async function getTeamStats(){
             const data = await response.json();
             
             const teamPromises = data.items.map(async teams => {
-                var teamUrl = teams.$ref;
-                var safeTeamUrl = teamUrl.replace('http:', 'https:');
+                const teamUrl = teams.$ref;
+                const safeTeamUrl = teamUrl.replace('http:', 'https:');
                 const teamResponse = await fetch(safeTeamUrl);
                 if(!teamResponse.ok){
                     throw new Error('Error fetching team data');
                 }
                 const teamData = await teamResponse.json();
-                var teamStatsUrl = teamData.statistics.$ref;
-                var teamRecordUrl = teamData.record.$ref;
-                var teamPlayersUrl = teamData.athletes.$ref;
-                var secureTeamStatsUrl = teamStatsUrl.replace('http:','https:');
-                var secureTeamRecordUrl = teamRecordUrl.replace('http:','https:');
-                var securePlayersUrl = teamPlayersUrl.replace('http:','https:');
+                const teamStatsUrl = teamData.statistics.$ref;
+                const teamRecordUrl = teamData.record.$ref;
+                const teamPlayersUrl = teamData.athletes.$ref;
+                const secureTeamStatsUrl = teamStatsUrl.replace('http:','https:');
+                const secureTeamRecordUrl = teamRecordUrl.replace('http:','https:');
+                const securePlayersUrl = teamPlayersUrl.replace('http:','https:');
                 const teamStatsResponse = await fetch(secureTeamStatsUrl);
                 const teamRecordResponse = await fetch(secureTeamRecordUrl);
                 const teamPlayersResponse = await fetch(securePlayersUrl);
@@ -37,8 +37,8 @@ async function getTeamStats(){
                 const teamPlayers = await teamPlayersResponse.json();
                 
                 const playerPromises = teamPlayers.items.map(async athlete => {
-                  var athleteUrl = athlete.$ref;
-                  var secureAthleteUrl = athleteUrl.replace('http:', 'https:');
+                  const athleteUrl = athlete.$ref;
+                  const secureAthleteUrl = athleteUrl.replace('http:', 'https:');
                   const athleteResponse = await fetch(secureAthleteUrl);
                   if(!athleteResponse.ok){
                     throw new Error('Error fetching player data');
@@ -47,8 +47,8 @@ async function getTeamStats(){
                   if(!athleteData.statistics){
                     return null;
                   }
-                  var athleteStatsUrl = athleteData.statistics.$ref || "";
-                  var secureAthleteStatsUrl = athleteStatsUrl.replace('http:', 'https:');
+                  const athleteStatsUrl = athleteData.statistics.$ref || "";
+                  const secureAthleteStatsUrl = athleteStatsUrl.replace('http:', 'https:');
                   const athleteStatResponse = await fetch(secureAthleteStatsUrl);
                   if(!athleteStatResponse.ok){
                     throw new Error('Error fetching player stats data');
@@ -63,7 +63,8 @@ async function getTeamStats(){
 
                 const player = await Promise.all(playerPromises);
                 const playerArray = Object.values(player);
-                playerArray.sort((a, b) => {
+                const filteredPlayerArray = playerArray.filter(obj => obj && obj.players && obj.players.headshot);
+                filteredPlayerArray.sort((a, b) => {
                   const statA = a?.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
                   const statB = b?.stats?.splits?.categories[2]?.stats[11]?.value || Number.MIN_SAFE_INTEGER;
                   return statB - statA;
@@ -73,7 +74,7 @@ async function getTeamStats(){
                     teams: teamData,
                     stats: teamStats,
                     record: teamRecord,
-                    athletes: playerArray
+                    athletes: filteredPlayerArray
                 };
             });
             const teamStats = await Promise.all(teamPromises);
@@ -90,10 +91,10 @@ document.addEventListener('DOMContentLoaded', async function(){
     console.log(teams);
     try{
         const loadElement = document.getElementById("logoContainer");
-        var step = (100/teams[0].length);
+        const step = (100/teams[0].length);
         for(let i=0; i<teams[0].length; i++){
             loadElement.innerHTML=`<div class="radial-progress" style="--value:${i*step}; --size:12rem; --thickness: 5px;" role="progressbar">${Math.floor((i*step))+'%'}</div>`;
-            const obj = teams[0][i];
+            let obj = teams[0][i];
             displayTeams(obj);
     
         }
@@ -104,11 +105,12 @@ document.addEventListener('DOMContentLoaded', async function(){
     }catch(error){
         console.error('Error:', error);
     }
+    
 });
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.addEventListener('click', function(event) {
-    const target = event.target;
+    let target = event.target;
 
     if (target.matches('.modal-toggle')) {
       const modal = document.querySelector('.modal'); // Assuming .modal is the class of your modal
@@ -134,21 +136,21 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const teamsMachine = (obj) => {
-    var teamName = obj.teams.displayName;
-    var id = obj.teams.abbreviation;
-    var teamImg = obj.teams.logos[0].href;
-    var record = obj.record.items[0].displayValue;
-    var homeRecord = obj.record.items[1].displayValue;
-    var awayRecord = obj.record.items[2].displayValue;
-    var rank;
-    for(let i=8; i<=12;i++){
-        if(obj.record.items[0].stats[i].name === "playoffSeed"){
-          rank = obj.record.items[0].stats[i].value
-        }
-    }
+    let teamName = obj.teams.displayName;
+    let id = obj.teams.abbreviation;
+    let teamImg = obj.teams.logos[0].href;
+    let record = obj.record.items[0].displayValue;
+    let homeRecord = obj.record.items[1].displayValue;
+    let awayRecord = obj.record.items[2].displayValue;
+  
+    let playoffSeedItem = obj.record.items.find(item => item.stats.some(stat => stat.name === "playoffSeed"));
+
+    // Extract the playoffSeed value if found
+    let playoffSeed = playoffSeedItem ? playoffSeedItem.stats.find(stat => stat.name === "playoffSeed").value : null;
+    let rank = playoffSeed;
     const makeTeam = `
-    <label for="my_modal_${id}" >
-                    <div class="card lg bg-neutral shadow-xl">
+                <div class="card lg bg-neutral shadow-xl">
+                <label for="my_modal_${id}" >
                     <div class="card-body p-0">
                       <div class="w-full">
                         <div class="text-l font-medium flex flex-col justify-center">
@@ -172,8 +174,8 @@ const teamsMachine = (obj) => {
                           </div>
                         </div>
                       </div>
-                      </div>
                       </label>
+                      </div>
                         <input type="checkbox" id="my_modal_${id}" class="modal-toggle" />
                         <div class="modal" role="dialog">
                           <div class="modal-box min-h-fit">
@@ -246,23 +248,22 @@ const teamsMachine = (obj) => {
     return makeTeam;
 }
 
+
+
 const generateTeamPlayerRows = (playerList) => {
   // Get the first array from playerData to iterate over
-  var playerRows = '';
+  let playerRows = '';
   
 
-  for (let i = 0; i < 8; i++) {
-      const obj = playerList[i];
-        if (!obj || typeof obj.players === 'undefined' || typeof obj.players.headshot === 'undefined') {
-          continue; // Skip this iteration and move to the next one
-      }
-      const makePlayer = `
+  for (let i = 0; i < playerList.length; i++) {
+      let obj = playerList[i];
+      playerRows += `
       <tr>
       <th class="text-sm">${obj.players.jersey}</th>
       <td class="text-sm" id="playerNameGamesContainer">
         <div class="avatar">
           <div class="w-7 rounded-full">
-            <img src="${obj.players.headshot.href}" />
+            <img src="${obj.players.headshot.href}" loading="lazy"/>
           </div>
         </div>
         ${obj.players.shortName} 
@@ -272,36 +273,30 @@ const generateTeamPlayerRows = (playerList) => {
       <td class="text-sm">${obj.stats.splits.categories[1].stats[15].displayValue}</td>
     </tr>
       `;
-
-    
-      playerRows += makePlayer;
   }
  
   return playerRows;
 }
 
 const generateTeamPlayers = (players) => {
-  var playerHtml = '';
+  let playerHtml = '';
   for (let i = 0; i <= 4; i++){
-    const obj = players[i];
-    if (typeof obj.players.headshot === 'undefined') {
+    let obj = players[i];
+    if (!obj.players.headshot) {
       continue; // Skip this iteration and move to the next one
     }
-    const makePlayer = `
+    playerHtml+= `
     <div class="avatar border-[#212124]">
-    <div class="w-12">
-      <img src="${obj.players.headshot.href}" />
+      <div class="w-12">
+        <img src="${obj.players.headshot.href}" loading="lazy"/>
+      </div>
     </div>
-  </div>
         `;
-
-      
-    playerHtml += makePlayer;
   }
   return playerHtml;
 }
 function displayTeams(obj){
-    let parentNode = document.getElementById('liveGamesCardContainer');
+    const parentNode = document.getElementById('liveGamesCardContainer');
     parentNode.insertAdjacentHTML('beforeend', teamsMachine(obj));
 }
 
