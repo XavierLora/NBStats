@@ -2,7 +2,7 @@ let teamData;
 let teamStatData;
 
 async function getTeamStats() {
-  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/teams?limit=30';
+  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/types/2/groups/5/teams';
 
   try {
       const response = await fetch(apiUrl);
@@ -256,7 +256,7 @@ const teamsMachine = (obj) => {
 
 const generateTeamPlayerRows = (playerList) => {
   let playerRows = '';
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < playerList.length; i++) {
     let obj = playerList[i];
     playerRows += generatePlayerRow(obj);
   }
