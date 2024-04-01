@@ -290,7 +290,7 @@ const generateTeamPlayers = (players) => {
       continue; // Skip this iteration and move to the next one
     }
     playerHtml+= `
-    <div class="avatar border-[#212124]">
+    <div class="avatar border-neutral">
       <div class="w-12">
         <img src="${obj.players.headshot.href}" loading="lazy"/>
       </div>
@@ -308,3 +308,35 @@ function fadeMain(){
     const mainElement = document.getElementById("liveGamesCardContainer");
     mainElement.classList.add("fadein");
 }
+
+function updateCheckboxState() {
+  var checkboxes = document.querySelectorAll('.theme-controller');
+  checkboxes.forEach(function(checkbox) {
+    if (localStorage.getItem(checkbox.value) === 'checked') {
+      checkbox.checked = true;
+    } else {
+      checkbox.checked = false;
+    }
+  });
+}
+
+// Function to store checkbox state in localStorage
+function storeCheckboxState() {
+  var checkbox = this;
+  if (checkbox.checked) {
+    localStorage.setItem(checkbox.value, 'checked');
+  } else {
+    localStorage.setItem(checkbox.value, 'unchecked');
+  }
+}
+
+// Call updateCheckboxState when the page loads
+document.addEventListener('DOMContentLoaded', function () {
+  updateCheckboxState();
+});
+
+// Attach an event listener to the checkbox for changes
+var checkboxes = document.querySelectorAll('.theme-controller');
+checkboxes.forEach(function(checkbox) {
+  checkbox.addEventListener('change', storeCheckboxState);
+});

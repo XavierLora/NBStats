@@ -229,3 +229,40 @@ input.tab:checked{
     0% { opacity: 0;}
     100% { opacity: 1;}
 }
+
+@media (min-width: 600px) {
+    input.tab:checked{
+        width: 30vw;
+    }
+    
+  }
+@media (min-width: 700px) {
+    input.tab:checked{
+        width: 30vw;
+    }
+  }
+  @media (min-width: 800px) {
+    input.tab:checked{
+        width: 30vw;
+    }
+  }
+  @media (min-width: 900px) {
+    input.tab:checked{
+        width: 20vw;
+    }
+  }
+  @media (min-width: 1000px) {
+    input.tab:checked{
+        width: 20vw;
+    }
+  }
+  @media (min-width: 1200px) {
+    input.tab:checked{
+        width: 15vw;
+    }
+  }
+  @media (min-width: 1500px) {
+    input.tab:checked{
+        width: 10vw;
+    }
+  }
