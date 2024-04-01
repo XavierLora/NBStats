@@ -173,7 +173,7 @@ input.tab:checked{
 }
 #playerStatsContainer{
     width: 100%;
-    height: 40vh;
+    height: 37.5vh;
     place-items: center;
     scrollbar-width: thin;
     scrollbar-width: none; /* Firefox */
@@ -198,7 +198,7 @@ input.tab:checked{
     left: 50%;
     transform: translate(-50%, -50%);
     opacity: 1;
-    text-align: center
+    text-align: center;
 }
 
 #liveGamesCardContainer.fadein{

@@ -8,10 +8,28 @@
     <link href="../../assets/global.css" rel="stylesheet">
     <script type="module" src="../../index.js"></script>
     <script type="module" src="../statsEast.js"></script>
-    <title>{{title}}</title>
+    <title>Team Stats</title>
   </head>
   <body>
-    {{content | safe}}
+    <div class="drawer-content flex flex-col">
+    <div id="logoContainer">
+  
+</div>
+<div class="card lg bg-neutral shadow-xl" id="titleHeader">
+    <div class="card-body place-items-center">
+        <h2 class="card-title text-2xl" id="gamesTitle">
+          Team Stats
+        </h2>
+      </div>
+    </div>
+      <div class="card-body place-items-center">
+          <div class="grid w-full auto-rows-max grid-cols-auto-fill-325 justify-items-center" id="liveGamesCardContainer">
+            
+            
+          </div>
+        </div>
+</div>
+    
     <div class="btm-nav btm-nav-lg">
         <button onclick="location.href='../../index.html'">
           <svg class="swap-off fill-current w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
