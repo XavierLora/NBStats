@@ -89,32 +89,7 @@ async function getTeamStats() {
       throw new Error('Error fetching NBA Teams');
   }
 }
-function handleScroll(event) {
-  const playerListContainer = event.target.matches('.player-list-container');
 
-  if (playerListContainer) {
-    // Calculate visible range of players based on scroll position
-    const scrollTop = playerListContainer.scrollTop;
-    const visibleHeight = playerListContainer.clientHeight;
-    const visibleStart = Math.floor(scrollTop / playerRowHeight);
-    console.log(playerRowHeight);
-    const visibleEnd = Math.min(
-      Math.ceil((scrollTop + visibleHeight) / playerRowHeight),
-      players.length
-    );
-
-    // Render only the visible players
-    let playerRows = '';
-    for (let i = visibleStart; i < visibleEnd; i++) {
-      let obj = players[i];
-      playerRows += generatePlayerRow(obj);
-    }
-    playerListContainer.innerHTML = playerRows;
-  }
-}
-
-// Attach scroll event listener to a parent element using event delegation
-document.addEventListener('scroll', handleScroll);
 
 document.addEventListener('DOMContentLoaded', async function(){
     const teams = await Promise.all([getTeamStats()]);
@@ -244,7 +219,7 @@ const teamsMachine = (obj) => {
                                 <div class="flex justify-center p-1">
                                 <div class="stats shadow bg-neutral w-11/12">
                                     <div class="overflow-x-auto" id="playerStatsContainer">
-                                      <table class="table-xs">
+                                      <table class="table-xs player-list-container">
                                       <!-- head -->
                                         <thead>
                                           <tr>
@@ -255,7 +230,7 @@ const teamsMachine = (obj) => {
                                           <th>Reb</th>
                                           </tr>
                                         </thead>
-                                        <tbody class="player-list-container">
+                                        <tbody>
                                           <!-- row 1 -->
                                           ${generateTeamPlayerRows(obj.athletes)}
                                             
@@ -281,7 +256,7 @@ const teamsMachine = (obj) => {
 
 const generateTeamPlayerRows = (playerList) => {
   let playerRows = '';
-  for (let i = 0; i < playerList.length; i++) {
+  for (let i = 0; i < 7; i++) {
     let obj = playerList[i];
     playerRows += generatePlayerRow(obj);
   }
