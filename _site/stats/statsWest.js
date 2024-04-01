@@ -2,7 +2,7 @@ let teamData;
 let teamStatData;
 
 async function getTeamStats() {
-  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/types/2/groups/5/teams';
+  const apiUrl = 'https://sports.core.api.espn.com/v2/sports/basketball/leagues/nba/seasons/2024/types/2/groups/6/teams';
 
   try {
       const response = await fetch(apiUrl);
