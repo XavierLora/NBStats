@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', async function eventHandler() {
 });
 
 const upcomingGamesMachine = (obj) => {
-  console.log(obj);
   let allGamesOver = false;
   for(let i = 0; i<upcomingGamesData.events.length; i++){
     if(upcomingGamesData.events[i].status.type.state === "post"){
