@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async function eventHandler() {
 });
 
 const upcomingGamesMachine = (obj) => {
+  console.log(obj);
   let allGamesOver = false;
   for(let i = 0; i<upcomingGamesData.events.length; i++){
     if(upcomingGamesData.events[i].status.type.state === "post"){
@@ -155,9 +156,13 @@ const upcomingGamesMachine = (obj) => {
 
 // Compare if the current date is 8 hours ahead of obj.date
   if (new Date() >= eightHoursLaterDate) {
-    highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD?.href || 0;
-    highlights = obj.links[2].href;
-    highlightThumbnail = obj.competitions[0].headlines[0].video[0]?.thumbnail || 0;
+    if (obj.competitions[0].headlines && obj.competitions[0].headlines[0] && obj.competitions[0].headlines[0].video && obj.competitions[0].headlines[0].video[0] && obj.competitions[0].headlines[0].video[0].links && obj.competitions[0].headlines[0].video[0].links.source && obj.competitions[0].headlines[0].video[0].links.source.HD && obj.competitions[0].headlines[0].video[0].links.source.HD.href) {
+      highlightVid = obj.competitions[0].headlines[0].video[0].links.source.HD.href;
+      highlights = obj.links[2].href;
+      highlightThumbnail = obj.competitions[0].headlines[0].video[0].thumbnail;
+    } else {
+      return ""; // No video found, return blank HTML
+    }
   }
   const makeGame = `
     <div class="collapse w-full">
